@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    {% load static %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="{% static 'js/jquery.bxslider-rahisified.js' %}"></script>
+    <link href="{% static 'css/jquery.bxslider.css' %}" rel="stylesheet" />
+    <style>
+         *{margin: 0;padding: 0;}
+         li{list-style: none;}
+         #gallery_wrap{ margin: 0 auto; width: 450px;}
+         #gallery_wrap .bx-wrapper{margin-bottom: 20px;}
+         .slider-pager{text-align: center;}
+         .slider-pager li{display: inline;}
+    </style>
+
+    
+    <script>
+    $(document).ready( function() {
+
+        $('#myslider').bxSlider({
+          slideMargin: 5,
+          autoReload: true,
+          breaks: [{screen:0, slides:1, pager:false},{screen:460, slides:2},{screen:768, slides:3}]
+        });
+
+    });
+    </script>
+</head>
+<body>
+
+
+
+{% for i in local_detail %}
+<div class="container">
+    <div class="well clearfix" style="margin-top:50px;">
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-md-5">
+                    <h3>{{ i.title }}</h3>
+                </div>
+                <div class="col-md-3 col-md-offset-4">
+                    <h3>{{ i.Tourtype }}</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="bxslider" data-call="bxslider" data-options="slideMargin:5, autoReload:true" data-breaks="[{screen:0, slides:1, pager:false}, {screen:460, slides:2}, {screen: 768, slides:3}]">
+                      <li><img src="{{ i.img.url }}" /></li>
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="border: 1px solid black; padding: 10px;">
+                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                                1. Overview
+                                <br>
+                                {{ i.DetailContent }}
+                            </div>
+                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                                2. Language : {{ i.language }}
+                            </div>
+                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                                3. Meeting time : {{ i.MeetingTime }}
+                            </div>
+                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                                4. Duration : {{ i.Duration }}
+                            </div>
+                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                                5. The number of people : {{ i.Minimum }} - {{ i.Maximum }}
+                            </div>
+                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                                6. Includes <br>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5" style="border: 1px solid black; margin-top:15px;">
+            <div class="container">
+                <div class="container">
+                    <div style="height:150px; width: 380px; border: 1px solid black; margin: 25px 0;">
+                        프로필
+                    </div>
+                    <span>Laguage : {{ i.language }}</span><br>
+                    <span>Major: </span><br>
+                    <span>Visited Country : </span><br>
+                    <span>Next travel : </span><br>
+                    <span>Interest : </span><br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+</body>
+
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet"
+      href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<h1>{{ user }}'s Profile</h1>
+<ul>
+    <li>email : {{ user.email }}</li>
+    <li>name : {{ user.name }}</li>
+    <li>date_joined : {{ user.date_joined }}</li>
+</ul>
+<img src="{{ user.socialaccount_set.all.first.get_avatar_url }}" />
+
+<a href="{% url 'accounts:logout' %}?next={{ request.path }}" onclick="return confirm('Are you sure?');"><h2>로그아웃하기</h2></a>
+<a href="{% url 'accounts:profile' %}"><h2>가이드로 등록하기</h2> </a>
+
+{% endblock %}

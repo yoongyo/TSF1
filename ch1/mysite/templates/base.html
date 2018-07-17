@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Today's Friend</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+</head>
+<body>
+    <!-- navbar_top -->
+    <style>
+        .navbar-default{
+            background-color: #0F3A72;
+        }
+        .container-fluid  ul  li{
+            color: white;
+        }
+
+        @media (min-width: 768px){
+            /* 큰 화면 전용 설정 */
+            .container-fluid{
+                padding:0 20%;
+            }
+            .fcontent {
+                padding:0 20%;
+                display: flex;
+            }
+        }
+        @media (max-width: 786px) {
+            .fcontent{
+                display:flex;
+            }
+        }
+        #login-dp{
+            min-width: 250px;
+            padding: 14px 14px 0;
+            overflow:hidden;
+            background-color:rgba(255,255,255,.8);
+        }
+        #login-dp .help-block{
+            font-size:12px    
+        }
+        #login-dp .bottom{
+            background-color:rgba(255,255,255,.8);
+            border-top:1px solid #ddd;
+            clear:both;
+            padding:14px;
+        }
+        #login-dp .social-buttons{
+            margin:12px 0    
+        }
+        #login-dp .social-buttons a{
+            width: 49%;
+        }
+        #login-dp .form-group {
+            margin-bottom: 10px;
+        }
+        .btn-fb{
+            color: #fff;
+            background-color:#3b5998;
+        }
+        .btn-fb:hover{
+            color: #fff;
+            background-color:#496ebc 
+        }
+        .btn-tw{
+            color: #fff;
+            background-color:#55acee;
+        }
+        .btn-tw:hover{
+            color: #fff;
+            background-color:#59b5fa;
+        }
+        @media(max-width:768px){
+            #login-dp{
+                background-color: inherit;
+                color: #fff;
+            }
+            #login-dp .bottom{
+                background-color: inherit;
+                border-top:0 none;
+            }
+        }
+    </style>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button style="border:2px solid #333333;" type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#list" aria-expanded="false">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'travel:main' %}" style="color:white;">Today's Friend</a>
+            </div>
+            <div class="collapse navbar-collapse" id="list">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href=# style="color:white; font-size: 15px;">Laguage</a></li>
+                    <li><a href="{% url 'travel:local_list' %}" style="color:white; font-size: 15px;">Tour</a></li>
+                    <li><a href="#" style="color: white; font-size: 15px;">Personalized</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'accounts:new_profile' %}" style="color:white; font-size: 15px;">Become a guide</a></li>
+                    {% else %}
+                        <li><a href="{% url 'accounts:login' %}?next={% url 'accounts:new_profile' %}" style="color:white; font-szie: 15px;">Become a guide</a></li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'accounts:profile' %}" style="color:white; font-size:15px;">{{ user }}</a></li>
+                    {% else %}
+                        <li><a href="{% url 'accounts:login' %}?next={{ request.path }}" style="color: white; font-size: 15px;">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div style="height:50px;"></div>
+    {% block content %}
+    {% endblock %}
+    <footer style="background-color:rgb(228, 220, 220)">
+        <div class="container">
+            <br>
+            <div class="row" style="margin:0 auto">
+                <p class="text-center">
+                    회사소개 &nbsp; |&emsp;
+                    이용약관 &nbsp; |&emsp;
+                    개인정보 처리방침 &nbsp; |&emsp;
+                    위치기반 서비스 이용약관 &nbsp; |&emsp;
+                    중개사 사이트 바로가기
+                </p>
+            </div>
+            <br>
+            <p class="text-center">상호 : Tryground&emsp; 대표 : 김희인 &emsp;주소: 경기도 광명시 소하동 1391-4번지(14328)</p>
+            <p class="text-center">서비스 이용문의 : 010-5016-1069 &emsp;&emsp;이메일 : gmldls420@naver.com </p>
+            <br>
+            <br>
+            <p class="text-center">
+                Copyright @ Tryground. All Right Reserved.
+            </p>
+        </div>
+    </footer>
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

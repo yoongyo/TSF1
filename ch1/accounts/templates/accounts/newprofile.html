@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <span>가이더로 상품을 등록하기 위해서는 추가적인 프로필 입력이 필요합니다.<br>
+        개인 프로필은 상품 검증 및 상품운영의 도움을 드리기 위해 사용되며 <br>
+        Tour 프로필은 외국인 친구들에게 여러분의 개성을 마음껏 보여주어<br>
+        공감대를 가지고 더 많은 여행자들이 여러분에게 편하게 다가갈 수 있도록 도와줍니다.<br>
+        언제나 여러분에게 친구처럼 여러분의 상품 개발과 운영에 도와드리는 '오늘의 친구'가 되겠습니다!</span>
+    <div style="padding:50px; border:1px solid black">
+        Name : {{ form.name }}<br>
+        Genger : {{ form.gender }}<br>
+        E-mail Adress: {{ form.email }}<br>
+        Cell number : {{ form.phone_number }}<br>
+    </div>
+</div>
+Laguage : {{ form.language }}
+<a href="{% url 'travel:post_new' %}">2단계</a>
+
+
+{% endblock %}

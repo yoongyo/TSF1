@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<video preload="auto" id="bgvid" loop width="100%" muted="muted" autoplay="true">
+    <source src="{% static 'video/main.mp4' %}" type="video/mp4">
+</video>
+
+<div class="container">
+    <div class="center-block" style="width:67.2%; margin-bottom:7px;">
+        <a href="/travel/local/Seoul"><img src="{% static 'img/상품지역/Seoul1.jpg' %}" style="max-height:200px; width:380px;"></a>
+        <a href="/travel/local/Seoul"><img src="{% static 'img/상품지역/Seoul2.jpg' %}" style="max-height: 200px; background-attachment:fixed; width:380px;"></a>
+    </div>
+    <div class="center-block" style="width:67.2%; margin-bottom:7px;">
+        <a href="/travel/local/Busan"><img src="{% static 'img/상품지역/Busan.jpg' %}" style="max-height:200px; width:380px;"></a>
+        <a href="/travel/local/Gyeongju"><img src="{% static 'img/상품지역/Gyeongju.JPG' %}" style="max-height: 200px; width:380px;"></a>
+    </div>
+    <div class="center-block" style="width:67.2%; margin-bottom:7px;">
+        <a href="/travel/local/Jeju"><img src="{% static 'img/상품지역/Jeju.jpg' %}" style="max-height:200px; width:380px;"></a>
+        <a href="/travel/local/Jeonju"><img src="{% static 'img/상품지역/Jeonju.jpg' %}" style="max-height: 200px; width:380px;"></a>
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="margin-top:15px;">
+                <a href="/travel/local/Seoul"><img src="{% static 'img/상품지역/Seoul1.jpg' %}" style="max-height:200px; width:380px;"></a>
+            </div>
+            <div class="col-md-4" style="margin-top:15px;">
+                <a href="/travel/local/Seoul"><img src="{% static 'img/상품지역/Seoul2.jpg' %}" style="max-height: 200px; background-attachment:fixed; width:380px;"></a>
+            </div>
+            <div class="col-md-4" style="margin-top:15px;">
+                    <a href="/travel/local/Jeju"><img src="{% static 'img/상품지역/Jeju.jpg' %}" style="max-height:200px; width:380px;"></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4" style="margin-top:15px;">
+                <a href="/travel/local/Busan"><img src="{% static 'img/상품지역/Busan.jpg' %}" style="max-height:200px; width:380px;"></a>
+            </div>
+            <div class="col-md-4" style="margin-top:15px;">
+                <a href="/travel/local/Gyeongju"><img src="{% static 'img/상품지역/Gyeongju.JPG' %}" style="max-height: 200px; width:380px;"></a>
+            </div>
+            <div class="col-md-4" style="margin-top:15px;">
+                    <a href="/travel/local/Jeonju"><img src="{% static 'img/상품지역/Jeonju.jpg' %}" style="max-height: 200px; width:380px;"></a>
+                </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

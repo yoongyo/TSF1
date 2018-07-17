@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<body>
+
+    {% for i in local_list %}
+    
+        <div class="container">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-9">
+            <div class="well clearfix" style="background-color:rgb(243,243,243); margin:15px auto; padding:10px;">
+                <article class="box">
+                    <a href="{% url 'travel:local_detail_form' i.City i.pk %}">
+                        <div class="row">
+                            <div class="col-sm-3">
+                            <figure>
+                                <img src="{{ i.img.url }}" style="max-height:140px; width:100%">
+                                <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
+                            </figure>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="clearfix row">
+                                    <h4 class="box-title col-xs-10">
+                                          {{ i.title }}<br>
+                                        <small>Provided by Generaion {{ i.name }}</small>
+                                        <br>
+                                        <br>
+                                        <div style="height:58px">
+                                            <small>{{ i.BriefContent }}</small>
+                                        </div>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <small>from </small>{{ i.Price }}<br>
+                                <small>Tip based</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <div class="clearfix row">
+                                    <div class="col-sm-4">{{ i.HashTag }}</div>
+                                    <div class="col-sm-4">Duration : {{ i.Duration }}</div>
+                                    <div class="col-sm-4">Language : {{ i.Language }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+<img src="{% static 'img/top.jpg' %}" width="100%" height="300">
+
+<div class="jumbotron">
+
+</div>
+<div class="container">
+    <h1>Seoul</h1>
+    <div class="row">
+        {% for i in seoul %}
+        <div class="col-md-6">
+            <div class="well clearfix" style="background-color:rgb(243,243,243); margin:15px auto; padding:10px;">
+                <article class="box">
+                    <a href="{% url 'travel:local_detail_form' i.City i.pk %}">
+                        <figure class="col-md-6">
+                        <img src="{{ i.img.url }}" style="max-height:140px; width:100%">
+                        <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
+                        </figure>
+                        <div class="col-md-6">
+                            <h4>{{ i.title }}</h4>
+                            <br>
+                            {{ i.Price}}
+                            <br>
+                            {{ i.Duration}}
+                            <br>
+                            {{ i.Language }}
+                            <br>
+                            {{ i.HashTag }}
+                        </div>
+
+                    </a>
+                </article>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-md-6">
+        </div>
+    </div>
+    <h1>Busan</h1>
+    <div class="row">
+        {% for i in busan %}
+        <div class="col-md-6">
+            <div class="well clearfix" style="background-color:rgb(243,243,243); margin:15px auto; padding:10px;">
+                <article class="box">
+                    <a href="{% url 'travel:local_detail_form' i.City i.pk %}">
+                        <figure class="col-md-6">
+                        <img src="{{ i.img.url }}" style="max-height:140px; width:100%">
+                        <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
+                        </figure>
+                        <div class="col-md-6">
+                            <h4>{{ i.title }}</h4>
+                            <br>
+                            {{ i.Price}}
+                            <br>
+                            {{ i.Duration}}
+                            <br>
+                            {{ i.Language }}
+                            <br>
+                            {{ i.HashTag }}
+                        </div>
+
+                    </a>
+                </article>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-md-6">
+        </div>
+    </div>
+    <h1>Jeonju</h1>
+    <div class="row">
+        {% for i in jeonju %}
+        <div class="col-md-6">
+            <div class="well clearfix" style="background-color:rgb(243,243,243); margin:15px auto; padding:10px;">
+                <article class="box">
+                    <a href="{% url 'travel:local_detail_form' i.City i.pk %}">
+                        <figure class="col-md-6">
+                        <img src="{{ i.img.url }}" style="max-height:140px; width:100%">
+                        <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
+                        </figure>
+                        <div class="col-md-6">
+                            <h4>{{ i.title }}</h4>
+                            <br>
+                            {{ i.Price}}
+                            <br>
+                            {{ i.Duration}}
+                            <br>
+                            {{ i.Language }}
+                            <br>
+                            {{ i.HashTag }}
+                        </div>
+
+                    </a>
+                </article>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-md-6">
+        </div>
+    </div>
+    <h1>Jeju</h1>
+    <div class="row">
+        {% for i in jeju %}
+        <div class="col-md-6">
+            <div class="well clearfix" style="background-color:rgb(243,243,243); margin:15px auto; padding:10px;">
+                <article class="box">
+                    <a href="{% url 'travel:local_detail_form' i.City i.pk %}">
+                        <figure class="col-md-6">
+                        <img src="{{ i.img.url }}" style="max-height:140px; width:100%">
+                        <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
+                        </figure>
+                        <div class="col-md-6">
+                            <h4>{{ i.title }}</h4>
+                            <br>
+                            {{ i.Price}}
+                            <br>
+                            {{ i.Duration}}
+                            <br>
+                            {{ i.Language }}
+                            <br>
+                            {{ i.HashTag }}
+                        </div>
+
+                    </a>
+                </article>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-md-6">
+        </div>
+    </div>
+    <h1>Gyeongju</h1>
+    <div class="row">
+        {% for i in gyeongju %}
+        <div class="col-md-6">
+            <div class="well clearfix" style="background-color:rgb(243,243,243); margin:15px auto; padding:10px;">
+                <article class="box">
+                    <a href="{% url 'travel:local_detail_form' i.City i.pk %}">
+                        <figure class="col-md-6">
+                        <img src="{{ i.img.url }}" style="max-height:140px; width:100%">
+                        <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
+                        </figure>
+                        <div class="col-md-6">
+                            <h4>{{ i.title }}</h4>
+                            <br>
+                            {{ i.Price}}
+                            <br>
+                            {{ i.Duration}}
+                            <br>
+                            {{ i.Language }}
+                            <br>
+                            {{ i.HashTag }}
+                        </div>
+
+                    </a>
+                </article>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-md-6">
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+        <h2 class="text-center"></h2>
+    </div>
+
+{% endblock %}
