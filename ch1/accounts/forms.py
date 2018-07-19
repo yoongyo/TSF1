@@ -2,17 +2,12 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile, Country, Language
 from django.contrib.auth.forms import AuthenticationForm
-
+from .widgets import AutoCompleteSelect
 
 class SignupForm(UserCreationForm):
-    phone_number = forms.CharField()
-    def save(self):
-        user = super().save()
-        profile = Profile.objects.create(user=user, phone_number=self.cleaned_data['phone_number'])
-        return user
+    pass
 
 class LoginForm(AuthenticationForm):
-
     answer = forms.IntegerField(label='3+3=?')
     def clean_answer(self):
         if self.cleaned_data.get('answer', None) != 6:
@@ -23,7 +18,8 @@ class ProfileForm(forms.Form):
         queryset=Language.objects.all(),
         widget=forms.Select(
             attrs={
-                'style': 'width:100%; hegith:30px; margin-top:4px;'
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
             }
         )
     )
@@ -31,7 +27,8 @@ class ProfileForm(forms.Form):
         max_length=30,
         widget=forms.TextInput(
             attrs={
-                'style': 'width:100%; height:30px; margin-top:4px;'
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
             }
         )
     )
@@ -39,7 +36,8 @@ class ProfileForm(forms.Form):
         queryset=Country.objects.all(),
         widget=forms.Select(
             attrs={
-                'style': 'width:100%; height:30px; margin-top:4px;'
+                'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
             }
         )
     )
@@ -47,7 +45,8 @@ class ProfileForm(forms.Form):
         queryset=Country.objects.all(),
         widget=forms.Select(
             attrs={
-                'style': 'width:100%; height:30px; margin-top:4px;'
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
             }
         )
     )
@@ -55,21 +54,23 @@ class ProfileForm(forms.Form):
         max_length=30,
         widget=forms.TextInput(
             attrs={
-                'style': 'width:100%; height:30px; margin-top:4px;'
+                'style': 'height:27px; margin-top:4px; border: 1px solid gray;',
+                'class':'form-control'
             }
         )
     )
     birth = forms.DateField(
-        widget=forms.DateInput(
+        widget=forms.SelectDateWidget(
             attrs={
-                'style': 'width:100%; height:30px; margin-top:4px;'
+                'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
             }
         )
     )
     email = forms.EmailField(
-        widget=forms.ClearableFileInput(
+        widget=forms.EmailInput(
             attrs={
-                'style': 'width:100%; height:30px; margin-top:4px;'
+                'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
             }
         )
     )
@@ -77,7 +78,9 @@ class ProfileForm(forms.Form):
         max_length=20,
         widget=forms.TextInput(
             attrs={
-                'style': 'width:100%; height:30px; margin-top:4px;'
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
+
             }
         )
 
@@ -86,14 +89,32 @@ class ProfileForm(forms.Form):
         max_length=20,
         widget=forms.TextInput(
             attrs={
-                'style': 'width:100%; height:30px; margin-top:4px;'
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
             }
         )
     )
     introduce = forms.CharField(
         widget=forms.Textarea(
             attrs={
-                'style': 'width:100%; height:130px; margin-top:4px;'
+                'style': 'width:100%;height:108px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
+            }
+        )
+    )
+    phone_number = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
+            }
+        )
+    )
+    gender = forms.CharField(
+        widget=forms.Select(
+            attrs={
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
             }
         )
     )

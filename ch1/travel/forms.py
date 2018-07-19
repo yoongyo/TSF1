@@ -1,12 +1,15 @@
 from .models import Post,Country,TypeOfTour,City,Language
 from django import forms
-
-
+from .widgets import DatePickerWidget,AutoCompleteSelect
+from django.core.urlresolvers import reverse_lazy
+import sys
+sys.path.append('..')
+from mysite.widgets.naver_map_point_widget import NaverMapPointWidget
 
 class PostMForm(forms.Form):
     title = forms.CharField(
         max_length=30,
-        widget = forms.TextInput(
+        widget=forms.TextInput(
             attrs={
                 'style': 'width:100%; height:30px; margin-top:4px;'
             }
@@ -22,7 +25,8 @@ class PostMForm(forms.Form):
     )
     Country = forms.ModelChoiceField(
         queryset = Country.objects.all(),
-        widget=forms.Select(
+        widget=AutoCompleteSelect(
+            ajax_url=reverse_lazy('country_list'),
             attrs={
                 'style': 'width:100%; height:30px; margin-top:4px;'
             }
@@ -48,7 +52,11 @@ class PostMForm(forms.Form):
         max_length = 1200,
         widget=forms.Textarea(
             attrs={
-                'style': 'width:100%; height:240px; margin-top:4px;'
+                'style': 'width:100%; height:240px; margin-top:4px;',
+                'placeholder': '당신이 만든 local 여행에 대한 설명을 자유롭게 작성해 주세요\n'
+                'Tip. 당신의 Tour만이 가지고 있는 특징에 대해 설명해 주세요.외국인은 언제나 local다움과 funny한 상품을 찾고있습니다.'
+
+
             }
         )
     )
@@ -91,14 +99,9 @@ class PostMForm(forms.Form):
             }
         )
     )
-    Map = forms.CharField(
-        max_length=10,
-        widget=forms.Textarea(
-            attrs={
-                'style': 'width:100%; height:230px; margin-top:4px;'
-            }
-        )
-    )
+
+    Map = forms.CharField(max_length=10, widget=NaverMapPointWidget())
+
     Direction = forms.CharField(
         max_length = 200,
         widget=forms.Textarea(
@@ -151,9 +154,10 @@ class PostMForm(forms.Form):
     )
     Price_include = forms.CharField(
         max_length = 100,
-        widget=forms.TextInput(
+        widget=forms.Textarea(
             attrs={
-                'style': 'width:100%; height:130px; margin-top:4px;'
+                'style': 'width:100%; height:130px; margin-top:4px;',
+                'placeholder' : 'Ex) traditional market, bicycle rental, Gyengbuk palace entree, dinner, lunch'
             }
         )
     )
@@ -169,6 +173,13 @@ class PostMForm(forms.Form):
         widget=forms.ClearableFileInput(
             attrs={
                 'style': 'width:100%; height:30px; margin-top:4px;'
+            }
+        )
+    )
+    NotDate = forms.DateField(
+        widget=DatePickerWidget(
+            attrs={
+                'style':'width:100%; height:30px; margin-top:4px;'
             }
         )
     )

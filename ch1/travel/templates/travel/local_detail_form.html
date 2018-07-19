@@ -15,7 +15,7 @@
          .slider-pager li{display: inline;}
     </style>
 
-    
+
     <script>
     $(document).ready( function() {
 
@@ -48,7 +48,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="bxslider" data-call="bxslider" data-options="slideMargin:5, autoReload:true" data-breaks="[{screen:0, slides:1, pager:false}, {screen:460, slides:2}, {screen: 768, slides:3}]">
-                      <li><img src="{{ i.img.url }}" /></li>
+                      <li><img src="{{ i.img.url }}" width="100%"/></li>
                     </ul>
                 </div>
             </div>
@@ -87,12 +87,14 @@
                     <div style="height:150px; width: 380px; border: 1px solid black; margin: 25px 0;">
                         프로필
                     </div>
-                    <span>Laguage : {{ i.language }}</span><br>
-                    <span>Major: </span><br>
-                    <span>Visited Country : </span><br>
-                    <span>Next travel : </span><br>
-                    <span>Interest : </span><br>
-
+                    {% for profile in profiles %}
+                    <span>Laguage : {{ profile.language }}</span><br>
+                    <span>Major: {{ profile.major }}</span><br>
+                    <span>Visited Country : {{ profile.visitedCountry }}</span><br>
+                    <span>Next travel : {{ profile.nextCountry }}</span><br>
+                    <span>Interest : {{ profile.interest }}</span><br>
+                    <a href="{% url 'Booking:booking' %}" class="btn btn-primary">Book Now</a>
+                    {% endfor %}
                 </div>
             </div>
         </div>

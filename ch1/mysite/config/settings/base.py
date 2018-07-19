@@ -35,10 +35,8 @@ INSTALLED_APPS = [
     'travel',
     'accounts',
     'widget_tweaks',
-    'post',
     'Booking',
     'Personalized',
-
     # 로그인 부분
     'django.contrib.sites',
     'allauth',
@@ -159,3 +157,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+NAVER_CLIENT_ID = '08EHhkPy8yFmFkD4jQxm'

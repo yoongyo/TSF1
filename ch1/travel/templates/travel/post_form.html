@@ -3,7 +3,6 @@
 
 
 {% block content %}
-
 <link rel="stylesheet"
       href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 
@@ -126,6 +125,13 @@
                     <span>Price included</span>
                     <br>
                     {{ form.Price_include }}
+                </div>
+
+                <div class="col-md-11">
+                    <span>Date not allowed <small>(불가능한 날짜를 선택해주시면 해당일에 대한 예약은 진행되지 않습니다)</small></span>
+                    <br>
+                    {{ form.media }}
+                    {{ form.NotDate }}
                 </div>
             </div>
             <div class="row" style="margin-bottom:30px;">

@@ -1,0 +1,7 @@
+{% include "django/forms/widgets/select.html" %}
+<script>
+$(function() {
+    var options = {minimumInputLength: 1};
+    $('#{{ widget.attrs.id }}').select2(options);
+});
+</script>

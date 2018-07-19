@@ -1,21 +1,52 @@
 {% extends 'base.html' %}
 {% block content %}
+{{ form.media }}
+<div class="container" style="padding-top:50px;">
+    <h2 class="text-center">프로필 작성</h2>
+    <p class="text-center">가이더로 상품을 등록하기 위해서는 추가적인 프로필 입력이 필요합니다.<br>
+        개인 프로필은 상품 검증 및 상품운영의 도움을 드리기 위해 사용되며 Tour 프로필은<br>
+        외국인 친구들에게 여러분의 개성을 마음껏 보여주어 공감대를 가지고 더 많은 여행자들이 여러분에게 편하게 다가갈 수 있도록 도와줍니다.<br>
+        언제나 여러분에게 친구처럼 여러분의 상품 개발과 운영에 도와드리는 '오늘의 친구'가 되겠습니다!</p>
+    <div class="center-block" style="width:80%">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row" style="padding:10px 5px; border:1px solid black; margin-top:10px;">
+            <div class="col-sm-6">
+                <div style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Name(이름)  {{ user }}</div>
+                <div style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Genger  {{ form.gender }}</div>
+                <span>* 통계목적으로 사용되며, 타인에게 절대 공개되지 않습니다.</span>
+                <div style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Birth {{ form.birth }}</div>
+                <span>* 통계목적으로 사용되며, 타인에게 절대 공개되지 않습니다.</span>
+                <div style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">E-mail Adress {{ form.email }}</div>
+                <span>* 투어 예약확인 메일 발송을 위해 필요하니, 정확하게 입력하여 주시기 바랍니다.</span>
+                <div style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Cell number  {{ form.phone_number }}</div>
+                <span>* 상품 검증 안내를 위해 필요하며, 타인에게 절대 공개되지 않습니다.</span>
+                <div style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Emergency contact(비상 연락처)  {{ form.emergency }}</div>
+                <span>* 연락이 가장 잘 될 수 있는 분의 번호를 꼭 입력하여 주시기 바랍니다.</span>
+                <div style="border:1px solid black; width:100%;padding:10px;margin-top:20px;">Interest  {{ form.interest }}</div>
+                <span>* 평소 관심사를 해시 태그로 작성해 주세요</span>
+            </div>
+            <div class="col-sm-6">
+                <div style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">카카오톡 ID  {{ form.kakaoID }}</div>
+                <span>* 투어진행 및 완료를 위해서는 필요합니다.</span>
+                <div style="border:1px solid black; width:100%;padding:10px;margin-top:20px;">Self Introduce(자기소개) <br> {{ form.introduce }}</div>
+                <div style="border:1px solid black; width:100%;padding:10px;margin-top:20px">Language  {{ form.language }}</div>
+                <span>* 투어시 사용 가능한 언어를 모두 선택해 주세요</span>
+                <div style="border:1px solid black; width:100%;padding:10px;margin-top:20px;">Major  {{ form.major }}</div>
+                <span>* 본인의 전공을 기입해 주세요</span>
+                <div style="border:1px solid black; width:100%;padding:10px;margin-top:20px;">Visited Country  {{ form.visitedCountry }}</div>
+                <span>* 방문했던 나라를 모두 선택해 주세요</span>
+                <div style="border:1px solid black; width:100%;padding:10px;margin-top:20px;">Next Trevel  {{ form.nextCountry }}</div>
+                <span>* 방문할 나라를 선택해 주세요</span>
 
-<div class="container">
-    <span>가이더로 상품을 등록하기 위해서는 추가적인 프로필 입력이 필요합니다.<br>
-        개인 프로필은 상품 검증 및 상품운영의 도움을 드리기 위해 사용되며 <br>
-        Tour 프로필은 외국인 친구들에게 여러분의 개성을 마음껏 보여주어<br>
-        공감대를 가지고 더 많은 여행자들이 여러분에게 편하게 다가갈 수 있도록 도와줍니다.<br>
-        언제나 여러분에게 친구처럼 여러분의 상품 개발과 운영에 도와드리는 '오늘의 친구'가 되겠습니다!</span>
-    <div style="padding:50px; border:1px solid black">
-        Name : {{ form.name }}<br>
-        Genger : {{ form.gender }}<br>
-        E-mail Adress: {{ form.email }}<br>
-        Cell number : {{ form.phone_number }}<br>
+            </div>
+        </div>
+        <div class="center-block" style="width:120px;">
+        <input class="btn btn-primary" type="submit" style="margin:10px; float:right; width:100px;" value="완료">
+        </div>
+    </form>
     </div>
 </div>
-Laguage : {{ form.language }}
-<a href="{% url 'travel:post_new' %}">2단계</a>
 
 
 {% endblock %}

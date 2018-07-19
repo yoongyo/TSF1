@@ -1,4 +1,9 @@
 from django.contrib import admin
-from .models import Profile
+from .models import Profile,Language
 
-admin.site.register(Profile)
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['user']
+
+admin.site.register(Language)

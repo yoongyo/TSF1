@@ -13,8 +13,9 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^travel/', include('travel.urls', namespace='travel')),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^Personalized/', include('Personalized.urls', namespace='Personalized')),
-    url(r'^Booking/', include('Booking.urls', namespace='Booking'))
+    url(r'^Booking/', include('Booking.urls', namespace='Booking')),
 ]
 
 

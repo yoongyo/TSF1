@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+
 from .models import Post,City
 from .forms import PostForm, PostMForm
-
+import sys
+sys.path.append('..')
+from accounts import models
 
 def main(request):
     return render(request, 'travel/_main.html')
@@ -38,7 +41,8 @@ def local_detail(request, City):
     })
 
 
-def local_detail_form(request, City ,pk):
+def local_detail_form(request, City, pk):
+    pf = models.Profile.objects.all()
     queryset = Post.objects.all()
     path = request.path
     print(path)
@@ -48,6 +52,7 @@ def local_detail_form(request, City ,pk):
     return render(request, 'travel/local_detail_form.html',{
         'local_detail': qs,
         'filter':filter,
+        'profiles': pf,
     })
 
 
@@ -68,3 +73,16 @@ def post_new(request):
 
 def complete(request):
     return render(request, 'travel/complete.html')
+
+
+from django.http import JsonResponse
+from .models import Country
+
+def country_list(request):
+    qs = Country.objects.all()
+    q = request.GET.get('q')
+    qs = qs.filter(name__icontains=q)
+    results = [{'id': country.id, 'text': country.name} for country in qs]
+    return JsonResponse({
+        'results': results,
+    })

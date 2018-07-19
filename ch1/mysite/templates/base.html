@@ -108,7 +108,7 @@
                         <li><a href="{% url 'accounts:login' %}?next={% url 'accounts:new_profile' %}" style="color:white; font-szie: 15px;">Become a guide</a></li>
                     {% endif %}
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'accounts:profile' %}" style="color:white; font-size:15px;">{{ user }}</a></li>
+                        <li><a href="{% url 'accounts:profile' %}" style="color:white; font-size:15px;">Mypage</a></li>
                     {% else %}
                         <li><a href="{% url 'accounts:login' %}?next={{ request.path }}" style="color: white; font-size: 15px;">Login</a></li>
                     {% endif %}

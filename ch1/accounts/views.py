@@ -1,19 +1,48 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404,resolve_url
 
+from django.contrib.auth import login as auth_login
 from django.contrib.auth.views import login as auth_login
 from allauth.socialaccount.models import SocialApp
 from allauth.socialaccount.templatetags.socialaccount import get_providers
 from .forms import LoginForm, SignupForm,ProfileForm
+from django.views.generic import CreateView
+from django.contrib.auth.models import User
+from .models import Profile
+
+import sys
+sys.path.append('..')
+from travel.models import Post
 
 
-def signup(request):
+
+class SignupView(CreateView):
+    model = User
+    form_class = SignupForm
+    template_name = 'accounts/signup.html'
+
+    def get_success_url(self):
+        return resolve_url('profile')
+
+    def form_valid(self, form):
+        user = form.save()
+        auth_login(self.request, user)
+        return redirect('accounts:profile')
+
+signup = SignupView.as_view()
+
+
+def skignup(request):
     if request.method =='POST':
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect(settings.LOGIN_URL)
+
+            auth_login(request, user)  # 로그인 처리
+
+
+            return redirect('accounts:profile')
         else:
             form = SignupForm()
         return render(request, 'accounts/signup_form.html',{
@@ -22,8 +51,14 @@ def signup(request):
 
 @login_required     # settings.LOGIN_URL
 def profile(request):
-    request.user    # django.contrib.auth.models.AnonymousUser
-    return render(request, 'accounts/profile.html')
+    pf = Profile.objects.all()
+    pf = pf.filter(user=request.user)
+    post = Post.objects.all()
+    post = post.filter(user=request.user)
+    return render(request, 'accounts/profile.html',{
+        'profiles':pf,
+        'list':post
+    })
 
 
 def login(request):
@@ -39,7 +74,7 @@ def login(request):
 
     return auth_login(request,
         authentication_form=LoginForm,
-        template_name=['accounts/login_form.html','mystie/base.html'],
+        template_name='accounts/login_form.html',
         extra_context={'providers': providers})
 
 def new_profile(request):
@@ -47,9 +82,23 @@ def new_profile(request):
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save()
-            return redirect(post)
+            return redirect('travel:post_new')
     else:
         form = ProfileForm()
     return render(request, 'accounts/newprofile.html', {
         'form':form,
     })
+
+
+def profileEdit(request):
+    profile = get_object_or_404(Profile, User=user_id)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            profile = form.save()
+            return redirect(profile)
+        else:
+            form = ProfileForm(instance=profile)
+        return render(request, 'accounts/newprofile.html',{
+            'form':form,
+        })

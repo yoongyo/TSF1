@@ -1,17 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-<link rel="stylesheet"
-      href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-<h1>{{ user }}'s Profile</h1>
-<ul>
-    <li>email : {{ user.email }}</li>
-    <li>name : {{ user.name }}</li>
-    <li>date_joined : {{ user.date_joined }}</li>
-</ul>
-<img src="{{ user.socialaccount_set.all.first.get_avatar_url }}" />
 
-<a href="{% url 'accounts:logout' %}?next={{ request.path }}" onclick="return confirm('Are you sure?');"><h2>로그아웃하기</h2></a>
-<a href="{% url 'accounts:profile' %}"><h2>가이드로 등록하기</h2> </a>
+<div class="container" style="padding-top:30px;">
+    <h2 class="text-center">MY PAGE</h2>
+    <h3 class="text-center">프로필 관리, 투어 프로그램 관리, 예약 일정관리 페이지</h3>
+
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1 " style="border:1px solid black; margin-right:10px;">
+                <div style="border:1px solid black; margin:15px 0; padding:10px;" >Language : {{ user.profile.language|default:'empty' }}</div>
+                <div style="border:1px solid black; margin:15px 0; padding:10px;">Major : {{ user.profile.major }}</div>
+                <div style="border:1px solid black; margin:15px 0; padding:10px;">Visited Country : {{ user.profile.visitedCountry }}</div>
+                <div style="border:1px solid black; margin:15px 0; padding:10px;">Next Travel : {{ user.profile.nextCountry }}</div>
+
+                <div style="border:1px solid black; margin:15px 0; padding:10px;">Interest : {{ user.profile.interest }}</div>
+
+        </div>
+        <div class="col-md-5" style="border: 1px solid black; margin-left:10px;height:300px;">
+            {% for i in list %}
+            <div class="well clearfix" style="background-color:rgb(243,243,243); margin:15px auto; padding:10px;">
+                <article class="box">
+                    <a href="{% url 'travel:local_detail_form' i.City i.pk %}">
+                        <figure class="col-md-6">
+                            <img src="{{ i.img.url }}" style="max-height:140px; width:100%">
+                            <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
+                        </figure>
+                        <div class="col-md-6">
+                            <h4>{{ i.title }}</h4>
+                            <br>
+                            {{ i.Price}}
+                            <br>
+                            {{ i.Duration}}
+                            <br>
+                            {{ i.Language }}
+                            <br>
+                            {{ i.HashTag }}
+                        </div>
+                    </a>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+    <img src="{{ user.socialaccount_set.all.first.get_avatar_url }}" />
+
+    <a href="{% url 'accounts:logout' %}?next={{ request.path }}" onclick="return confirm('Are you sure?');"><h2>로그아웃하기</h2></a>
+    <a href="{% url 'accounts:profile' %}"><h2>가이드로 등록하기</h2> </a>
+
+    </div>
+</div>
+
+
+
 
 {% endblock %}
