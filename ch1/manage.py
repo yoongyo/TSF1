@@ -3,7 +3,11 @@ import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.config.settings.debug")
+    path = '/Users/jarvis/Desktop/TFS-master/ch1'
+    if path not in sys.path:
+        sys.path.append(path)
+
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.config.settings.deploy")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

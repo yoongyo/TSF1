@@ -62,7 +62,6 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # bizch/ch1/mysite/templates
         'DIRS': [
             os.path.join(BASE_DIR, 'templates')
         ],

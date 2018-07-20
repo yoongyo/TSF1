@@ -2,11 +2,9 @@
 
 {% block content %}
 {% load static %}
-<div class="slideshow-bg full-screen" style="height:600px;">
-    <video preload="auto" id="bgvid" loop muted="muted" autoplay="true" style="position:absolute;height:px;width:auto;">
-        <source src="{% static 'video/main.mp4' %}" type="video/mp4">
-    </video>
-</div>
+<video preload="auto" id="bgvid" loop muted="muted" autoplay="true" style="width:100%;">
+    <source src="{% static 'video/main.mp4' %}" type="video/mp4">
+</video>
 
 <div class="container">
     
@@ -14,18 +12,20 @@
 
 <div class="jumbotron">
     <div class="container">
-        <div class="center-block" style="background-color:gray;padding:3px; width:50%;color:white;margin-bottom:30px;"><h2 class="text-center">Most popular city in Korea</h2></div>
-        <div class="center-block" style="width:67.2%; margin-bottom:7px;">
-            <a href="/travel/local/Seoul"><img src="{% static 'img/상품지역/Seoul1.jpg' %}" style="max-height:200px; width:380px;"></a>
-            <a href="/travel/local/Seoul"><img src="{% static 'img/상품지역/Seoul2.jpg' %}" style="max-height: 200px; background-attachment:fixed; width:380px;"></a>
+        <div class="center-block well" style="background-color:gray;height:65px;width:50%; color:white;margin-bottom:30px;">
+            <h2 class="text-center" style="margin-top:-5px;">Most popular city in Korea</h2>
         </div>
         <div class="center-block" style="width:67.2%; margin-bottom:7px;">
-            <a href="/travel/local/Busan"><img src="{% static 'img/상품지역/Busan.jpg' %}" style="max-height:200px; width:380px;"></a>
-            <a href="/travel/local/Gyeongju"><img src="{% static 'img/상품지역/Gyeongju.JPG' %}" style="max-height: 200px; width:380px;"></a>
+            <a href="/travel/local/Seoul"><img src="{% static 'img/local/Seoul1.jpg' %}" style="max-height:200px; width:380px;"></a>
+            <a href="/travel/local/Seoul"><img src="{% static 'img/local/Seoul2.jpg' %}" style="max-height: 200px; background-attachment:fixed; width:380px;"></a>
         </div>
         <div class="center-block" style="width:67.2%; margin-bottom:7px;">
-            <a href="/travel/local/Jeju"><img src="{% static 'img/상품지역/Jeju.jpg' %}" style="max-height:200px; width:380px;"></a>
-            <a href="/travel/local/Jeonju"><img src="{% static 'img/상품지역/Jeonju.jpg' %}" style="max-height: 200px; width:380px;"></a>
+            <a href="/travel/local/Busan"><img src="{% static 'img/local/Busan.jpg' %}" style="max-height:200px; width:380px;"></a>
+            <a href="/travel/local/Gyeongju"><img src="{% static 'img/local/Gyeongju.JPG' %}" style="max-height: 200px; width:380px;"></a>
+        </div>
+        <div class="center-block" style="width:67.2%; margin-bottom:7px;">
+            <a href="/travel/local/Jeju"><img src="{% static 'img/local/Jeju.jpg' %}" style="max-height:200px; width:380px;"></a>
+            <a href="/travel/local/Jeonju"><img src="{% static 'img/local/Jeonju.jpg' %}" style="max-height: 200px; width:380px;"></a>
         </div>
     </div>
 </div>

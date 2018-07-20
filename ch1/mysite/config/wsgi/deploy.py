@@ -1,7 +1,7 @@
 import os
 import sys
 from django.core.wsgi import get_wsgi_application
-path = '/Users/javis/Desktop/trvel_home-master/ch1'
+path = '/Users/jarvis/Desktop/TFS-master/ch1'
 if path not in sys.path:
     sys.path.append(path)
 
