@@ -13,6 +13,73 @@ class LoginForm(AuthenticationForm):
         if self.cleaned_data.get('answer', None) != 6:
             raise forms.ValidationError('땡~!!!')
 
+class ProfileMForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = {
+            'language',
+            'major',
+            'visitedCountry',
+            'nextCountry',
+            'interest',
+            'birth',
+            'email',
+            'emergency',
+            'kakaoID',
+            'phone_number',
+            'introduce',
+            'gender',
+        }
+        widgets = {
+            'language' : forms.Select(attrs={
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
+            }),
+            'major': forms.TextInput(attrs={
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
+            }),
+            'visitedCountry':forms.Select(attrs={
+                'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
+            }),
+            'nextCountry':forms.Select(attrs={
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
+            }),
+            'interest': forms.TextInput(attrs={
+                'style': 'height:27px; margin-top:4px; border: 1px solid gray;',
+                'class':'form-control'
+            }),
+            'birth':forms.SelectDateWidget(attrs={
+                'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
+            }),
+            'email':forms.EmailInput(attrs={
+                'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
+            }),
+            'emergency':forms.TextInput(attrs={
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
+            }),
+            'kakaoID':forms.TextInput(attrs={
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
+            }),
+            'introduce':forms.Textarea(attrs={
+                'style': 'width:100%;height:108px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
+            }),
+            'phone_number':forms.TextInput(attrs={
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
+            }),
+            'gender':forms.Select(attrs={
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class':'form-control'
+            }),
+        }
+
 class ProfileForm(forms.Form):
     language = forms.ModelChoiceField(
         queryset=Language.objects.all(),

@@ -8,141 +8,148 @@
 
 
 <div class="container">
-    <div style="border:1px solid gray; margin-top:40px; margin-bottom:40px;">
-        <div style="border-bottom:1px solid gray">
-            <h2 class="text-center" style="margin-left:20px;">Create a Prodect - 1. Basic Information</h2>
-        </div>
-        <div class="container" style="padding:30px;">
-            <div class="row" style="margin-bottom:30px;">
-                <div class="col-md-4">
-                    <span>Name of tour</span>
-                    <br>
-                    {{ form.title }}
-                </div>
-                <div class="col-md-3 col-md-offset-2">
-                    <span>Type of tour</span>
-                    <br>
-                    {{ form.Tourtype }}
-                </div>
-            </div>
-            <div class="row" style="margin-bottom:30px;">
-                <div class="col-md-2">
-                    <span>Country</span>
-                    <br>
-                    {{ form.Country }}
-                </div>
-                <div class="col-md-2 col-md-offset-1">
-                    <span>City</span>
-                    <br>
-                    {{ form.City }}
-                </div>
-                <div class="col-md-2 col-md-offset-1">
-                    <span>Language</span>
-                    <br>
-                    {{ form.Language }}
-                </div>
-                <div class="col-md-2 col-md-offset-1">
-                    <span>Representative image</span>
-                    <br>
-                    {{ form.img }}
-                </div>
-            </div>
-            <div class="row" style="margin-bottom:30px;">
-                <div class="col-md-11">
-                    <span>Detailed description of tour</span>
-                    <br>
-                    {{ form.DetailContent}}
-                </div>
-            </div>
-            <div class="row" style="margin-bottom:30px;">
-                <div class="col-md-11">
-                    <span>Hash tag</span>
-                    <br>
-                    {{ form.HashTag }}
-                </div>
-            </div>
-        </div>
-        <div style="border-top:1px solid gray; border-bottom:1px solid gray">
-            <h2 class="text-center" style="margin-left:20px;">Create a Product - 2. Course Information</h2>
-        </div>
-        <div class="container" style="padding:30px;">
-            <div class="row" style="margin-bottom:30px;">
-                <div class="col-md-8">
-                    <span>Meeting point of tour</span>
-                    <br>
-                    {{ form.MeetingPoint}}
-                </div>
-                <div class="col-md-3">
-                    <span>Meeting time</span>
-                    <br>
-                    {{ form.MeetingTime }}
-                    <br>
-                    {{ form.Duration }}
-                </div>
-            </div>
-            <div class="row" style="margin-bottom:30px;">
-                <div class="col-md-11">
-                    <span>Map of tour</span>
-                    <br>
-                    {{ form.Map }}
-                </div>
-            </div>
-            <div class="row" style="margin-bottom:30px;">
-                <div class="col-md-11">
-                    <span>Please give directions and explain how your costumers can find your activity</span>
-                    <br>
-                    {{ form.Direction }}
-                </div>
-            </div>
-        </div>
-        <div style="border-top: 1px solid gray;border-bottom:1px solid gray">
-            <h2 class="text-center" style="margin-left:20px;">Create a Prodect - 3. Price & Other Information</h2>
-        </div>
-        <div class="container" style="padding:30px;">
-            <div class="row" style="margin-bottom:30px;">
-                <div class="col-md-4">
-                    <span>Price of tour</span>
-                    <br>
-                    {{ form.Price }}
-                </div>
-                <div class="col-md-3">
-                    <span>Minimum number of people</span>
-                    <br>
-                    {{ form.Minimum }} 
-                </div>
-                <div class="col-md-1">
-                    <br>
-                    <p class="text-center" style="font-size:25px;">~</p>
-                </div>
-                <div class="col-md-3">
-                    <span>Maximum number of people</span>
-                    <br>
-                    {{ form.Maximum }}
-                </div>
-            </div>
-            <div class="row" style="margin-bottom:30px;">
-                <div class="col-md-11">
-                    <span>Price included</span>
-                    <br>
-                    {{ form.Price_include }}
-                </div>
+     <form action="" method="post">
+         {% csrf_token %}
+         <div style="border:1px solid gray; margin-top:40px; margin-bottom:40px;">
+             <div style="border-bottom:1px solid gray">
+                <h2 class="text-center" style="margin-left:20px;">Create a Prodect - 1. Basic Information</h2>
+             </div>
 
-                <div class="col-md-11">
-                    <span>Date not allowed <small>(불가능한 날짜를 선택해주시면 해당일에 대한 예약은 진행되지 않습니다)</small></span>
-                    <br>
-                    {{ form.media }}
-                    {{ form.NotDate }}
+            <div class="container" style="padding:30px;">
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-4">
+                        <span>Name of tour</span>
+                        <br>
+                        {{ form.title }}
+                    </div>
+                    <div class="col-md-3 col-md-offset-2">
+                        <span>Type of tour</span>
+                        <br>
+                        {{ form.Tourtype }}
+                    </div>
                 </div>
-            </div>
-            <div class="row" style="margin-bottom:30px;">
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-2">
+                        <span>Country</span>
+                        <br>
+                        {{ form.Country }}
+                    </div>
+                    <div class="col-md-2 col-md-offset-1">
+                        <span>City</span>
+                        <br>
+                        {{ form.City }}
+                    </div>
+                    <div class="col-md-2 col-md-offset-1">
+                        <span>Language</span>
+                        <br>
+                        {{ form.Language }}
+                    </div>
+                    <div class="col-md-2 col-md-offset-1">
+                        <span>Representative image</span>
+                        <br>
+                        {{ form.img }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:30px;">
                     <div class="col-md-11">
-                    <span>Please include here any additional information for your guest</span>
-                    <br>
-                    {{ form.GuestInfo }}
+                        <span>Detailed description of tour</span>
+                        <br>
+                        {{ form.DetailContent}}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-11">
+                        <span>Hash tag</span>
+                        <br>
+                        {{ form.HashTag }}
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+            <div style="border-top:1px solid gray; border-bottom:1px solid gray">
+                <h2 class="text-center" style="margin-left:20px;">Create a Product - 2. Course Information</h2>
+            </div>
+            <div class="container" style="padding:30px;">
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-8">
+                        <span>Meeting point of tour</span>
+                        <br>
+                        {{ form.MeetingPoint}}
+                    </div>
+                    <div class="col-md-3">
+                        <span>Meeting time</span>
+                        <br>
+                        {{ form.MeetingTime }}
+                        <br>
+                        {{ form.Duration }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-11">
+                        <span>Map of tour</span>
+                        <br>
+                        {{ form.Map }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-11">
+                        <span>Please give directions and explain how your costumers can find your activity</span>
+                        <br>
+                        {{ form.Direction }}
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid gray;border-bottom:1px solid gray">
+                <h2 class="text-center" style="margin-left:20px;">Create a Prodect - 3. Price & Other Information</h2>
+            </div>
+            <div class="container" style="padding:30px;">
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-4">
+                        <span>Price of tour</span>
+                        <br>
+                        {{ form.Price }}
+                    </div>
+                    <div class="col-md-3">
+                        <span>Minimum number of people</span>
+                        <br>
+                        {{ form.Minimum }}
+                    </div>
+                    <div class="col-md-1">
+                        <br>
+                        <p class="text-center" style="font-size:25px;">~</p>
+                    </div>
+                    <div class="col-md-3">
+                        <span>Maximum number of people</span>
+                        <br>
+                        {{ form.Maximum }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-11">
+                        <span>Price included</span>
+                        <br>
+                        {{ form.Price_include }}
+                    </div>
+
+                    <div class="col-md-11">
+                        <span>Date not allowed <small>(불가능한 날짜를 선택해주시면 해당일에 대한 예약은 진행되지 않습니다)</small></span>
+                        <br>
+                        {{ form.media }}
+                        {{ form.NotDate }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:30px;">
+                        <div class="col-md-11">
+                        <span>Please include here any additional information for your guest</span>
+                        <br>
+                        {{ form.GuestInfo }}
+                    </div>
+                </div>
+            </div>
+         </div>
+         <div class="center-block" style="width:120px;">
+            <input class="btn btn-primary" type="submit" value="완료" style="width:110px;margin-bottom:20px;">
+         </div>
+     </form>
 </div>
 
 

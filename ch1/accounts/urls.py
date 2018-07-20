@@ -11,6 +11,6 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, name='logout',
         kwargs={'next_page': settings.LOGIN_URL}),
     url(r'^profile/$', views.profile, name="profile"),
-    url(r'newprofile/$', views.new_profile, name='new_profile'),
+    url(r'newprofile/(?P<user>\w+)/$', views.new_profile, name='new_profile'),
     url(r'newprofile/edit/$', views.profileEdit, name="profileEdit"),
 ]

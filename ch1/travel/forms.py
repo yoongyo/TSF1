@@ -6,7 +6,173 @@ import sys
 sys.path.append('..')
 from mysite.widgets.naver_map_point_widget import NaverMapPointWidget
 
-class PostMForm(forms.Form):
+
+
+class PostMForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = [
+            'title',
+            'Tourtype',
+            'Country',
+            'City',
+            'Language',
+            'DetailContent',
+            'BriefContent',
+            'HashTag',
+            'MeetingPoint',
+            'MeetingTime',
+            'Map',
+            'Direction',
+            'CourseName',
+            'Duration',
+            'Price',
+            'Minimum',
+            'Maximum',
+            'Price_include',
+            'NotDate',
+            'GuestInfo',
+            'img',
+        ]
+        widgets = {
+            'title':forms.TextInput(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'Tourtype':forms.Select(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'Country':AutoCompleteSelect(
+                ajax_url=reverse_lazy('country_list'),
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'City':forms.Select(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'Language':forms.Select(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'DetailContent':forms.Textarea(
+                attrs={
+                    'style': 'width:100%; height:240px; margin-top:4px;',
+                    'placeholder': '당신이 만든 local 여행에 대한 설명을 자유롭게 작성해 주세요\n'
+                    'Tip. 당신의 Tour만이 가지고 있는 특징에 대해 설명해 주세요.외국인은 언제나 local다움과 funny한 상품을 찾고있습니다.',
+                    'class': 'form-control'
+                }
+            ),
+            'BriefContent':forms.Select(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'HashTag':forms.TextInput(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'MeetingPoint':forms.TextInput(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'MeetingTime':forms.TextInput(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'Map': NaverMapPointWidget(
+
+            ),
+            'Direction':forms.Textarea(
+                attrs={
+                    'style': 'width:100%; height:130px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'CourseName':forms.TextInput(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'Duration':forms.TextInput(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'Price':forms.TextInput(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'Minimum' : forms.NumberInput(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'Maximum': forms.NumberInput(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'Price_include':forms.Textarea(
+                attrs={
+                    'style': 'width:100%; height:130px; margin-top:4px;',
+                    'placeholder' : 'Ex) traditional market, bicycle rental, Gyengbuk palace entree, dinner, lunch',
+                    'class': 'form-control'
+                }
+            ),
+            'NotDate':DatePickerWidget(
+                attrs={
+                    'style':'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'GuestInfo':forms.TextInput(
+                attrs={
+                    'style': 'width:100%; height:130px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+            'img':forms.ClearableFileInput(
+                attrs={
+                    'style': 'width:100%; height:30px; margin-top:4px;',
+                    'class': 'form-control'
+                }
+            ),
+        }
+
+    def save(self, commit=True):
+        post = Post(**self.cleaned_data)
+        if commit:
+            post.save()
+        return post
+
+
+
+class PostForm(forms.Form):
     title = forms.CharField(
         max_length=30,
         widget=forms.TextInput(
@@ -183,35 +349,3 @@ class PostMForm(forms.Form):
             }
         )
     )
-
-class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = [
-            'title',
-            'Tourtype',
-            'Country',
-            'City',
-            'Language',
-            'DetailContent',
-            'BriefContent',
-            'HashTag',
-            'MeetingPoint',
-            'MeetingTime',
-            'Map',
-            'Direction',
-            'CourseName',
-            'Duration',
-            'Price',
-            'Minimum',
-            'Maximum',
-            'Price_include',
-            'NotDate',
-            'GuestInfo',
-        ]
-
-    def save(self, commit=True):
-        post = Post(**self.cleaned_data)
-        if commit:
-            post.save()
-        return post

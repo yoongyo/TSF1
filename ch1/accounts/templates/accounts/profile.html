@@ -41,6 +41,7 @@
             </div>
             {% endfor %}
         </div>
+    </div>
     <img src="{{ user.socialaccount_set.all.first.get_avatar_url }}" />
 
     <a href="{% url 'accounts:logout' %}?next={{ request.path }}" onclick="return confirm('Are you sure?');"><h2>로그아웃하기</h2></a>

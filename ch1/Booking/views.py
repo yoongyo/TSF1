@@ -1,10 +1,10 @@
 from django.shortcuts import render,redirect
-from .forms import BookForm
+from .forms import BookForm,BookMForm
 
 
 def booking(request):
     if request.method == 'POST':
-        form = BookForm(request.POST, request.FILES)
+        form = BookMForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save()
             return redirect('Booking:complete')

@@ -6,7 +6,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.views import login as auth_login
 from allauth.socialaccount.models import SocialApp
 from allauth.socialaccount.templatetags.socialaccount import get_providers
-from .forms import LoginForm, SignupForm,ProfileForm
+from .forms import LoginForm, SignupForm,ProfileForm,ProfileMForm
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
 from .models import Profile
@@ -77,14 +77,15 @@ def login(request):
         template_name='accounts/login_form.html',
         extra_context={'providers': providers})
 
-def new_profile(request):
+def new_profile(request, user):
+    profile = get_object_or_404(Profile, user=request.user)
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES)
+        form = ProfileMForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            post = form.save()
+            profile = form.save()
             return redirect('travel:post_new')
     else:
-        form = ProfileForm()
+        form = ProfileMForm(instance=profile)
     return render(request, 'accounts/newprofile.html', {
         'form':form,
     })

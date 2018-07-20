@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Profile,Language
+from .forms import ProfileMForm
 
 
 @admin.register(Profile)

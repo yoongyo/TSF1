@@ -103,9 +103,9 @@
                     <li><a href="{% url 'travel:local_list' %}" style="color:white; font-size: 15px;">Tour</a></li>
                     <li><a href="#" style="color: white; font-size: 15px;">Personalized</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'accounts:new_profile' %}" style="color:white; font-size: 15px;">Become a guide</a></li>
+                        <li><a href="{% url 'accounts:new_profile' request.user %}" style="color:white; font-size: 15px;">Become a guide</a></li>
                     {% else %}
-                        <li><a href="{% url 'accounts:login' %}?next={% url 'accounts:new_profile' %}" style="color:white; font-szie: 15px;">Become a guide</a></li>
+                        <li><a href="{% url 'accounts:login' %}?next={% url 'accounts:new_profile' request.user %}" style="color:white; font-szie: 15px;">Become a guide</a></li>
                     {% endif %}
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'accounts:profile' %}" style="color:white; font-size:15px;">Mypage</a></li>
