@@ -9,7 +9,7 @@ def booking(request):
             post = form.save()
             return redirect('Booking:complete')
     else:
-        form = BookForm()
+        form = BookMForm()
     return render(request, 'booking/booking.html', {
         'form': form,
     })

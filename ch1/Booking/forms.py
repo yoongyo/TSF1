@@ -1,26 +1,13 @@
 from django import forms
 from .models import Language,Nationality,SNS,Booking
+from .widgets import DatePickerWidget, CounterTextInput
 
 
 class BookMForm(forms.ModelForm):
-    class meta:
+    class Meta:
         model = Booking
-        fields = {
-            'LastName',
-            'FirstName',
-            'Age',
-            'Gender',
-            'Email',
-            'Date',
-            'SNS',
-            'Nationality',
-            'phone',
-            'ConfirmedEmail',
-            'Language',
-            'SNSID',
-            'Demand',
-        },
-        widgets={
+        fields = "__all__"
+        widgets = {
             'LastName':forms.TextInput(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
@@ -52,9 +39,10 @@ class BookMForm(forms.ModelForm):
                     'class': 'form-control'
                 }
             ),
-            'Date':forms.SelectDateWidget(
+            'Date': DatePickerWidget(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
+                    'class': 'form-control'
                 }
             ),
             'SNS':forms.Select(
@@ -93,7 +81,7 @@ class BookMForm(forms.ModelForm):
                     'class': 'form-control'
                 }
             ),
-            'Demend':forms.Textarea(
+            'Demand': CounterTextInput(
                 attrs={
                     'style': 'width:100%; height:130px; border:1px solid gray;margin-top:3px;',
                     'class': 'form-control'
