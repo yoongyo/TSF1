@@ -1,6 +1,6 @@
 from django import forms
 from .models import Language,Nationality,SNS,Booking
-from .widgets import DatePickerWidget, CounterTextInput
+from .widgets import DatePickerWidget, CounterTextInput, AutoCompleteSelect
 
 
 class BookMForm(forms.ModelForm):
@@ -20,14 +20,14 @@ class BookMForm(forms.ModelForm):
                     'class': 'form-control'
                 }
             ),
-            'Age':forms.NumberInput(
+            'Age': forms.NumberInput(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
                     'class': 'form-control'
 
                 }
             ),
-            'Gender':forms.TextInput(
+            'gender': forms.Select(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
                     'class': 'form-control'
@@ -51,7 +51,7 @@ class BookMForm(forms.ModelForm):
                     'class': 'form-control'
                 }
             ),
-            'Nationality':forms.Select(
+            'Nationality':AutoCompleteSelect(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
                     'class': 'form-control'
@@ -81,7 +81,7 @@ class BookMForm(forms.ModelForm):
                     'class': 'form-control'
                 }
             ),
-            'Demand': CounterTextInput(
+            'Demand': forms.Textarea(
                 attrs={
                     'style': 'width:100%; height:130px; border:1px solid gray;margin-top:3px;',
                     'class': 'form-control'
@@ -118,7 +118,7 @@ class BookForm(forms.Form):
         )
     )
     Gender = forms.CharField(
-        widget=forms.TextInput(
+        widget=forms.Select(
             attrs={
                 'style': 'border:1px solid gray;height:27px;margin-top:3px;',
                 'class': 'form-control'
@@ -194,7 +194,7 @@ class BookForm(forms.Form):
     )
     Demand = forms.CharField(
         max_length=1200,
-        widget=forms.Textarea(
+        widget=forms.TextInput(
             attrs={
                 'style': 'width:100%; height:130px; border:1px solid gray;margin-top:3px;',
                 'class': 'form-control'

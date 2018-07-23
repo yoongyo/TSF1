@@ -17,6 +17,20 @@ class DatePickerWidget(forms.DateInput):
             '//code.jquery.com/ui/1.12.1/jquery-ui.min.js',
         ]
 
+class LocationWidget(forms.TextInput):
+    template_name = 'widgets/location_widget.html'
+
+    class Media:
+        js = [
+            '//maps.googleapis.com/maps/api/js', # FIXME: Google Maps JavaScript API 키 적용
+        ]
+
+    def build_attrs(self, *args, **kwargs):
+        attrs = super().build_attrs(*args, **kwargs)
+        attrs['readonly'] = True
+        attrs['style'] = 'background-color: #eee; border: 0;'
+        return attrs
+
 
 class AutoCompleteSelect(forms.Select):
     template_name = 'widgets/autocomplete_select.html'

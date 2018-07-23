@@ -1,17 +1,65 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.forms import extras
+
 from .models import Profile, Country, Language
 from django.contrib.auth.forms import AuthenticationForm
 from .widgets import AutoCompleteSelect
+import unicodedata
+from django.core.validators import validate_email
+from .models import Profile
+from .widgets import AutoCompleteSelect
 
 class SignupForm(UserCreationForm):
-    pass
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].validators = [validate_email]
+        self.fields['username'].help_text = '이메일 형식으로 입력 가능합니다.'
+        self.fields['username'].label = '이메일'
+        self.fields['username'].widget = forms.EmailInput(
+            attrs={'class':'form-control'}
+        )
+        self.fields['password1'].widget = forms.PasswordInput(
+            attrs={'class':'form-control'}
+        )
+        self.fields['password2'].widget = forms.PasswordInput(
+            attrs={'class': 'form-control'}
+        )
+
+
+    def save(self, commit=True):
+        user = super().save()
+        user.email = user.username
+
+        if commit:
+            user.save()
+        return user
+
+    """
+    def clean_username(self):
+        value = self.cleaned_data('username')
+        if value:
+            validate_email(value)
+        return value
+    """
+
+class UsernameField(forms.CharField):
+    def to_python(self, value):
+        return unicodedata.normalize('NFKC', super().to_python(value))
 
 class LoginForm(AuthenticationForm):
-    answer = forms.IntegerField(label='3+3=?')
-    def clean_answer(self):
-        if self.cleaned_data.get('answer', None) != 6:
-            raise forms.ValidationError('땡~!!!')
+    username = UsernameField(
+        label= 'Email',
+        widget=forms.TextInput(attrs={'autofocus': True, 'class':'form-control', 'placeholder':'Your Email', 'requidred':True, 'style':'margin-top:20px; margin-bottom: 10px;'})
+    )
+    password = forms.CharField(
+        label= "Password",
+        strip=False,
+        widget=forms.PasswordInput(attrs={'class':'form-control', 'id':'upw', 'placeholder':'Password', 'required': True}),
+    )
 
 class ProfileMForm(forms.ModelForm):
     class Meta:
@@ -39,11 +87,11 @@ class ProfileMForm(forms.ModelForm):
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
                 'class':'form-control'
             }),
-            'visitedCountry':forms.Select(attrs={
+            'visitedCountry':AutoCompleteSelect(attrs={
                 'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
                 'class':'form-control'
             }),
-            'nextCountry':forms.Select(attrs={
+            'nextCountry':AutoCompleteSelect(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
                 'class':'form-control'
             }),
@@ -51,7 +99,7 @@ class ProfileMForm(forms.ModelForm):
                 'style': 'height:27px; margin-top:4px; border: 1px solid gray;',
                 'class':'form-control'
             }),
-            'birth':forms.SelectDateWidget(attrs={
+            'birth':extras.SelectDateWidget(attrs={
                 'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
             }),
             'email':forms.EmailInput(attrs={
@@ -127,7 +175,7 @@ class ProfileForm(forms.Form):
         )
     )
     birth = forms.DateField(
-        widget=forms.SelectDateWidget(
+        widget=extras.SelectDateWidget(
             attrs={
                 'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
             }

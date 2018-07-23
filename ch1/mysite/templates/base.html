@@ -85,7 +85,7 @@
             }
         }
     </style>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: rgb(40,86,141); border:1px solid rgb(40,86,141);">
         <div class="container">
             <div class="navbar-header">
                 <button style="border:2px solid #333333;" type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -95,17 +95,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{% url 'travel:main' %}" style="color:white;">Today's Friend</a>
+                {% load static %}
+                <a class="navbar-brand" href="{% url 'travel:main' %}" style="color:white;"><img style="width:20px; display:inline; height:20px; margin-right:9px; margin-top:-2px;" src="{% static 'img/logo1.jpeg' %}">Today's Friend</a>
             </div>
             <div class="collapse navbar-collapse" id="list">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href=# style="color:white; font-size: 15px;">Laguage</a></li>
                     <li><a href="{% url 'travel:local_list' %}" style="color:white; font-size: 15px;">Tour</a></li>
                     <li><a href="#" style="color: white; font-size: 15px;">Personalized</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'accounts:new_profile' request.user %}" style="color:white; font-size: 15px;">Become a guide</a></li>
+                        <li><a href="{% url 'accounts:new_profile' %}" style="color:white; font-size: 15px;">Become a guide</a></li>
                     {% else %}
-                        <li><a href="{% url 'accounts:login' %}?next={% url 'accounts:new_profile' request.user %}" style="color:white; font-szie: 15px;">Become a guide</a></li>
+                        <li><a href="{% url 'accounts:login' %}?next={% url 'accounts:new_profile' %}" style="color:white; font-szie: 15px;">Become a guide</a></li>
                     {% endif %}
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'accounts:profile' %}" style="color:white; font-size:15px;">Mypage</a></li>
@@ -119,7 +119,7 @@
     <div style="height:50px;"></div>
     {% block content %}
     {% endblock %}
-    <footer style="background-color:rgb(228, 220, 220)">
+    <footer style="background-color:rgb(181, 184, 191)">
         <div class="container">
             <br>
             <div class="row" style="margin:0 auto">

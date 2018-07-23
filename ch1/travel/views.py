@@ -43,6 +43,7 @@ def local_detail(request, City):
 
 def local_detail_form(request, City, pk):
     pf = models.Profile.objects.all()
+    pf = pf.filter(user=request.user)
     queryset = Post.objects.all()
     path = request.path
     print(path)

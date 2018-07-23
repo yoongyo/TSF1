@@ -3,8 +3,7 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.shortcuts import reverse
 from django.db.models.signals import post_save
-
-
+from django.contrib.auth.models import AbstractUser
 
 
 class Language(models.Model):
@@ -26,7 +25,8 @@ SEX = (
 )
 
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    name = models.CharField(max_length=10)
     phone_number = models.CharField(max_length=20, validators=[RegexValidator(r'^010[1-9]\d{7}$')], blank=True)
     birth = models.DateField(blank=True, null=True)
     email = models.EmailField(blank=True)

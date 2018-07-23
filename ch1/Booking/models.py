@@ -19,11 +19,17 @@ class Language(models.Model):
     def __str__(self):
         return self.name
 
+SEX = (
+    ('Man', 'Man'),
+    ('Woman', 'Woman'),
+)
+
+
 class Booking(models.Model):
     LastName = models.CharField(max_length=20)
     FirstName = models.CharField(max_length=20)
-    Age = models.IntegerField()
-    Gender = models.CharField(max_length=10)
+    Age = models.PositiveIntegerField()
+    gender = models.CharField(max_length=10, choices=SEX, blank=True, null=True)
     Email = models.EmailField(max_length=30)
     Date = models.DateField()
     SNS = models.ForeignKey(SNS)

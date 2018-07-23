@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<style>
+    #ks{
+        background-color:white;
+    }
+</style>
+
 {{ form.media }}
 <div class="container" style="margin-top:40px;">
     <h1 class="text-center">Booking</h1>
@@ -11,56 +17,56 @@
     <br>
     <form action="" method="POST">
         {% csrf_token %}
-        <div class="center-block clearfix" style="border:1px solid black;width:70%;margin-top:-30px;">
+        <div class="center-block clearfix" style="border:1px solid black;width:70%;margin-top:-30px; background-color:rgb(242, 246, 248);">
         <div class="col-md-6">
-            <div style="border:1px solid black; padding:20px; margin:8px 0px; ">
+            <div id="ks" style="border:1px solid black; padding:20px; margin:8px 0px; border-radius:5px;">
                 First Name  {{ form.LastName }}
             </div>
-            <div style="border:1px solid black; padding: 20px; margin:8px 0px;">
+            <div id="ks" style="border:1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Age  {{ form.Age }}
             </div>
-            <div style="border:1px solid black; padding: 20px; margin:8px 0px;">
-                Gender  {{ form.Gender }}
+            <div id="ks" style="border:1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
+                Gender  {{ form.gender }}
             </div>
-            <div style="border: 1px solid black; padding: 20px; margin:8px 0px;">
+            <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 E-mail  {{ form.Email }}
             </div>
-            <div style="border: 1px solid black; padding: 20px; margin:8px 0px;">
+            <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Date  <br>{{ form.Date }}
             </div>
-            <div style="border: 1px solid black; padding: 20px; margin:8px 0px;">
+            <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Mainly used SNS  {{ form.SNS }}
             </div>
         </div>
         <div class="col-md-6">
-            <div style="border: 1px solid black; padding: 20px; margin:8px 0px;">
+            <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Last Name  {{ form.FirstName }}
             </div>
-            <div style="border: 1px solid black; padding: 20px; margin:8px 0px;">
+            <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Nationality  {{ form.Nationality }}
             </div>
-            <div style="border: 1px solid black; padding: 20px; margin:8px 0px;">
+            <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Language  {{ form.Language }}
             </div>
-            <div style="border: 1px solid black; padding: 20px; margin:8px 0px;">
+            <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Confirmed E-mail  {{ form.ConfirmedEmail }}
             </div>
-            <div style="border: 1px solid black; padding: 20px; margin:8px 0px;">
+            <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Cell number  {{ form.phone }}
             </div>
-            <div style="border: 1px solid black; padding: 20px; margin:8px 0px;">
+            <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 SNS ID  {{ form.SNSID }}
             </div>
         </div>
-        <div class="row" style="padding:0px 30px">
-            <div class="col-sm-12" style="border: 1px solid black; padding: 20px; margin-bottom:8px; width:100%">
+        <div class="row" style="padding:0px 30px;">
+            <div id="ks" class="col-sm-12" style="border: 1px solid black; padding: 20px; margin-bottom:8px; width:100%; border-radius:5px;">
                 <p style="margin-bottom:3px;">Thing to demand </p>
                 {{ form.Demand }}
             </div>
         </div>
         </div>
-        <div class="center-block" style="width:130px">
-            <input href="{% url 'Booking:complete' %}" type="submit" class="btn btn-primary" style="margin:15px;width:100px;" value="BOOK NOW"/>
+        <div class="center-block" style="width:230px;">
+            <input href="{% url 'Booking:complete' %}" type="submit" class="btn btn-primary" style="margin:30px 15px;width:200px;height:50px; font-size:24px;" value="BOOK NOW"/>
         </div>
     </form>
 </div>

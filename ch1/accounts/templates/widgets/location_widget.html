@@ -1,0 +1,84 @@
+{% include "django/forms/widgets/input.html" %}
+<span id="address_{{ widget.attrs.id }}"></span>
+
+<div id="map_{{ widget.attrs.id }}" style="width: 100%; height: 300px; border:1px solid gray;"></div>
+<p style="text-align: right;">
+    <input id="search_{{ widget.attrs.id }}" type="text" placeholder="위치검색"/>
+</p>
+
+<script>
+function geocode(address, callback) {
+    $.get('//maps.googleapis.com/maps/api/geocode/json',{
+        address: address
+        //key: '' // FIXME: Google Maps JavaScript API 키 적용
+    }).done(function(res) {
+        callback(res.results);
+    }).fail(function() {
+        alert('error');
+    });
+};
+$(function() {
+    var adjust = function(latlng) {
+        var pos = latlng.lat() + ',' + latlng.lng();
+        var selector_id = '{{ widget.attrs.id }}';
+        $('#' + selector_id).val(pos);
+    };
+    {% if widget.value %}
+        var center = new google.maps.LatLng({{ widget.value }});
+    {% else %}
+        var center = new google.maps.LatLng(37.55515726813202, 126.97069409811479);  {# default center #}
+        adjust(center);
+    {% endif %}
+    var map_selector_id = 'map_{{ widget.attrs.id }}';
+    var map = new google.maps.Map(document.getElementById(map_selector_id), {
+        zoom: 4,
+        center: center
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    map.addListener('click', function(e) {
+        marker.setPosition(e.latLng);
+        adjust(e.latLng);
+        // FIXME: 위도,경도를 통한 주소 찾기
+
+        geocode(loc, function(results) {
+            console.log(results);
+            if (results.length == 0) {
+                $('#address_{{ widget.attrs.id }}').html('주소 검색결과가 없습니다.');
+            }
+            else {
+                $('#address_{{ widget.attrs.id }}').html(results[0].formatted_address);
+            }
+        });
+    });
+
+    $('#search_{{ widget.attrs.id }}').keypress(function(e) {
+        if (e.keyCode == '13' ){
+            e.preventDefault();
+
+            var q = $(this).vla();
+            if ( q.length > 0 ) {
+                geocode(q, function(results) {
+                    if ( results.length == 0 ) {
+                        $('#address_{{ widget.attrs.id }}').html('검색결과가 없습니다.');
+                    }
+                    else {
+                        $('#address_{{ widget.attrs.id }}').html(results[0].formatted_address);
+
+                        var latLng = new google.maps.LatLng(
+                            results[0].geometry.location.lat,
+                            results[0].geometry.location.lng);
+                        map.setCenter(latLng);
+                        map.setZoom(10);
+                        marker.setPosition(latLng);
+
+                        $('#{{ widget.attrs.id }}').val(latLng.lat() + ',' + latLng.lng());
+                    }
+                });
+            }
+        }
+    });
+});
+</script>

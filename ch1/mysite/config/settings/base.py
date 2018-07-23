@@ -25,6 +25,8 @@ SECRET_KEY = config_secret_common['django']['secret_key']
 ALLOWED_HOSTS = []
 
 
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'Booking',
     'Personalized',
+    # 캘린더 스캐줄 표
     # 로그인 부분
     'django.contrib.sites',
     'allauth',
@@ -112,7 +115,14 @@ LOGIN_REDIRECT_URL = '/accounts/profile/'
 # redirect를 수행하지 않고 'registration/logged_out.html' 템플릿 렌더링
 LOGOUT_REDIRECT_URL = None
 # 인증에 사용할 커스텀 User 모델 지정, '앱이름.모델명'
+#
+
+
+
 AUTH_USER_MODEL = 'auth.User'
+
+
+
 
 
 # 데이터베이스
@@ -158,3 +168,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 NAVER_CLIENT_ID = '08EHhkPy8yFmFkD4jQxm'
+
+# 스케줄

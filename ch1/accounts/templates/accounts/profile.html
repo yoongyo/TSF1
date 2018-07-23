@@ -8,13 +8,12 @@
 
     <div class="row">
         <div class="col-md-5 col-md-offset-1 " style="border:1px solid black; margin-right:10px;">
-                <div style="border:1px solid black; margin:15px 0; padding:10px;" >Language : {{ user.profile.language|default:'empty' }}</div>
-                <div style="border:1px solid black; margin:15px 0; padding:10px;">Major : {{ user.profile.major }}</div>
-                <div style="border:1px solid black; margin:15px 0; padding:10px;">Visited Country : {{ user.profile.visitedCountry }}</div>
-                <div style="border:1px solid black; margin:15px 0; padding:10px;">Next Travel : {{ user.profile.nextCountry }}</div>
-
-                <div style="border:1px solid black; margin:15px 0; padding:10px;">Interest : {{ user.profile.interest }}</div>
-
+            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;" >Language : {{ user.profile.language|default:'empty' }}</div>
+            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Major : {{ user.profile.major }}</div>
+            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Visited Country : {{ user.profile.visitedCountry }}</div>
+            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Next Travel : {{ user.profile.nextCountry }}</div>
+            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Interest : {{ user.profile.interest }}</div>
+            <a href="{% url 'accounts:profileEdit' %}" class="btn btn-primary">Change Profile</a>
         </div>
         <div class="col-md-5" style="border: 1px solid black; margin-left:10px;height:300px;">
             {% for i in list %}

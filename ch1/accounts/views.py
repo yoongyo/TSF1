@@ -56,7 +56,7 @@ def profile(request):
     post = Post.objects.all()
     post = post.filter(user=request.user)
     return render(request, 'accounts/profile.html',{
-        'profiles':pf,
+        'profiles': pf,
         'list':post
     })
 
@@ -77,7 +77,7 @@ def login(request):
         template_name='accounts/login_form.html',
         extra_context={'providers': providers})
 
-def new_profile(request, user):
+def new_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
     if request.method == 'POST':
         form = ProfileMForm(request.POST, request.FILES, instance=profile)
@@ -92,14 +92,14 @@ def new_profile(request, user):
 
 
 def profileEdit(request):
-    profile = get_object_or_404(Profile, User=user_id)
+    profile = get_object_or_404(Profile, user=request.user)
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        form = ProfileMForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             profile = form.save()
-            return redirect(profile)
-        else:
-            form = ProfileForm(instance=profile)
-        return render(request, 'accounts/newprofile.html',{
-            'form':form,
-        })
+            return redirect('accounts:profile')
+    else:
+        form = ProfileMForm(instance=profile)
+    return render(request, 'accounts/profile_edit.html', {
+        'form':form,
+    })
