@@ -33,12 +33,15 @@ class Profile(models.Model):
     emergency = models.CharField(max_length=20 ,validators=[RegexValidator(r'^010[1-9]\d{7}$')], blank=True)
     kakaoID = models.CharField(max_length=20, blank=True)
     introduce = models.CharField(max_length=600, blank=True)
-    language = models.ForeignKey(Language, blank=True, null=True)
+    language = models.ForeignKey(Language, blank=True, null=True, on_delete=models.CASCADE)
     major = models.CharField(max_length=20, blank=True, null=True)
-    visitedCountry = models.ForeignKey(Country, related_name='Visited', blank=True, null=True)
-    nextCountry = models.ForeignKey(Country, related_name='Next', blank=True, null=True)
+    visitedCountry = models.ForeignKey(Country, related_name='Visited', blank=True, null=True, on_delete=models.CASCADE)
+    nextCountry = models.ForeignKey(Country, related_name='Next', blank=True, null=True, on_delete=models.CASCADE)
     interest = models.CharField(max_length=20, blank=True, null=True)
     gender = models.CharField(max_length=10, choices=SEX, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 def on_post_save_for_user(sender, **kwargs):
     if kwargs['created']:

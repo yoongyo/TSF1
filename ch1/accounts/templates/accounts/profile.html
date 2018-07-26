@@ -15,7 +15,7 @@
             <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Interest : {{ user.profile.interest }}</div>
             <a href="{% url 'accounts:profileEdit' %}" class="btn btn-primary">Change Profile</a>
         </div>
-        <div class="col-md-5" style="border: 1px solid black; margin-left:10px;height:300px;">
+        <div class="col-md-5" style="border: 1px solid black; margin-left:10px;min-height:300px;">
             {% for i in list %}
             <div class="well clearfix" style="background-color:rgb(243,243,243); margin:15px auto; padding:10px;">
                 <article class="box">
@@ -37,6 +37,24 @@
                         </div>
                     </a>
                 </article>
+            </div>
+            {% endfor %}
+            {% for i in bk %}
+            <div style="border:1px solid black">
+                {{ i.content }}
+                {{ i.FirstName }}
+                {{ i.LastName }}
+                {{ i.Age }}
+                {{ i.gender }}
+                {{ i.Email }}
+                {{ i.Date }}
+                {{ i.SNS }}
+                {{ i.SNSID }}
+                {{ i.Nationality }}
+                {{ i.phone }}
+                {{ i.ConfirmedEmail }}
+                {{ i.Language }}
+                {{ i.Demand }}
             </div>
             {% endfor %}
         </div>

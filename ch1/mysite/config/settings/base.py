@@ -124,17 +124,6 @@ AUTH_USER_MODEL = 'auth.User'
 
 
 
-
-# 데이터베이스
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -170,3 +159,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 NAVER_CLIENT_ID = '08EHhkPy8yFmFkD4jQxm'
 
 # 스케줄
+

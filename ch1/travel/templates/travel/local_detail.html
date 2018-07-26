@@ -7,12 +7,13 @@
     <div >
         <img style="height:200px; width:100%;" src="{% static 'img/dma.jpeg' %}">
     </div>
-    {% for i in local_list %}
 
         <div class="container">
             <div class="row" style="margin:40px 0px;">
             <div class="col-md-3">
-                <iframe style="width:350px; height: 200px; margin-left:-10px;" src="https://www.youtube.com/embed/WGvh3Eag_vc?amp;autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>            </div>
+                <iframe style="width:350px; height: 200px; margin-left:-10px;" src="https://www.youtube.com/embed/WGvh3Eag_vc?amp;autoplay=1" frameborder="0" muted="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+                {% for i in local_list %}
             <div class="col-md-8 col-md-offset-1">
             <div class="well clearfix" style="background-color:rgb(243,243,243); margin:15px auto; padding:10px;">
                 <article class="box">
@@ -55,10 +56,10 @@
                 </article>
             </div>
             </div>
+                    {% endfor %}
             </div>
         </div>
     </div>
-    {% endfor %}
 
 </body>
 </html>

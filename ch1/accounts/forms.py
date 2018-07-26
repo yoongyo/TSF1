@@ -1,8 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.forms import extras
-
+from django.contrib.auth import password_validation
 from .models import Profile, Country, Language
 from django.contrib.auth.forms import AuthenticationForm
 from .widgets import AutoCompleteSelect
@@ -20,14 +19,32 @@ class SignupForm(UserCreationForm):
         self.fields['username'].help_text = '이메일 형식으로 입력 가능합니다.'
         self.fields['username'].label = '이메일'
         self.fields['username'].widget = forms.EmailInput(
-            attrs={'class':'form-control'}
+            attrs={'class':'form-control','style':'margin-top:10px;margin-bottom:14px;','placeholder':'Your Email'}
+
         )
+        #self.fields['password1'].validators = password_validation.password_validators_help_text_html(),
+        self.fields['password1'].help_text = '비밀번호 형식에 맞게 넣어주세요'
         self.fields['password1'].widget = forms.PasswordInput(
-            attrs={'class':'form-control'}
+            attrs={'class':'form-control','style':'margin-bottom:14px;', 'placeholder':'Password'}
         )
+        self.fields['password2'].validators = []
+        self.fields['password2'].help_text = "Enter the same password as before, for verification."
         self.fields['password2'].widget = forms.PasswordInput(
-            attrs={'class': 'form-control'}
+            attrs={'class': 'form-control','style':'margin-bottom:20px;', 'placeholder':'Confirm Password'}
         )
+
+    error_messages = {
+        'password_mismatch': "The two password fields didn't match."
+    }
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError(
+                self.error_messages['password_mismatch'],
+                code='password_mismatch',
+            )
+        return password2
 
 
     def save(self, commit=True):
@@ -77,8 +94,13 @@ class ProfileMForm(forms.ModelForm):
             'phone_number',
             'introduce',
             'gender',
+            'name',
         }
         widgets = {
+            'name': forms.TextInput(attrs={
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class': 'form-control'
+            }),
             'language' : forms.Select(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
                 'class':'form-control'
@@ -99,7 +121,7 @@ class ProfileMForm(forms.ModelForm):
                 'style': 'height:27px; margin-top:4px; border: 1px solid gray;',
                 'class':'form-control'
             }),
-            'birth':extras.SelectDateWidget(attrs={
+            'birth': forms.SelectDateWidget(attrs={
                 'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
             }),
             'email':forms.EmailInput(attrs={
@@ -115,7 +137,7 @@ class ProfileMForm(forms.ModelForm):
                 'class':'form-control'
             }),
             'introduce':forms.Textarea(attrs={
-                'style': 'width:100%;height:108px; margin-top:4px;border: 1px solid gray;',
+                'style': 'width:100%;height:160px; margin-top:4px;border: 1px solid gray;',
                 'class':'form-control'
             }),
             'phone_number':forms.TextInput(attrs={
@@ -127,110 +149,3 @@ class ProfileMForm(forms.ModelForm):
                 'class':'form-control'
             }),
         }
-
-class ProfileForm(forms.Form):
-    language = forms.ModelChoiceField(
-        queryset=Language.objects.all(),
-        widget=forms.Select(
-            attrs={
-                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
-            }
-        )
-    )
-    major = forms.CharField(
-        max_length=30,
-        widget=forms.TextInput(
-            attrs={
-                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
-            }
-        )
-    )
-    visitedCountry = forms.ModelChoiceField(
-        queryset=Country.objects.all(),
-        widget=forms.Select(
-            attrs={
-                'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
-            }
-        )
-    )
-    nextCountry = forms.ModelChoiceField(
-        queryset=Country.objects.all(),
-        widget=forms.Select(
-            attrs={
-                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
-            }
-        )
-    )
-    interest = forms.CharField(
-        max_length=30,
-        widget=forms.TextInput(
-            attrs={
-                'style': 'height:27px; margin-top:4px; border: 1px solid gray;',
-                'class':'form-control'
-            }
-        )
-    )
-    birth = forms.DateField(
-        widget=extras.SelectDateWidget(
-            attrs={
-                'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
-            }
-        )
-    )
-    email = forms.EmailField(
-        widget=forms.EmailInput(
-            attrs={
-                'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
-            }
-        )
-    )
-    emergency = forms.CharField(
-        max_length=20,
-        widget=forms.TextInput(
-            attrs={
-                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
-
-            }
-        )
-
-    )
-    kakaoID = forms.CharField(
-        max_length=20,
-        widget=forms.TextInput(
-            attrs={
-                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
-            }
-        )
-    )
-    introduce = forms.CharField(
-        widget=forms.Textarea(
-            attrs={
-                'style': 'width:100%;height:108px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
-            }
-        )
-    )
-    phone_number = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
-            }
-        )
-    )
-    gender = forms.CharField(
-        widget=forms.Select(
-            attrs={
-                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
-            }
-        )
-    )
-

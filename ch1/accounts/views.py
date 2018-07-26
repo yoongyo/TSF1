@@ -6,14 +6,14 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.views import login as auth_login
 from allauth.socialaccount.models import SocialApp
 from allauth.socialaccount.templatetags.socialaccount import get_providers
-from .forms import LoginForm, SignupForm,ProfileForm,ProfileMForm
+from .forms import LoginForm, SignupForm,ProfileMForm
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
 from .models import Profile
 
 import sys
 sys.path.append('..')
-from travel.models import Post
+from travel.models import Post, Booking
 
 
 
@@ -55,9 +55,11 @@ def profile(request):
     pf = pf.filter(user=request.user)
     post = Post.objects.all()
     post = post.filter(user=request.user)
+    bk = Booking.objects.filter(content__user=request.user)
     return render(request, 'accounts/profile.html',{
         'profiles': pf,
-        'list':post
+        'list': post,
+        'bk': bk,
     })
 
 

@@ -9,8 +9,11 @@ urlpatterns =[
     url(r'^local/$', views.local_list, name="local_list"),
     url(r'^local/(?P<City>\w+)/$', views.local_detail, name="local_detail"),
     url(r'^local/(?P<City>\w+)/(?P<pk>\d+)/$', views.local_detail_form, name='local_detail_form'),
+    url(r'^local/(?P<City>\w+)/(?P<pk>\d+)/booking/$', views.booking, name="booking"),
+    url(r'^local/(?P<City>\w+)/(?P<pk>\d+)/booking/complete/$', views.bookingcomplete, name="bookingcomplete"),
+
     url(r'^new/$', views.post_new, name="post_new"),
-    url(r'^new/complete/$', views.complete, name="complete"),
+    url(r'^new/complete/$', views.postcomplete, name="complete"),
 ]
 
 

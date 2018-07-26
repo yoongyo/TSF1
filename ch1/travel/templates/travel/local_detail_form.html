@@ -94,7 +94,7 @@
                     <span>Visited Country : {{ profile.visitedCountry }}</span><br>
                     <span>Next travel : {{ profile.nextCountry }}</span><br>
                     <span>Interest : {{ profile.interest }}</span><br>
-                    <a href="{% url 'Booking:booking' %}" class="btn btn-primary">Book Now</a>
+                    <a href="{% url 'travel:booking' i.City i.pk %}" class="btn btn-primary">Book Now</a>
                     {% endfor %}
                 </div>
             </div>

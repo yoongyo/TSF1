@@ -23,7 +23,8 @@
         {% csrf_token %}
         <div class="row" style="padding:10px 5px; border:1px solid black; margin-top:10px; background-color:rgb(242, 246, 248);">
             <div class="col-sm-6">
-                <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Name(이름)  {{ user }}</div>
+                <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Name  {{ form.name }}</div>
+                <span>* 외국인에게 보여질 이름입니다.</span>
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Genger  {{ form.gender }}</div>
                 <span>* 통계목적으로 사용되며, 타인에게 절대 공개되지 않습니다.</span>
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Birth {{ form.birth }}</div>
@@ -49,11 +50,10 @@
                 <span>* 방문했던 나라를 모두 선택해 주세요</span>
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px;margin-top:20px;">Next Trevel  {{ form.nextCountry }}</div>
                 <span>* 방문할 나라를 선택해 주세요</span>
-
             </div>
         </div>
         <div class="center-block" style="width:260px;">
-        <input class="btn btn-primary" type="submit" style="margin:30px; float:right; width:200px; height:50px; font-size:24px;" value="완 료">
+            <input class="btn btn-primary" type="submit" style="margin:30px; float:right; width:200px; height:50px; font-size:24px;" value="완 료">
         </div>
     </form>
     </div>

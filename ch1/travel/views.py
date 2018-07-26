@@ -1,7 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
+from .forms import BookMForm,PostMForm
+from django.shortcuts import render,redirect
+from django.http import JsonResponse, HttpResponseRedirect
+from .models import Post,City,Country,Booking
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 
-from .models import Post,City
-from .forms import PostForm, PostMForm
 import sys
 sys.path.append('..')
 from accounts import models
@@ -42,17 +46,19 @@ def local_detail(request, City):
 
 
 def local_detail_form(request, City, pk):
-    pf = models.Profile.objects.all()
-    pf = pf.filter(user=request.user)
     queryset = Post.objects.all()
+
     path = request.path
     print(path)
     filter = path.split('/')[4]
     print(filter)
     qs = queryset.filter(pk=filter)
+    qs1 = Post.objects.get(pk=filter)
+    pf = models.Profile.objects.all()
+    pf = pf.filter(user=qs1.user)
     return render(request, 'travel/local_detail_form.html',{
         'local_detail': qs,
-        'filter':filter,
+        'filter': filter,
         'profiles': pf,
     })
 
@@ -70,14 +76,37 @@ def post_new(request):
         'form': form,
     })
 
-
-
-def complete(request):
+def postcomplete(request):
     return render(request, 'travel/complete.html')
 
 
-from django.http import JsonResponse
-from .models import Country
+
+def booking(request, City, pk):
+    book = get_object_or_404(Booking, pk=pk)
+    if request.method == 'POST':
+        form = BookMForm(request.POST, request.FILES)
+        print(form)
+        if form.is_valid():
+            book = form.save()
+            content = Booking(content_id=pk)
+            content.save()
+            return HttpResponseRedirect(reverse('travel:bookingcomplete', args=[City, pk]))
+    else:
+        form = BookMForm()
+
+    path = request.path
+    filter = path.split('/')[4]
+    post = Post.objects.all()
+    post = post.filter(pk=filter)
+    return render(request, 'travel/booking.html', {
+        'form': form,
+        'post': post,
+    })
+
+def bookingcomplete(request, City, pk):
+
+    return render(request, 'travel/bookingcomplete.html')
+
 
 def country_list(request):
     qs = Country.objects.all()

@@ -13,7 +13,7 @@
     <img src="{% static 'img/img3.jpeg' %}" style="width:100%; height:200px;" >
 </div>
 <div class="container" style="padding-top:50px; ">
-    <h1 class="text-center">프로필 작성</h1>
+    <h1 class="text-center">프로필 수정</h1>
     <p class="text-center">가이더로 상품을 등록하기 위해서는 추가적인 프로필 입력이 필요합니다.<br>
         개인 프로필은 상품 검증 및 상품운영의 도움을 드리기 위해 사용되며 Tour 프로필은<br>
         외국인 친구들에게 여러분의 개성을 마음껏 보여주어 공감대를 가지고 더 많은 여행자들이 여러분에게 편하게 다가갈 수 있도록 도와줍니다.<br>
@@ -23,7 +23,8 @@
         {% csrf_token %}
         <div class="row" style="padding:10px 5px; border:1px solid black; margin-top:10px; background-color:rgb(242, 246, 248);">
             <div class="col-sm-6">
-                <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Name(이름)  {{ user }}</div>
+                <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Name  {{ form.name }}</div>
+                <span>* 외국인에게 보여질 이름입니다.</span>
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Genger  {{ form.gender }}</div>
                 <span>* 통계목적으로 사용되며, 타인에게 절대 공개되지 않습니다.</span>
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Birth {{ form.birth }}</div>

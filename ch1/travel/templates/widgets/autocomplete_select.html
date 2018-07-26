@@ -1,12 +1,13 @@
 {% include "django/forms/widgets/select.html" %}
-<style>
-    .form-control.select2-hidden-accessible{
-        margin-top:4px;
-    }
-</style>
 <script>
 $(function() {
     var options = {minimumInputLength: 1};
+    var ajax_url = "{{ ajax_url|default:"" }}";
+    if ( ajax_url.length > 0 ) {
+        options['ajax'] = {
+            'url': ajax_url,
+            'dataType': 'json'
+}; }
     $('#{{ widget.attrs.id }}').select2(options);
 });
 </script>

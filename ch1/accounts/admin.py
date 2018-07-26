@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile,Language
+from .models import Profile,Language,Country
 from .forms import ProfileMForm
 
 
@@ -8,3 +8,7 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ['user']
 
 admin.site.register(Language)
+
+@admin.register(Country)
+class CountryAdmin(admin.ModelAdmin):
+    list_display = ['name']
