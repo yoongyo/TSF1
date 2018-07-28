@@ -10,45 +10,49 @@
 
         <div class="container">
             <div class="row" style="margin:40px 0px;">
-            <div class="col-md-3">
-                <iframe style="width:350px; height: 200px; margin-left:-10px;" src="https://www.youtube.com/embed/WGvh3Eag_vc?amp;autoplay=1" frameborder="0" muted="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <div class="col-md-4" style="height:100%;">
+                <iframe style="width:350px; height: 200px; margin-left:-10px;" src="https://www.youtube.com/embed/WGvh3Eag_vc?amp;autoplay=1&rel=0" frameborder="0" muted="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
                 {% for i in local_list %}
-            <div class="col-md-8 col-md-offset-1">
-            <div class="well clearfix" style="background-color:rgb(243,243,243); margin:15px auto; padding:10px;">
+            <div class="col-md-8">
+            <div class="well clearfix" style="background-color:rgb(243,243,243); margin:9px auto; padding:10px;">
                 <article class="box">
                     <a href="{% url 'travel:local_detail_form' i.City i.pk %}">
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-md-4">
                             <figure>
-                                <img src="{{ i.img.url }}" style="max-height:140px; width:100%">
+                                <img src="{{ i.img.url }}" style="max-height:155px; width:100%">
                                 <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
                             </figure>
                             </div>
-                            <div class="col-sm-7">
+                            <div class="col-md-8">
                                 <div class="clearfix row">
-                                    <h4 class="box-title col-xs-10">
+                                    <h4 class="box-title col-md-9" style="height:40px;">
                                           {{ i.title }}<br>
                                         <small>Provided by Generation {{ i.name }}</small>
                                         <br>
                                         <br>
-                                        <div style="height:58px">
-                                            <small>{{ i.BriefContent }}</small>
-                                        </div>
+
                                     </h4>
+                                    <div class="col-sm-3">
+                                        <small>from </small>{{ i.Price }}<small>₩</small><br>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <small>from </small>{{ i.Price }}<br>
-                                <small>Tip based</small>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-9 col-sm-offset-3">
-                                <div class="clearfix row">
-                                    <div class="col-sm-4">{{ i.HashTag }}</div>
-                                    <div class="col-sm-4">Duration : {{ i.Duration }}</div>
-                                    <div class="col-sm-4">Language : {{ i.Language }}</div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4 style="height:58px">
+                                            <small>{{ i.BriefContent }}</small>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="clearfix row">
+                                            <div class="col-sm-4">{{ i.HashTag }}</div>
+                                            <div class="col-sm-4">Duration : {{ i.Duration }}</div>
+                                            <div class="col-sm-4">Language : {{ i.Language }}</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

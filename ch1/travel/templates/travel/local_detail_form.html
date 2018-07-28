@@ -16,6 +16,113 @@
     </style>
 
 
+    <meat charset="UTF-8"/>
+    <link rel="stylesheet" href="{% static 'css/fullcalendar.css' %}" type="text/css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/fullcalendar.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/gcal.js' %}"></script>
+
+    <script type="text/javascript">
+    $(function(){
+
+        // 현재 일시를 취득하기
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+
+        // 객체 생성
+        $('#calendar').fullCalendar({
+            // 헤더의 지정
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month, basicWeek, basicDay'
+            },
+
+            //월일의 포맷
+            columnFormat: {
+                month: 'ddd',
+                week: 'M/d(ddd)',
+                day: 'M/d(ddd)'
+            },
+            //요일의 포맷
+            dayNames: ['SUN','MON','TUE','WEN','THU','FRI','SAT'],
+            dayNamesShort: ['SUN', 'MON', 'TUE','WEN','THU','FRI','SAT'],
+            // tlrksdml 포맷
+            timeFormat: {
+                '': 'H:mm{ - H:mm}'
+            },
+            // 버튼의 표시명
+            buttonText: {
+                today: 'today',
+                month: 'month',
+                week: 'week',
+                day: 'day'
+            },
+            // Event Sources 객체에서의 지정
+            eventSources: [
+                {
+                    color:'darkred',
+                    textColor:'white'
+                }
+            ],
+            eventColor: 'blue',
+            // Event 객체에서의 지정
+            events: [
+                {% for i in local_detail %}
+                {
+                    title: '{{ i.title }}',
+                    start: new Date({{ FY }},{{ FM }}-1,{{ FD }},{{ SH }},{{ SM }}),
+                    end: new Date({{ TY }},{{ TM }}-1, {{ TD }},{{ H }},{{ M }}),
+                    allDay: false,
+                    textColor: 'black'
+                },
+                {% endfor %}
+                {
+                    title: 'Not Date',
+                    start: new Date(y,m,1),
+                    end: new Date(y,m,1),
+                    allDay: true,
+                    textColor: 'black',
+                    color:'red',
+                },
+            ],
+            eventColor: 'green',
+            editable: false,
+        });
+    });
+    </script>
+    <style type='text/css'>
+        body {
+            font-size: 13px;
+        }
+        #calendar {
+            width: 600px;
+        }
+        .fc-sat{
+            color: black;
+        }
+        .fc-sun {
+            color: black;
+        }
+        .fc-event-title {
+            text-align: center;
+            font-weight: bold;
+            padding-right:4px;
+        }
+        .fc-event-time {
+            font-weight: normal;
+        }
+        .fc-event-time,
+        .fc-event-title {
+            padding: 0px 2px;
+        }
+    </style>
+
+
+
     <script>
     $(document).ready( function() {
 
@@ -34,13 +141,13 @@
 
 {% for i in local_detail %}
 <div class="container">
-    <div class="well clearfix" style="margin-top:50px;">
+    <div class="well clearfix" style="margin:50px 0px;">
         <div class="col-md-7">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-9">
                     <h3>{{ i.title }}</h3>
                 </div>
-                <div class="col-md-3 col-md-offset-4">
+                <div class="col-md-3" style="float:right">
                     <h3>{{ i.Tourtype }}</h3>
                 </div>
             </div>
@@ -69,7 +176,7 @@
                                 3. Meeting time : {{ i.MeetingTime }}
                             </div>
                             <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
-                                4. Duration : {{ i.Duration }}
+                                4. Duration : {{ H1 }}hr {{ M1 }}min
                             </div>
                             <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
                                 5. The number of people : {{ i.Minimum }} - {{ i.Maximum }}
@@ -78,29 +185,38 @@
                                 6. Includes : <br>
                                 {{ i.Price_include }}
                             </div>
+                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                                7. Meeting Point: {{ i.MeetingPoint}}
+                            </div>
+                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                                8. Direction : {{ i.Direction }}
+                            </div>
+                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                                9.Thing to Note : {{ i.GuestInfo }}
+                            </div>    
+                    </div>
+                    <div style="border:1px solid black;margin-top:15px;padding:3px;">
+                    <div style="background-color:white; margin:0 auto;" id="calendar"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-5" style="border: 1px solid black; margin-top:15px;">
-            <div class="container">
-                <div class="container">
-                    <div style="height:150px; width: 380px; border: 1px solid black; margin: 25px 0;">
-                        프로필
+        <div class="col-md-5">
+            <div class="col-md-12" style="border: 1px solid black">
+                    <div style="width: 380px; border: 1px solid black; margin: 25px 0; padding:20px;">
+                        <h3>프로필</h3>
+                        {% for profile in profiles %}
+                        <span>Laguage : {{ profile.language }}</span><br>
+                        <span>Major: {{ profile.major }}</span><br>
+                        <span>Visited Country : {{ profile.visitedCountry }}</span><br>
+                        <span>Next travel : {{ profile.nextCountry }}</span><br>
+                        <span>Interest : {{ profile.interest }}</span><br>
+                        {% endfor %}
                     </div>
-                    {% for profile in profiles %}
-                    <span>Laguage : {{ profile.language }}</span><br>
-                    <span>Major: {{ profile.major }}</span><br>
-                    <span>Visited Country : {{ profile.visitedCountry }}</span><br>
-                    <span>Next travel : {{ profile.nextCountry }}</span><br>
-                    <span>Interest : {{ profile.interest }}</span><br>
-                    <a href="{% url 'travel:booking' i.City i.pk %}" class="btn btn-primary">Book Now</a>
-                    {% endfor %}
-                </div>
+                <a style="margin:200px 110px;" href="{% url 'travel:booking' i.City i.pk %}" class="btn btn-primary"><h1>Book Now</h1></a>
             </div>
         </div>
     </div>
-    
 </div>
 </body>
 

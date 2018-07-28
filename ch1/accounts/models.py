@@ -35,8 +35,8 @@ class Profile(models.Model):
     introduce = models.CharField(max_length=600, blank=True)
     language = models.ForeignKey(Language, blank=True, null=True, on_delete=models.CASCADE)
     major = models.CharField(max_length=20, blank=True, null=True)
-    visitedCountry = models.ForeignKey(Country, related_name='Visited', blank=True, null=True, on_delete=models.CASCADE)
-    nextCountry = models.ForeignKey(Country, related_name='Next', blank=True, null=True, on_delete=models.CASCADE)
+    visitedCountry = models.ForeignKey(Country, related_name='Visited', blank=True, null=True)
+    nextCountry = models.ForeignKey(Country, related_name='Next', blank=True, null=True)
     interest = models.CharField(max_length=20, blank=True, null=True)
     gender = models.CharField(max_length=10, choices=SEX, blank=True, null=True)
 

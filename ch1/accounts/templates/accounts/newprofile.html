@@ -21,7 +21,7 @@
     <div class="center-block" style="width:80%;">
     <form action="" method="post">
         {% csrf_token %}
-        <div class="row" style="padding:10px 5px; border:1px solid black; margin-top:10px; background-color:rgb(242, 246, 248);">
+        <div class="row" style="position:relative;padding:10px 5px; border:1px solid black; margin-top:10px; background-color:rgb(242, 246, 248);">
             <div class="col-sm-6">
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Name  {{ form.name }}</div>
                 <span>* 외국인에게 보여질 이름입니다.</span>
@@ -35,8 +35,8 @@
                 <span>* 상품 검증 안내를 위해 필요하며, 타인에게 절대 공개되지 않습니다.</span>
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Emergency contact(비상 연락처)  {{ form.emergency }}</div>
                 <span>* 연락이 가장 잘 될 수 있는 분의 번호를 꼭 입력하여 주시기 바랍니다.</span>
-                <div id="ks" style="border:1px solid black; width:100%;padding:10px;margin-top:20px;">Interest  {{ form.interest }}</div>
-                <span>* 평소 관심사를 해시 태그로 작성해 주세요</span>
+                <div id="ks" style="border:1px solid black; width:100%;padding:10px;margin-top:20px;">Interest {{ form.interest }}</div>
+                <span style="margin-bottom:10px;">* 평소 관심사를 해시 태그로 작성해 주세요</span>
             </div>
             <div class="col-sm-6">
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">카카오톡 ID  {{ form.kakaoID }}</div>
@@ -51,6 +51,7 @@
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px;margin-top:20px;">Next Trevel  {{ form.nextCountry }}</div>
                 <span>* 방문할 나라를 선택해 주세요</span>
             </div>
+            <span style="color:red; font-size:15px; position:absolute; right:0px; bottom:0px;">* 반드시 영어로 작성해 주세요.</span>
         </div>
         <div class="center-block" style="width:260px;">
             <input class="btn btn-primary" type="submit" style="margin:30px; float:right; width:200px; height:50px; font-size:24px;" value="완 료">

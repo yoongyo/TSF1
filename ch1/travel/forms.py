@@ -100,7 +100,7 @@ class PostMForm(forms.ModelForm):
                     'placeholder': 'Ex) 94, Wausan-ro Mapo-gu Seoul'
                 }
             ),
-            'MeetingTime':forms.TextInput(
+            'MeetingTime':forms.Select(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px; border:1px solid gray;',
                     'class': 'form-control',
@@ -108,6 +108,9 @@ class PostMForm(forms.ModelForm):
                 }
             ),
             'Map': LocationWidget(
+                attrs={
+                    'style': 'width:250px;'
+                }
 
             ),
             'Direction':forms.Textarea(
@@ -116,7 +119,7 @@ class PostMForm(forms.ModelForm):
                     'class': 'form-control',
                 }
             ),
-            'Duration':forms.TextInput(
+            'Duration':forms.Select(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px; border:1px solid gray;',
                     'class': 'form-control',
@@ -220,6 +223,12 @@ class BookMForm(forms.ModelForm):
         model = Booking
         fields = "__all__"
         widgets = {
+            'NOP': forms.NumberInput(
+                attrs={
+                    'style': 'border:1px solid gray;height:27px;margin-top:3px;',
+                    'class': 'form-control'
+                }
+            ),
             'LastName': forms.TextInput(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
@@ -254,8 +263,10 @@ class BookMForm(forms.ModelForm):
             'Date': DatePickerWidget(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
-                    'class': 'form-control'
-                }
+                    'class': 'form-control',
+                    'multiple': True
+
+        }
             ),
             'SNS': forms.Select(
                 attrs={
@@ -266,7 +277,8 @@ class BookMForm(forms.ModelForm):
             'Nationality': AutoCompleteSelect(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'multiple': True
                 }
             ),
             'phone': forms.TextInput(
@@ -295,8 +307,15 @@ class BookMForm(forms.ModelForm):
             ),
             'Demand': forms.Textarea(
                 attrs={
-                    'style': 'width:100%; height:130px; border:1px solid gray;margin-top:3px;',
+                    'style': 'width:100%; height:27px; border:1px solid gray;margin-top:3px;',
                     'class': 'form-control'
                 }
             ),
         }
+
+    def save(self, **kwargs):
+        post = super().save(commit=False)
+        post.author = kwargs.get('content', None)
+        post.save()
+
+        return post

@@ -13,7 +13,7 @@
     <img src="{% static 'img/img3.jpeg' %}" style="width:100%; height:200px;" >
 </div>
 <div class="container" style="padding-top:50px; ">
-    <h1 class="text-center">프로필 수정</h1>
+    <h1 class="text-center">프로필 작성</h1>
     <p class="text-center">가이더로 상품을 등록하기 위해서는 추가적인 프로필 입력이 필요합니다.<br>
         개인 프로필은 상품 검증 및 상품운영의 도움을 드리기 위해 사용되며 Tour 프로필은<br>
         외국인 친구들에게 여러분의 개성을 마음껏 보여주어 공감대를 가지고 더 많은 여행자들이 여러분에게 편하게 다가갈 수 있도록 도와줍니다.<br>
@@ -21,7 +21,7 @@
     <div class="center-block" style="width:80%;">
     <form action="" method="post">
         {% csrf_token %}
-        <div class="row" style="padding:10px 5px; border:1px solid black; margin-top:10px; background-color:rgb(242, 246, 248);">
+        <div class="row" style="position:relative;padding:10px 5px; border:1px solid black; margin-top:10px; background-color:rgb(242, 246, 248);">
             <div class="col-sm-6">
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Name  {{ form.name }}</div>
                 <span>* 외국인에게 보여질 이름입니다.</span>
@@ -35,8 +35,8 @@
                 <span>* 상품 검증 안내를 위해 필요하며, 타인에게 절대 공개되지 않습니다.</span>
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Emergency contact(비상 연락처)  {{ form.emergency }}</div>
                 <span>* 연락이 가장 잘 될 수 있는 분의 번호를 꼭 입력하여 주시기 바랍니다.</span>
-                <div id="ks" style="border:1px solid black; width:100%;padding:10px;margin-top:20px;">Interest  {{ form.interest }}</div>
-                <span>* 평소 관심사를 해시 태그로 작성해 주세요</span>
+                <div id="ks" style="border:1px solid black; width:100%;padding:10px;margin-top:20px;">Interest {{ form.interest }}</div>
+                <span style="margin-bottom:10px;">* 평소 관심사를 해시 태그로 작성해 주세요</span>
             </div>
             <div class="col-sm-6">
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">카카오톡 ID  {{ form.kakaoID }}</div>
@@ -50,11 +50,11 @@
                 <span>* 방문했던 나라를 모두 선택해 주세요</span>
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px;margin-top:20px;">Next Trevel  {{ form.nextCountry }}</div>
                 <span>* 방문할 나라를 선택해 주세요</span>
-
             </div>
+            <span style="color:red; font-size:15px; position:absolute; right:0px; bottom:0px;">* 반드시 영어로 작성해 주세요.</span>
         </div>
         <div class="center-block" style="width:260px;">
-        <input class="btn btn-primary" type="submit" style="margin:30px; float:right; width:200px; height:50px; font-size:24px;" value="완 료">
+            <input class="btn btn-primary" type="submit" style="margin:30px; float:right; width:200px; height:50px; font-size:24px;" value="완 료">
         </div>
     </form>
     </div>

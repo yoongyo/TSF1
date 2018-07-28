@@ -19,3 +19,7 @@ class AutoCompleteSelect(forms.Select):
         context = super().build_attrs(*args, **kwargs);
         context['style'] = 'min-width: 200px;'
         return context
+
+
+class CounterTextInput(forms.Textarea):
+    template_name = 'widgets/counter_text.html'

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Today's Friend</title>
+        <title>Todays friend</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width", initial-scale="1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -96,11 +96,11 @@
                     <span class="icon-bar"></span>
                 </button>
                 {% load static %}
-                <a class="navbar-brand" href="{% url 'travel:main' %}" style="color:white;"><img style="width:20px; display:inline; height:20px; margin-right:9px; margin-top:-2px;" src="{% static 'img/logo1.jpeg' %}">Today's Friend</a>
+                <a class="navbar-brand" href="{% url 'travel:main' %}" style="color:white;font-size:20px;"><img style="width:26px; display:inline; height:26px; margin-right:9px; margin-top:-3px;" src="{% static 'img/logo1.jpeg' %}">Todays friend<a href="https://www.instagram.com/todaysfriends/"><img style="margin-left: 15px;width:23px; display:inline; height:23px; margin-top:15px;" src="{% static 'img/instar.png' %}"></a><a href="https://www.facebook.com/Free-tour-in-Korea-by-Todaysfriend-216333222470217/?ref=bookmarks"><img style="margin-left:5px;width:23px; display:inline; height:23px; margin-top:15px;" src="{% static 'img/face.png' %}"></a></a>
             </div>
             <div class="collapse navbar-collapse" id="list">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{% url 'travel:local_list' %}" style="color:white; font-size: 15px;">Tour</a></li>
+                    <li><a href="{% url 'travel:local_list' %}" style="color:white; font-size: 15px;">Tour Program</a></li>
                     <li><a href="#" style="color: white; font-size: 15px;">Personalized</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'accounts:new_profile' %}" style="color:white; font-size: 15px;">Become a guide</a></li>

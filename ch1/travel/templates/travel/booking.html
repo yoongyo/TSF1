@@ -15,7 +15,7 @@
     that in order to contact you immediately if there is any change in the circumstances of the your that is unavoidable</p>
     <br>
     <br>
-    <form action="" method="POST">
+    <form action="" method="post">
         {% csrf_token %}
         <div class="center-block clearfix" style="border:1px solid black;width:70%;margin-top:-30px; background-color:rgb(242, 246, 248);">
         <div class="col-md-6">
@@ -37,6 +37,9 @@
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Mainly used SNS  {{ form.SNS }}
             </div>
+            <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
+                Thing to Demand {{ form.Demand }}
+            </div>
         </div>
         <div class="col-md-6">
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
@@ -57,13 +60,11 @@
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 SNS ID  {{ form.SNSID }}
             </div>
-        </div>
-        <div class="row" style="padding:0px 30px;">
-            <div id="ks" class="col-sm-12" style="border: 1px solid black; padding: 20px; margin-bottom:8px; width:100%; border-radius:5px;">
-                <p style="margin-bottom:3px;">Thing to demand </p>
-                {{ form.Demand }}
+            <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
+                Number of People {{ form.NOP }}
             </div>
         </div>
+
         </div>
         <div class="center-block" style="width:230px;">
             <input type="submit" class="btn btn-primary" style="margin:30px 15px;width:200px;height:50px; font-size:24px;" value="BOOK NOW"/>

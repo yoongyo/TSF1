@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import password_validation
 from .models import Profile, Country, Language
 from django.contrib.auth.forms import AuthenticationForm
-from .widgets import AutoCompleteSelect
+from .widgets import AutoCompleteSelect, CounterTextInput
 import unicodedata
 from django.core.validators import validate_email
 from .models import Profile
@@ -111,7 +111,8 @@ class ProfileMForm(forms.ModelForm):
             }),
             'visitedCountry':AutoCompleteSelect(attrs={
                 'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
+                'class':'form-control',
+                'dependent_fields': {'field1': 'field1', 'field2': 'field2'},
             }),
             'nextCountry':AutoCompleteSelect(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
@@ -119,7 +120,8 @@ class ProfileMForm(forms.ModelForm):
             }),
             'interest': forms.TextInput(attrs={
                 'style': 'height:27px; margin-top:4px; border: 1px solid gray;',
-                'class':'form-control'
+                'class': 'form-control',
+                'placeholder': '예시: #soccer #photo #travel #cook #activity',
             }),
             'birth': forms.SelectDateWidget(attrs={
                 'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
@@ -142,7 +144,8 @@ class ProfileMForm(forms.ModelForm):
             }),
             'phone_number':forms.TextInput(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
+                'class':'form-control',
+                'placeholder': '- 없이 숫자만 입력',
             }),
             'gender':forms.Select(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',

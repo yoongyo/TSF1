@@ -48,8 +48,17 @@ SEX = (
     ('Woman', 'Woman'),
 )
 
+class Time(models.Model):
+    time = models.CharField(max_length=10)
 
+    def __str__(self):
+        return self.time
 
+class Duration(models.Model):
+    duration = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.duration
 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
@@ -66,14 +75,14 @@ class Post(models.Model):
 
     # Course Infomation
     MeetingPoint = models.CharField(max_length=50)
-    MeetingTime = models.CharField(max_length=30)
+    MeetingTime = models.ForeignKey(Time)
     Map = models.CharField(max_length=10)
     Direction = models.CharField(max_length=200)
     CourseName = models.CharField(max_length=40)
     DurationCourse = models.CharField(max_length=80)
     BriefCourse = models.CharField(max_length=1000)
     Photography = models.ImageField()
-    Duration = models.CharField(max_length=20)
+    Duration = models.ForeignKey(Duration)
 
     # Price & Other Information
     Price = models.CharField(max_length=10)
@@ -109,17 +118,18 @@ class Booking(models.Model):
     content = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     LastName = models.CharField(max_length=20)
     FirstName = models.CharField(max_length=20)
-    Age = models.PositiveIntegerField(null=True)
+    Age = models.PositiveIntegerField()
     gender = models.CharField(max_length=10, choices=SEX, blank=True, null=True)
     Email = models.EmailField(max_length=30)
     Date = models.DateField()
     SNS = models.ForeignKey(SNS, on_delete=models.CASCADE)
     SNSID = models.CharField(max_length=20)
-    Nationality = models.ForeignKey(Country, on_delete=models.CASCADE)
+    Nationality = models.ForeignKey(Country)
     phone = models.CharField(max_length=15)
     ConfirmedEmail = models.EmailField(max_length=30)
-    Language = models.ForeignKey(Language,on_delete=models.CASCADE)
+    Language = models.ForeignKey(Language, on_delete=models.CASCADE)
     Demand = models.CharField(max_length=1200)
+    NOP = models.PositiveIntegerField()
 
     def __str__(self):
         return self.FirstName

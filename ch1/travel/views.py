@@ -56,10 +56,28 @@ def local_detail_form(request, City, pk):
     qs1 = Post.objects.get(pk=filter)
     pf = models.Profile.objects.all()
     pf = pf.filter(user=qs1.user)
+    FY, FM, FD = str(qs1.SeasonFrom).split('-')
+    TY, TM, TD = str(qs1.SeasonTo).split('-')
+    SH, SM = str(qs1.MeetingTime).split(':')
+    H1, M1 = str(qs1.Duration).split(':')
+    H = int(SH)+int(H1)
+    M = int(SM)+int(M1)
     return render(request, 'travel/local_detail_form.html',{
         'local_detail': qs,
         'filter': filter,
         'profiles': pf,
+        'FY': FY,
+        'FM': FM,
+        'FD': FD,
+        'TY': TY,
+        'TM': TM,
+        'TD': TD,
+        'SH': SH,
+        'SM': SM,
+        'M': M,
+        'H': H,
+        'H1': H1,
+        'M1': M1,
     })
 
 
@@ -76,21 +94,35 @@ def post_new(request):
         'form': form,
     })
 
+def post_edit(request, City, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        form = PostMForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save()
+            return redirect('accounts:profile')
+    else:
+        form = PostMForm(instance=post)
+    return render(request, 'travel/post_form_edit.html',{
+        'form':form,
+    })
+
+
 def postcomplete(request):
     return render(request, 'travel/complete.html')
 
 
 
 def booking(request, City, pk):
-    book = get_object_or_404(Booking, pk=pk)
+    content = get_object_or_404(Booking, pk=pk)
     if request.method == 'POST':
         form = BookMForm(request.POST, request.FILES)
-        print(form)
         if form.is_valid():
-            book = form.save()
-            content = Booking(content_id=pk)
-            content.save()
-            return HttpResponseRedirect(reverse('travel:bookingcomplete', args=[City, pk]))
+            booking = form.save(commit=False)
+            booking.content = content
+            booking.save()
+            return redirect('accounts:profile')
+            # return HttpResponseRedirect(reverse('travel:bookingcomplete', args=[City, pk]))
     else:
         form = BookMForm()
 
