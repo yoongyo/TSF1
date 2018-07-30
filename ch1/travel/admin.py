@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import City, Post, Country, Language, TypeOfTour, SNS, Booking, Time, Duration
-from .forms import BookMForm
+from .forms import BookMForm, PostMForm
+
 
 
 class PostAdmin(admin.ModelAdmin):

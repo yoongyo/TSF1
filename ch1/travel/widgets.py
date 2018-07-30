@@ -13,7 +13,6 @@ class DatePickerWidget(forms.DateInput):
             ],
         }
         js = [
-            '//code.jquery.com/jquery-2.2.4.min.js',
             '//code.jquery.com/ui/1.12.1/jquery-ui.min.js',
         ]
 
@@ -41,7 +40,6 @@ class AutoCompleteSelect(forms.Select):
             ],
         }
         js = [
-            '//code.jquery.com/jquery-2.2.4.min.js',
             '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js',
             ]
 
@@ -52,6 +50,23 @@ class AutoCompleteSelect(forms.Select):
 
 class CounterTextInput(forms.TextInput):
     template_name = 'widgets/counter_text.html'
+
+class MultiDatePicker(forms.TextInput):
+    template_name = 'widgets/MultiDatePicker.html'
+
+    class Media:
+        css = {
+            'all': [
+                '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css',
+                '//formden.com/static/cdn/bootstrap-iso.css',
+            ],
+
+        }
+        js = [
+             '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js'
+        ]
+
+
 
 
 

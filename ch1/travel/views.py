@@ -62,6 +62,14 @@ def local_detail_form(request, City, pk):
     H1, M1 = str(qs1.Duration).split(':')
     H = int(SH)+int(H1)
     M = int(SM)+int(M1)
+    l = len(qs1.NotDate.split(','))
+    b=[]
+    for i in range(l):
+        a = qs1.NotDate.split(',')[i].split('-')
+        a[1] = str(int(a[1])-1)
+        s = ','.join(a)
+        b.append(s)
+    k = qs1.NotDate.split(',')
     return render(request, 'travel/local_detail_form.html',{
         'local_detail': qs,
         'filter': filter,
@@ -78,6 +86,7 @@ def local_detail_form(request, City, pk):
         'H': H,
         'H1': H1,
         'M1': M1,
+        'b': b,
     })
 
 

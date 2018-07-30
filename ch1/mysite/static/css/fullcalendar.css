@@ -440,6 +440,7 @@ table.fc-border-separate {
 .fc-grid .fc-day-number {
 	float: right;
 	padding: 0 2px;
+	color: rgb(48,84,134);
 	}
 	
 .fc-grid .fc-other-month .fc-day-number {

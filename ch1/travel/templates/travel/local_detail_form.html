@@ -76,20 +76,23 @@
                     title: '{{ i.title }}',
                     start: new Date({{ FY }},{{ FM }}-1,{{ FD }},{{ SH }},{{ SM }}),
                     end: new Date({{ TY }},{{ TM }}-1, {{ TD }},{{ H }},{{ M }}),
-                    allDay: false,
-                    textColor: 'black'
+                    allDay: true,
+                    textColor: 'black',
+                    color: 'rgb(149,205,232)',
                 },
                 {% endfor %}
+
+
+                {% for m in b %}
                 {
-                    title: 'Not Date',
-                    start: new Date(y,m,1),
-                    end: new Date(y,m,1),
+                    title: 'Not',
+                    start: new Date({{ m }}),
                     allDay: true,
                     textColor: 'black',
                     color:'red',
                 },
+                {% endfor %}
             ],
-            eventColor: 'green',
             editable: false,
         });
     });
@@ -99,7 +102,7 @@
             font-size: 13px;
         }
         #calendar {
-            width: 600px;
+            width: 390px;
         }
         .fc-sat{
             color: black;
@@ -111,6 +114,9 @@
             text-align: center;
             font-weight: bold;
             padding-right:4px;
+            display:table;
+            margin-left:auto;
+            margin-right:auto;
         }
         .fc-event-time {
             font-weight: normal;
@@ -118,6 +124,15 @@
         .fc-event-time,
         .fc-event-title {
             padding: 0px 2px;
+        }
+        .fc-day-number{
+            color: rgb(49,86,137);
+        }
+        h2{
+            font-size:15px;
+        }
+        .fc-button-content{
+            padding: 0 3px;
         }
     </style>
 
@@ -148,7 +163,7 @@
                     <h3>{{ i.title }}</h3>
                 </div>
                 <div class="col-md-3" style="float:right">
-                    <h3>{{ i.Tourtype }}</h3>
+                    <h3>{{ i.Tourtype.img }}{{ i.Tourtype }}</h3>
                 </div>
             </div>
 
@@ -163,57 +178,64 @@
             <br>
             <div class="row">
                 <div class="col-md-12">
-                    <div style="border: 1px solid black; padding: 10px;">
-                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                    <!--<div style="border: 12px solid rgb(49,86,137); padding: 10px;">-->
+                            <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
                                 1. Overview
                                 <br>
                                 {{ i.DetailContent }}
                             </div>
-                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                            <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
                                 2. Language : {{ i.Language }}
                             </div>
-                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                            <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
                                 3. Meeting time : {{ i.MeetingTime }}
                             </div>
-                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                            <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
                                 4. Duration : {{ H1 }}hr {{ M1 }}min
                             </div>
-                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                            <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
                                 5. The number of people : {{ i.Minimum }} - {{ i.Maximum }}
                             </div>
-                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                            <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
                                 6. Includes : <br>
                                 {{ i.Price_include }}
                             </div>
-                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                            <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
                                 7. Meeting Point: {{ i.MeetingPoint}}
                             </div>
-                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                            <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
                                 8. Direction : {{ i.Direction }}
                             </div>
-                            <div style="border:1px solid black; margin-bottom:15px; padding:7px;">
+                            <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
                                 9.Thing to Note : {{ i.GuestInfo }}
-                            </div>    
-                    </div>
-                    <div style="border:1px solid black;margin-top:15px;padding:3px;">
-                    <div style="background-color:white; margin:0 auto;" id="calendar"></div>
-                    </div>
+                            </div>
+
+                    <!--</div>-->
                 </div>
             </div>
         </div>
         <div class="col-md-5">
-            <div class="col-md-12" style="border: 1px solid black">
+            <div class="col-md-12" style="border: 2px solid rgb(49,86,137)">
                     <div style="width: 380px; border: 1px solid black; margin: 25px 0; padding:20px;">
-                        <h3>프로필</h3>
+                        <h3>
                         {% for profile in profiles %}
-                        <span>Laguage : {{ profile.language }}</span><br>
-                        <span>Major: {{ profile.major }}</span><br>
-                        <span>Visited Country : {{ profile.visitedCountry }}</span><br>
-                        <span>Next travel : {{ profile.nextCountry }}</span><br>
-                        <span>Interest : {{ profile.interest }}</span><br>
+                        {% if profile.img %}
+                            <img style="margin-right:20px; width:100px; height:100px;"src="{{ profile.img.url }}">
+                        {% endif %}
+                        {{ profile.name }}
+                        </h3>
+                        <br>
+                        <p style="font-size: 20px;">Laguage : {{ profile.language }}</p><br>
+                        <p style="font-size: 20px;">Major: {{ profile.major }}</p><br>
+                        <p style="font-size: 20px; margin-bottom:15px;">Visited Country : {{ profile.visitedCountry }}</p><br>
+                        <p style="font-size: 20px; margin-bottom:15px;">Next travel : {{ profile.nextCountry }}</p><br>
+                        <p style="font-size: 20px; margin-bottom:15px;">Interest : {{ profile.interest }}</p><br>
                         {% endfor %}
                     </div>
-                <a style="margin:200px 110px;" href="{% url 'travel:booking' i.City i.pk %}" class="btn btn-primary"><h1>Book Now</h1></a>
+                    <div style="margin-top:15px;">
+                        <div style="background-color:white; margin:0 auto;" id="calendar"></div>
+                    </div>
+                <a style="margin:30px 100px;" href="{% url 'travel:booking' i.City i.pk %}" class="btn btn-primary"><h1>Book Now</h1></a>
             </div>
         </div>
     </div>

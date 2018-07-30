@@ -8,7 +8,7 @@ from .widgets import AutoCompleteSelect, CounterTextInput
 import unicodedata
 from django.core.validators import validate_email
 from .models import Profile
-from .widgets import AutoCompleteSelect
+from .widgets import AutoCompleteSelect, DatePickerWidget
 
 class SignupForm(UserCreationForm):
 
@@ -95,11 +95,14 @@ class ProfileMForm(forms.ModelForm):
             'introduce',
             'gender',
             'name',
+            'img',
+            'video'
         }
         widgets = {
             'name': forms.TextInput(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class': 'form-control'
+                'class': 'form-control',
+                'autocomplete': 'off'
             }),
             'language' : forms.Select(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
@@ -107,12 +110,15 @@ class ProfileMForm(forms.ModelForm):
             }),
             'major': forms.TextInput(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
+                'class':'form-control',
+                'autocomplete': 'off'
             }),
             'visitedCountry':AutoCompleteSelect(attrs={
                 'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control',
+                'class':'form-control js-example-basic-multiple',
                 'dependent_fields': {'field1': 'field1', 'field2': 'field2'},
+                'multiple': 'multiple',
+                'name': 'states[]'
             }),
             'nextCountry':AutoCompleteSelect(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
@@ -122,33 +128,50 @@ class ProfileMForm(forms.ModelForm):
                 'style': 'height:27px; margin-top:4px; border: 1px solid gray;',
                 'class': 'form-control',
                 'placeholder': '예시: #soccer #photo #travel #cook #activity',
+                'autocomplete': 'off'
             }),
-            'birth': forms.SelectDateWidget(attrs={
-                'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
+            'birth': DatePickerWidget(attrs={
+                'style':'width:100%; height:30px; margin-top:4px;border:1px solid gray;',
+                'class': 'form-control',
+                'autocomplete': 'off'
             }),
             'email':forms.EmailInput(attrs={
                 'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
+                'class':'form-control',
+                'autocomplete': 'off'
             }),
             'emergency':forms.TextInput(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
+                'class':'form-control',
+                'autocomplete': 'off'
             }),
             'kakaoID':forms.TextInput(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
+                'class':'form-control',
+                'autocomplete': 'off'
             }),
             'introduce':forms.Textarea(attrs={
                 'style': 'width:100%;height:160px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
+                'class':'form-control',
+                'autocomplete': 'off'
             }),
             'phone_number':forms.TextInput(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
                 'class':'form-control',
                 'placeholder': '- 없이 숫자만 입력',
+                'autocomplete': 'off'
             }),
-            'gender':forms.Select(attrs={
+            'gender': forms.Select(attrs={
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class': 'form-control',
+            }),
+            'img': forms.ClearableFileInput(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
                 'class':'form-control'
             }),
+            'video': forms.TextInput(attrs={
+                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
+                'class': 'form-control',
+            }),
+
         }

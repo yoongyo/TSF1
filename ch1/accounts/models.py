@@ -26,6 +26,7 @@ SEX = (
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    img = models.ImageField(blank=True)
     name = models.CharField(max_length=10)
     phone_number = models.CharField(max_length=20, validators=[RegexValidator(r'^010[1-9]\d{7}$')], blank=True)
     birth = models.DateField(blank=True, null=True)
@@ -39,6 +40,7 @@ class Profile(models.Model):
     nextCountry = models.ForeignKey(Country, related_name='Next', blank=True, null=True)
     interest = models.CharField(max_length=20, blank=True, null=True)
     gender = models.CharField(max_length=10, choices=SEX, blank=True, null=True)
+    video = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.name

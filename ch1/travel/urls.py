@@ -11,7 +11,6 @@ urlpatterns =[
     url(r'^local/(?P<City>\w+)/(?P<pk>\d+)/$', views.local_detail_form, name='local_detail_form'),
     url(r'^local/(?P<City>\w+)/(?P<pk>\d+)/booking/$', views.booking, name="booking"),
     url(r'^local/(?P<City>\w+)/(?P<pk>\d+)/booking/complete/$', views.bookingcomplete, name="bookingcomplete"),
-
     url(r'^new/$', views.post_new, name="post_new"),
     url(r'^local/(?P<City>\w+)/(?P<pk>\d+)/edit/$', views.post_edit, name="post_edit"),
     url(r'^new/complete/$', views.postcomplete, name="complete"),

@@ -12,6 +12,7 @@ from accounts import models as pd
 
 class TypeOfTour(models.Model):
     type = models.CharField(max_length=30)
+    img = models.ImageField()
 
     def __str__(self):
         return self.type
@@ -78,10 +79,14 @@ class Post(models.Model):
     MeetingTime = models.ForeignKey(Time)
     Map = models.CharField(max_length=10)
     Direction = models.CharField(max_length=200)
+
+
     CourseName = models.CharField(max_length=40)
     DurationCourse = models.CharField(max_length=80)
     BriefCourse = models.CharField(max_length=1000)
     Photography = models.ImageField()
+
+
     Duration = models.ForeignKey(Duration)
 
     # Price & Other Information
@@ -90,7 +95,7 @@ class Post(models.Model):
     Maximum = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(20)])
     Price_include = models.CharField(max_length=100)
     # 달력 구현원함
-    NotDate = models.DateField()
+    NotDate = models.TextField()
     GuestInfo = models.CharField(max_length=100)
 
     # etc

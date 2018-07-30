@@ -1,6 +1,6 @@
 from .models import Post, Country, TypeOfTour, City, Language, SNS, Booking
 from django import forms
-from .widgets import DatePickerWidget, CounterTextInput, AutoCompleteSelect,LocationWidget
+from .widgets import DatePickerWidget, CounterTextInput, AutoCompleteSelect,LocationWidget, MultiDatePicker
 
 from django.core.urlresolvers import reverse_lazy
 import sys
@@ -45,13 +45,14 @@ class PostMForm(forms.ModelForm):
             'title':forms.TextInput(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px; border:1px solid gray; margin-bottom:8px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off'
                 }
             ),
             'Tourtype':forms.Select(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px; border:1px solid gray; margin-bottom:8px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
                 }
             ),
             'Country':AutoCompleteSelect(
@@ -90,14 +91,16 @@ class PostMForm(forms.ModelForm):
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px;border:1px solid gray;',
                     'class': 'form-control',
-                    'placeholder' : 'Ex) #Seoul #hiking #bicycle #picnic #localfood #picture #exercise #beer'
+                    'placeholder' : 'Ex) #Seoul #hiking #bicycle #picnic #localfood #picture #exercise #beer',
+                    'autocomplete': 'off'
                 }
             ),
             'MeetingPoint':forms.TextInput(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px; border:1px solid gray; margin-bottom:8px;',
                     'class': 'form-control',
-                    'placeholder': 'Ex) 94, Wausan-ro Mapo-gu Seoul'
+                    'placeholder': 'Ex) 94, Wausan-ro Mapo-gu Seoul',
+                    'autocomplete': 'off'
                 }
             ),
             'MeetingTime':forms.Select(
@@ -123,25 +126,29 @@ class PostMForm(forms.ModelForm):
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px; border:1px solid gray;',
                     'class': 'form-control',
-                    'placeholder': 'Ex) 3hr 30min'
+                    'placeholder': 'Ex) 3hr 30min',
+                    'autocomplete': 'off'
                 }
             ),
             'Price':forms.TextInput(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px; border:1px solid gray; margin-bottom:8px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off'
                 }
             ),
             'Minimum' : forms.NumberInput(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px; border:1px solid gray;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off'
                 }
             ),
             'Maximum': forms.NumberInput(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px; border:1px solid gray;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off'
                 }
             ),
             'Price_include':forms.Textarea(
@@ -151,16 +158,20 @@ class PostMForm(forms.ModelForm):
                     'class': 'form-control'
                 }
             ),
-            'NotDate':DatePickerWidget(
+            'NotDate': MultiDatePicker(
                 attrs={
                     'style':'width:100%; height:30px; margin-top:4px;border:1px solid gray;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
+                    'id': 'date',
+                    'name': 'date',
                 }
             ),
             'GuestInfo':forms.TextInput(
                 attrs={
                     'style': 'width:100%; height:130px; margin-top:4px; border:1px solid gray;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off'
                 }
             ),
             'img':forms.ClearableFileInput(
@@ -172,25 +183,29 @@ class PostMForm(forms.ModelForm):
             'SeasonFrom': DatePickerWidget(
                 attrs={
                     'style':'width:100%; height:30px; margin-top:4px;border:1px solid gray;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off'
                 }
             ),
             'SeasonTo': DatePickerWidget(
                 attrs={
                     'style':'width:100%; height:30px; margin-top:4px;border:1px solid gray;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off'
                 }
             ),
             'CourseName': forms.TextInput(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px;border:1px solid gray;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off'
                 }
             ),
             'DurationCourse': forms.TextInput(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px;border:1px solid gray;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off'
                 }
             ),
             'Photography': forms.ClearableFileInput(
@@ -202,7 +217,8 @@ class PostMForm(forms.ModelForm):
             'BriefCourse': forms.TextInput(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px;border:1px solid gray;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off'
                 }
             )
         }
