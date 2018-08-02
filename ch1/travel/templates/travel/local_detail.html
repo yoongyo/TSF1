@@ -10,7 +10,7 @@
 
         <div class="container">
             <div class="row" style="margin:40px 0px;">
-            <div class="col-md-4" style="height:100%;">
+            <div class="col-md-4" style="height:3000px;">
                 <iframe style="width:350px; height: 200px; margin-left:-10px;" src="https://www.youtube.com/embed/WGvh3Eag_vc?amp;autoplay=1&rel=0" frameborder="0" muted="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
                 {% for i in local_list %}
@@ -29,7 +29,7 @@
                                 <div class="clearfix row">
                                     <h4 class="box-title col-md-9" style="height:40px;">
                                           {{ i.title }}<br>
-                                        <small>Provided by Generation {{ i.name }}</small>
+                                        <small>Provided by Generation {{ i.user__name }}</small>
                                         <br>
                                         <br>
 

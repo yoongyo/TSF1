@@ -10,9 +10,9 @@
     <script type="text/javascript" src="{% static 'js/fullcalendar.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/gcal.js' %}"></script>
     
-    <script type="text/javascript">
+     <script type="text/javascript">
     $(function(){
-        
+
         // 현재 일시를 취득하기
         var date = new Date();
         var d = date.getDate();
@@ -27,12 +27,7 @@
                 center: 'title',
                 right: 'month, basicWeek, basicDay'
             },
-            // 타이틀의 포맷
-            titleFormat: {
-                month: 'yyyy년 M월',
-                week: '[yyyy년 ]M월 d일{~[yyyy년 ] [ M월] d일}',
-                day: 'yyyy년 M월 d일 dddd'
-            },
+
             //월일의 포맷
             columnFormat: {
                 month: 'ddd',
@@ -40,18 +35,18 @@
                 day: 'M/d(ddd)'
             },
             //요일의 포맷
-            dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'],
+            dayNames: ['SUN','MON','TUE','WEN','THU','FRI','SAT'],
             dayNamesShort: ['SUN', 'MON', 'TUE','WEN','THU','FRI','SAT'],
-            // tlrksdml 포맷
+            // 시간의 포맷
             timeFormat: {
                 '': 'H:mm{ - H:mm}'
             },
             // 버튼의 표시명
             buttonText: {
-                today: '금일',
-                month: '월',
-                week: '주',
-                day: '일'
+                today: 'today',
+                month: 'month',
+                week: 'week',
+                day: 'day'
             },
             // Event Sources 객체에서의 지정
             eventSources: [
@@ -63,25 +58,26 @@
             eventColor: 'blue',
             // Event 객체에서의 지정
             events: [
-                {% for i in list %}
-                {   
-                    title: '{{ i.title }}',
-                    start: new Date(y,m,1,'2'),  // 이번 달 1일
-                    end: new Date(y,m,1,14,3),
-                    allDay: false,
-                    textColor: 'black'
-                },
+
                 {
-                    title: '{{ i.City }}',
-                    start: new Date(y,m,10,19,0), // 이번달 10일 9시
-                    end: new Date(y,m,10,22,30),  // 이번달 10일 23시 30분
-                    allDay: false,
-                    textColor: 'darkred'
+                    title: 'i.title',
+                    start: new Date(2018,7,20),
+                    end: new Date(2018,7,21),
+                    allDay: true,
+                    textColor: 'black',
+                    color: 'rgb(149,205,232)',
                 },
-                {% endfor %}
-            ],           
-            eventColor: '',
-            editable: false
+
+
+                {
+                    title: 'Not',
+                    start: new Date(2018,7,20),
+                    allDay: true,
+                    textColor: 'black',
+                    color:'red',
+                },
+            ],
+            editable: false,
         });
     });
     </script>
@@ -90,15 +86,53 @@
             font-size: 13px;
         }
         #calendar {
-            width: 600px;
+            width: 533px;
         }
         .fc-sat{
-            color:blue;
+            color: black;
         }
         .fc-sun {
-            color: red;
+            color: black;
+        }
+        .fc-event-title {
+            text-align: center;
+            font-weight: bold;
+            padding-right:4px;
+            display:table;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        .fc-event-time {
+            font-weight: normal;
+        }
+        .fc-event-time,
+        .fc-event-title {
+            padding: 0px 2px;
+        }
+        .fc-day-number{
+            color: rgb(49,86,137);
+        }
+        h2{
+            font-size:15px;
+        }
+        .fc-button-content{
+            padding: 0 3px;
         }
     </style>
+
+
+
+    <script>
+    $(document).ready( function() {
+
+        $('#myslider').bxSlider({
+          slideMargin: 5,
+          autoReload: true,
+          breaks: [{screen:0, slides:1, pager:false},{screen:460, slides:2},{screen:768, slides:3}]
+        });
+
+    });
+    </script>
 </head>
 <body>
 <div class="container" style="padding-top:30px;">
@@ -107,62 +141,99 @@
 
     <div class="row">
         <div class="col-md-4 col-md-offset-1 col-sm-11" style="border:1px solid black; margin-right:10px;">
-            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;" >Language : {{ user.profile.language|default:'empty' }}</div>
-            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Major : {{ user.profile.major }}</div>
-            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Visited Country : {{ user.profile.visitedCountry }}</div>
-            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Next Travel : {{ user.profile.nextCountry }}</div>
-            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Interest : {{ user.profile.interest }}</div>
-            <a href="{% url 'accounts:profileEdit' %}" class="btn btn-primary">Change Profile</a>
+            {% if user.profile.img %}
+            <img style="width:150px; max-height:150px; margin-top:10px;" src="{{ user.profile.img.url }}">
+            {% else %}
+            {% load static %}
+            <img style="width:150px; height:150px; margin-top:10px;" src="{% static 'img/profile.jpg' %}">
+            {% endif %}
+            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;" >Name : {{ user.profile.name|default:'Empty' }}</div>
+            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;" >Language : {{ user.profile.language|default:'Empty' }}</div>
+            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Major : {{ user.profile.major|default:'Empty' }}</div>
+            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Visited Country : {{ user.profile.visitedCountry|default:'Empty' }}</div>
+            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Next Travel : {{ user.profile.nextCountry|default:'Empty' }}</div>
+            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Interest : {{ user.profile.interest|default:'Empty' }}</div>
+            <a href="{% url 'accounts:profileEdit' %}" style="margin: 10px 120px;"class="btn btn-primary">Change Profile</a>
         </div>
-        <div class="col-md-6 col-sm-11" style="border: 1px solid black; margin-left:10px; min-height:300px; padding-top:15px;">
-            {% for i in list %}
-            <div class="row">    
-                <div class="col-md-10">    
-                    <div class="well clearfix" style="background-color:rgb(243,243,243); padding:10px;">
-                        <article class="box">
-                            <a href="{% url 'travel:local_detail_form' i.City i.pk %}">
-                                <figure class="col-md-5">
-                                    <img src="{{ i.img.url }}" style="max-height:140px; width:100%">
-                                    <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
-                                </figure>
-                                <div class="col-md-7">
-                                    <h4>{{ i.title }}</h4>
-                                    <br>
-                                    {{ i.Price}}
-                                    <br>
-                                    {{ i.Duration}}
-                                    <br>
-                                    {{ i.Language }}
-                                    <br>
-                                    {{ i.HashTag }}
+        <div class="col-md-6 col-sm-11 tab-content" style="border: 1px solid black; margin-left:10px; min-height:300px; padding-top:15px;">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a data-toggle="tab" href="#home">Your Product</a></li>
+                <li><a data-toggle="tab" href="#menu1">Your Booking</a></li>
+                <li><a data-toggle="tab" href="#menu2">Your Schedule</a></li>
+                <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div style="padding-top:10px;" id="home" class="tab-pane fade in active">
+                    {% for i in list %}
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="well clearfix" style="background-color:rgb(243,243,243); padding:10px;">
+                                <article class="box">
+                                    <a href="{% url 'travel:local_detail_form' i.City i.pk %}">
+                                        <figure class="col-md-5" style="padding:0px">
+                                            {% if i.img %}
+                                            <img src="{{ i.img.url }}" style="max-height:120px; width:100%">
+                                            {% endif %}
+                                            <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
+                                        </figure>
+                                        <div class="col-md-7">
+                                            <h4>{{ i.title }}</h4>
+                                            <br>
+                                            {{ i.Price}}
+                                            <br>
+                                            {{ i.Duration}}
+                                            <br>
+                                            {{ i.Language }}
+                                            <br>
+                                            {{ i.HashTag }}
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="col-md-1" style="padding-top:11%">
+                            <a href="{% url 'travel:post_edit' i.City i.pk %}" class="btn btn-primary">Modify</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <a href="{% url 'accounts:new_profile' %}" class="btn btn-primary" style="width:300px;height:50px;margin:10px 150px;"><span style="font-size:30px;">upload new tour</span></a>
+                </div>
+                <div style="padding-top:10px;" id="menu1" class="tab-pane fade">
+                    {% for i in bk %}
+                    <div class="row" style="margin-bottom:10px; border:1px solid black; margin:10px 0px; border-radius: 3px; padding:4px; max-height:42px;">
+                        <div class="col-md-9">
+                            <div style=" border-radius: 4px;" >
+                                {{ i.content }}
+                                {{ i.FirstName }}
+                                {{ i.LastName }}
+                                {{ i.Age }}
+                                <div class="collapse" id="demo">
+                                    adjfkaljfk<br>
+                                    adkfja;kfj<br>
+                                    sdfkadjl;k<br>
+                                    adfljaklfj<br>
+                                    adflas;klfk<br>
                                 </div>
-                            </a>
-                        </article>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3" style="margin:0px;padding:0px;">
+                            <button class="btn btn-primary" id="ww" data-toggle="collapse" data-target="#demo">Detail</button>
+                            <div class="btn btn-primary">Reject</div>
+                        </div>
                     </div>
+                    {% endfor %}
                 </div>
-                <div class="col-md-1" style="padding-top:11%">
-                    <a href="{% url 'travel:post_edit' i.City i.pk %}" class="btn btn-primary">Modify</a>
-                </div>     
-            </div>
-            {% endfor %}
-            {% for i in bk %}         
-            <div class="row" style="margin-bottom:10px; border:1px solid black; margin:10px 0px; border-radius: 3px; padding:4px; max-height:42px;">
-                <div class="col-md-9">
-                    <div style=" border-radius: 4px;">
-                        {{ i.content }}
-                        {{ i.FirstName }}
-                        {{ i.LastName }}
-                        {{ i.Age }}
-                    </div>
+                <div style="padding:10px;" id="menu2" class="tab-pane fade">
+                    <div id="calendar"></div>
                 </div>
-                <div class="col-md-3" style="margin:0px;padding:0px;">
-                    <div class="btn btn-primary">Detail</div>
-                    <div class="btn btn-primary">Reject</div>
+                <div id="menu3" class="tab-pane fade">
+                  <h3>Menu 3</h3>
+                  <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                 </div>
             </div>
-            {% endfor %}
         </div>
-        <div id="calendar"></div>
     </div>
     <img src="{{ user.socialaccount_set.all.first.get_avatar_url }}" />
 
@@ -171,6 +242,7 @@
 
     </div>
 </div>
+
 </body>
 
 

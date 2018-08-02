@@ -107,7 +107,7 @@
             <div class="collapse navbar-collapse" id="list">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{% url 'travel:local_list' %}" style="color:white; font-size: 15px;">Tour Program</a></li>
-                    <li><a href="#" style="color: white; font-size: 15px;">Personalized</a></li>
+                    <li><a href="{% url 'Personalized:list' %}" style="color: white; font-size: 15px;">Personalized</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'accounts:new_profile' %}" style="color:white; font-size: 15px;">Become a guide</a></li>
                     {% else %}

@@ -39,7 +39,6 @@ def local_detail(request, City):
     filter = path.split('/')[3]
     print(filter)
     qs = queryset.filter(City__city=filter, confirm='True')
-
     return render(request, 'travel/local_detail.html',{
         'local_list': qs
     })
@@ -69,7 +68,6 @@ def local_detail_form(request, City, pk):
         a[1] = str(int(a[1])-1)
         s = ','.join(a)
         b.append(s)
-    k = qs1.NotDate.split(',')
     return render(request, 'travel/local_detail_form.html',{
         'local_detail': qs,
         'filter': filter,
@@ -96,7 +94,9 @@ def post_new(request):
         form = PostMForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save()
-            return redirect(post)
+            return redirect('travel:complete')
+        else:
+            print(form.errors)
     else:
         form = PostMForm()
     return render(request, 'travel/post_form.html', {
@@ -123,25 +123,36 @@ def postcomplete(request):
 
 
 def booking(request, City, pk):
-    content = get_object_or_404(Booking, pk=pk)
+    content = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
         form = BookMForm(request.POST, request.FILES)
         if form.is_valid():
+            print('false')
             booking = form.save(commit=False)
             booking.content = content
             booking.save()
-            return redirect('accounts:profile')
-            # return HttpResponseRedirect(reverse('travel:bookingcomplete', args=[City, pk]))
+            return HttpResponseRedirect(reverse('travel:bookingcomplete', args=[City, pk]))
+        else:
+            print(form.errors)
     else:
         form = BookMForm()
 
     path = request.path
     filter = path.split('/')[4]
+    qs1 = Post.objects.get(pk=filter)
     post = Post.objects.all()
     post = post.filter(pk=filter)
+    l = len(qs1.NotDate.split(','))
+    b=[]
+    for i in range(l):
+        a = qs1.NotDate.split(',')[i].split('-')
+        a[1] = str(int(a[1])-1)
+        s = ','.join(a)
+        b.append(s)
     return render(request, 'travel/booking.html', {
         'form': form,
         'post': post,
+        'b': b,
     })
 
 def bookingcomplete(request, City, pk):
@@ -156,4 +167,17 @@ def country_list(request):
     results = [{'id': country.id, 'text': country.name} for country in qs]
     return JsonResponse({
         'results': results,
+    })
+
+def datewidget(request, City, pk):
+    qs1 = Post.objects.get(pk=filter)
+    l = len(qs1.NotDate.split(','))
+    b = []
+    for i in range(l):
+        a = qs1.NotDate.split(',')[i].split('-')
+        a[1] = str(int(a[1]) - 1)
+        s = ','.join(a)
+        b.append(s)
+    return render(request, 'widgets/booking_date.html', {
+        'b': b,
     })

@@ -1,0 +1,24 @@
+{% include "django/forms/widgets/date.html" %}
+
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
+{% for i in b %}
+{{ i }}
+{% endfor %}
+
+<script>
+$(function() {
+    $('#{{ widget.attrs.id }}').datepicker({
+        format: 'yyyy-mm-dd',
+        minDate: 0,
+        todayHighlight: true,
+        autoclose: true,
+        datesDisabled: ['2018-8-4','2018-8-3'],
+    });
+});
+</script>

@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import Personalized
 
-# Register your models here.
+
+class PersonalizedAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Personalized, PersonalizedAdmin)

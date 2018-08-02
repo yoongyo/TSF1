@@ -4,6 +4,7 @@ from django.db import models
 from django.shortcuts import reverse
 from django.db.models.signals import post_save
 from django.contrib.auth.models import AbstractUser
+from django.core.mail import send_mail
 
 
 class Language(models.Model):
@@ -47,8 +48,16 @@ class Profile(models.Model):
 
 def on_post_save_for_user(sender, **kwargs):
     if kwargs['created']:
+        # 가입시기
         user = kwargs['instance']
         Profile.objects.create(user=user)
 
-
+        # 환영 이메일 보내기
+        send_mail(
+            '환영합니다.',
+            'here  is th message',
+            'jyg0172@naver.com',
+            [user.email],
+            fail_silently=False,
+        )
 post_save.connect(on_post_save_for_user, sender=settings.AUTH_USER_MODEL)

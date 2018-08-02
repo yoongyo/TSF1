@@ -143,7 +143,8 @@ class ProfileMForm(forms.ModelForm):
             'emergency':forms.TextInput(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
                 'class':'form-control',
-                'autocomplete': 'off'
+                'autocomplete': 'off',
+                'placeholder': '- 없이 숫자만 입력',
             }),
             'kakaoID':forms.TextInput(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',

@@ -56,6 +56,9 @@ def profile(request):
     post = Post.objects.all()
     post = post.filter(user=request.user)
     bk = Booking.objects.filter(content__user=request.user)
+
+
+
     return render(request, 'accounts/profile.html',{
         'profiles': pf,
         'list': post,
@@ -86,6 +89,8 @@ def new_profile(request):
         if form.is_valid():
             profile = form.save()
             return redirect('travel:post_new')
+        else:
+            print(form.errors)
     else:
         form = ProfileMForm(instance=profile)
     return render(request, 'accounts/newprofile.html', {
@@ -100,6 +105,8 @@ def profileEdit(request):
         if form.is_valid():
             profile = form.save()
             return redirect('accounts:profile')
+        else:
+            print(form.errors)
     else:
         form = ProfileMForm(instance=profile)
     return render(request, 'accounts/profile_edit.html', {

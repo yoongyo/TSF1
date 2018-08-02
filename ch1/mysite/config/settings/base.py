@@ -160,3 +160,10 @@ NAVER_CLIENT_ID = '08EHhkPy8yFmFkD4jQxm'
 
 # 스케줄
 
+# 이메일 보내기
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = False

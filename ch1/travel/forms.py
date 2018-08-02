@@ -1,6 +1,6 @@
 from .models import Post, Country, TypeOfTour, City, Language, SNS, Booking
 from django import forms
-from .widgets import DatePickerWidget, CounterTextInput, AutoCompleteSelect,LocationWidget, MultiDatePicker
+from .widgets import DatePickerWidget, CounterTextInput, AutoCompleteSelect,LocationWidget, MultiDatePicker, BookingDatePickerWidget
 
 from django.core.urlresolvers import reverse_lazy
 import sys
@@ -78,13 +78,16 @@ class PostMForm(forms.ModelForm):
                     'style': 'width:100%; height:240px; margin-top:4px; border:1px solid gray; margin-bottom:8px;',
                     'placeholder': '당신이 만든 local 여행에 대한 설명을 자유롭게 작성해 주세요\n'
                     'Tip. 당신의 Tour만이 가지고 있는 특징에 대해 설명해 주세요.외국인은 언제나 local다움과 funny한 상품을 찾고있습니다.',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'id': 'detail'
                 }
             ),
-            'BriefContent':forms.Select(
+            'BriefContent':forms.Textarea(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px;border:1px solid gray; margin-bottom:8px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
+                    'id': 'brief'
                 }
             ),
             'HashTag':forms.TextInput(
@@ -174,10 +177,10 @@ class PostMForm(forms.ModelForm):
                     'autocomplete': 'off'
                 }
             ),
-            'img':forms.ClearableFileInput(
+            'img': forms.ClearableFileInput(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px; border:1px solid gray;',
-                    'class': 'form-control'
+                    'class': 'form-control',
                 }
             ),
             'SeasonFrom': DatePickerWidget(
@@ -242,89 +245,101 @@ class BookMForm(forms.ModelForm):
             'NOP': forms.NumberInput(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
                 }
             ),
             'LastName': forms.TextInput(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
                 }
             ),
             'FirstName': forms.TextInput(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
                 }
             ),
             'Age': forms.NumberInput(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
-                    'class': 'form-control'
-
+                    'class': 'form-control',
+                    'autocomplete': 'off',
                 }
             ),
             'gender': forms.Select(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
                 }
             ),
             'Email': forms.EmailInput(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
                 }
             ),
-            'Date': DatePickerWidget(
+            'Date': BookingDatePickerWidget(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
                     'class': 'form-control',
-                    'multiple': True
-
-        }
+                    'multiple': True,
+                    'autocomplete': 'off',
+                }
             ),
             'SNS': forms.Select(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
                 }
             ),
             'Nationality': AutoCompleteSelect(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
                     'class': 'form-control',
+                    'autocomplete': 'off',
                     'multiple': True
                 }
             ),
             'phone': forms.TextInput(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
                 }
             ),
             'ConfirmedEmail': forms.EmailInput(
                 attrs={
                     'style':'border:1px solid gray;height:27px;margin-top:3px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
                 }
             ),
             'Language': forms.Select(
                 attrs={
                     'style': 'border:1px solid gray; height:27px;margin-top:3px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
                 }
             ),
             'SNSID': forms.TextInput(
                 attrs={
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
                 }
             ),
             'Demand': forms.Textarea(
                 attrs={
                     'style': 'width:100%; height:27px; border:1px solid gray;margin-top:3px;',
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autocomplete': 'off',
                 }
             ),
         }

@@ -3,25 +3,29 @@
 {% block content %}
 <head>
     {% load static %}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script src="{% static 'js/jquery.bxslider-rahisified.js' %}"></script>
-    <link href="{% static 'css/jquery.bxslider.css' %}" rel="stylesheet" />
-    <style>
-         *{margin: 0;padding: 0;}
-         li{list-style: none;}
-         #gallery_wrap{ margin: 0 auto; width: 450px;}
-         #gallery_wrap .bx-wrapper{margin-bottom: 20px;}
-         .slider-pager{text-align: center;}
-         .slider-pager li{display: inline;}
-    </style>
+    <!-- 이미지 슬라이드 -->
+    <link rel="stylesheet"  href="{% static 'css/lightslider.css' %}"/>
+    <script src="{% static 'js/lightslider.min.js' %}"></script>
 
-
-    <meat charset="UTF-8"/>
+    <!-- 캘린더 -->
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
     <link rel="stylesheet" href="{% static 'css/fullcalendar.css' %}" type="text/css">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+    <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script>-->
+    <!--<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>-->
     <script type="text/javascript" src="{% static 'js/fullcalendar.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/gcal.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.youtubepopup.min.js' %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/YouTubePopUp.css' %}">
+    <script type="text/javascript" src="{% static 'js/YouTubePopUp.jquery.js' %}"></script>
+    <script type="text/javascript">
+      jQuery(function(){
+          jQuery("a.bla-1").YouTubePopUp();
+          jQuery("a.bla-2").YouTubePopUp( { autoplay: 0 } ); // Disable autoplay
+      });
+    </script>
+
+
 
     <script type="text/javascript">
     $(function(){
@@ -96,6 +100,8 @@
             editable: false,
         });
     });
+
+
     </script>
     <style type='text/css'>
         body {
@@ -138,22 +144,35 @@
 
 
 
-    <script>
-    $(document).ready( function() {
+    <!-- 이미지 슬라이드-->
+    {% load static %}
 
-        $('#myslider').bxSlider({
-          slideMargin: 5,
-          autoReload: true,
-          breaks: [{screen:0, slides:1, pager:false},{screen:460, slides:2},{screen:768, slides:3}]
-        });
 
-    });
-    </script>
+    <style>
+    	ul{
+			list-style: none outside none;
+		    padding-left: 0;
+            margin: 0;
+		}
+		.content-slider li{
+		    background-color: #ed3020;
+		    text-align: center;
+		    color: #FFF;
+		    width:100%;
+		}
+		.content-slider h3 {
+		    margin: 0;
+		    padding: 70px 0;
+		}
+		li img{
+		    width:100%;
+		    height:100%;
+		}
+    </style>
+
 </head>
+
 <body>
-
-
-
 {% for i in local_detail %}
 <div class="container">
     <div class="well clearfix" style="margin:50px 0px;">
@@ -163,15 +182,32 @@
                     <h3>{{ i.title }}</h3>
                 </div>
                 <div class="col-md-3" style="float:right">
+
                     <h3>{{ i.Tourtype.img }}{{ i.Tourtype }}</h3>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <ul class="bxslider" data-call="bxslider" data-options="slideMargin:5, autoReload:true" data-breaks="[{screen:0, slides:1, pager:false}, {screen:460, slides:2}, {screen: 768, slides:3}]">
-                      <li><img src="{{ i.img.url }}" width="100%"/></li>
-                    </ul>
+                    <div class="demo">
+                        <div class="item">
+                            <div class="clearfix" style="width:100%">
+                                <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+
+                                    <li data-thumb="{% static 'img/img3.jpeg' %}">
+                                        <img width="100%" src="{% static 'img/img3.jpeg' %}"/>
+                                    </li>
+                                    <li data-thumb="{% static 'img/dma.jpeg' %}">
+                                        <img src="{% static 'img/dma.jpeg' %}"/>
+                                    </li>
+                                    <li data-thumb="{{ i.img.url }}">
+                                        <img height="100%" src="{{ i.img.url }}"/>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <br>
@@ -217,6 +253,7 @@
         <div class="col-md-5">
             <div class="col-md-12" style="border: 2px solid rgb(49,86,137)">
                     <div style="width: 380px; border: 1px solid black; margin: 25px 0; padding:20px;">
+                        <a class="bla-1" href="https://www.youtube.com/watch?v=3qyhgV0Zew0">Profile Video</a>
                         <h3>
                         {% for profile in profiles %}
                         {% if profile.img %}
@@ -240,7 +277,30 @@
         </div>
     </div>
 </div>
-</body>
+<script>
+    // 이미지 슬라이드
+    $(document).ready(function() {
+		$("#content-slider").lightSlider({
+            loop:true,
+            auto:true,
+            keyPress:true
+        });
+        $('#image-gallery').lightSlider({
+            gallery:true,
+            item:1,
+            thumbItem:9,
+            slideMargin: 0,
+            speed:500,
+            auto:true,
+            loop:true,
+            onSliderLoad: function() {
+            $('#image-gallery').removeClass('cS-hidden');
+            }
+        });
+	});
+</script>
 
+
+</body>
 {% endfor %}
 {% endblock %}

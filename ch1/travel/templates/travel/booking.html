@@ -7,6 +7,9 @@
     }
 </style>
 
+
+
+
 {{ form.media }}
 <div class="container" style="margin-top:40px;">
     <h1 class="text-center">Booking</h1>
@@ -17,48 +20,63 @@
     <br>
     <form action="" method="post">
         {% csrf_token %}
+        {{ form.non_field_errors }}
         <div class="center-block clearfix" style="border:1px solid black;width:70%;margin-top:-30px; background-color:rgb(242, 246, 248);">
         <div class="col-md-6">
             <div id="ks" style="border:1px solid black; padding:20px; margin:8px 0px; border-radius:5px;">
                 First Name  {{ form.LastName }}
+                {{ form.LastName.errors }}
             </div>
             <div id="ks" style="border:1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Age  {{ form.Age }}
+                {{ form.Age.errors }}
             </div>
             <div id="ks" style="border:1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Gender  {{ form.gender }}
+                {{ form.gender.errors }}
             </div>
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 E-mail  {{ form.Email }}
+                {{ form.Email.errors }}
             </div>
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Date  <br>{{ form.Date }}
+                {{ form.Date.errors }}
             </div>
+
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Mainly used SNS  {{ form.SNS }}
+                {{ form.SNS.errors }}
             </div>
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Thing to Demand {{ form.Demand }}
+                {{ form.Demand.errors }}
             </div>
         </div>
         <div class="col-md-6">
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Last Name  {{ form.FirstName }}
+                {{ form.FirstName.errors }}
             </div>
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Nationality  {{ form.Nationality }}
+                {{ form.Nationality.errors }}
             </div>
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Language  {{ form.Language }}
+                {{ form.Language.errors }}
             </div>
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Confirmed E-mail  {{ form.ConfirmedEmail }}
+                {{ form.ConfirmedEmail.errors }}
             </div>
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Cell number  {{ form.phone }}
+                {{ form.phone.errors }}
             </div>
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 SNS ID  {{ form.SNSID }}
+                {{ form.SNSID.errors }}
             </div>
             <div id="ks" style="border: 1px solid black; padding: 20px; margin:8px 0px; border-radius:5px;">
                 Number of People {{ form.NOP }}

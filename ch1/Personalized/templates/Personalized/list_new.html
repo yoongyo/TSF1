@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<img src="{% static 'img/top.jpg' %}" width="100%" height="300">
+
+<div class="jumbotron" style="padding-top:0; padding-bottom:5px;">
+    <div class="container">
+        <h3><strong>What is 'Personalized'?</strong> Your trip can always be special. Ask your local friends to make the trip what you need and someting special just for you</h3>
+    </div>
+</div>
+
+<div class="container">
+    <h1 class="text-center">ASK to Todays Friend</h1>
+    <p class="text-center" style="margin-bottom:35px;">Please describe in detail the feature of your trip. Even if you write only roughly, todays friend will make a wonderful<br>
+        tour, but please write in more detail to make your trip special. Email, and SNS accounts are only used to deliver travel<br>
+        items of your LOCAL friends, and will not visible to anyone Except for the administrator.</p>
+    <div class="container">
+        <div class="center-block" style="width:70%;">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>Last Name</span>
+                            {{ form.LastName }}
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>First Name</span>
+                            {{ form.FirstName }}
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>Gender</span>
+                            {{ form.Gender }}
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>Nationality</span>
+                            {{ form.Nationality }}
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>City</span>
+                            {{ form.City }}
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>Language</span>
+                            {{ form.Language }}
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>E-mail</span>
+                            {{ form.Email }}
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>Password</span>
+                            {{ form.Password }}
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>Date</span>
+                            {{ form.Date }}
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>Title</span>
+                            {{ form.title }}
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>Mainly used SNS</span>
+                            {{ form.SNS }}
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>SNS ID</span>
+                            {{ form.SNSID }}
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>Guest</span>
+                            {{ form.Guest }}
+                        </div>
+                    </div><div class="col-md-6" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>Price</span>
+                            {{ form.Price }}
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-bottom:5px;">
+                        <div style="border: 1px solid black; padding:8px;">
+                            <span>What do you want?</span>
+                            {{ form.Content }}
+                        </div>
+                    </div>
+                </div>
+                <div class="center-block" style="width:200px;">
+                    <input class="btn btn-primary" type="submit" style="margin-bottom:25px; float:right; width:200px; height:50px; font-size:24px;" value="완 료">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

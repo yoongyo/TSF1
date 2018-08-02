@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<img src="{% static 'img/top.jpg' %}" width="100%" height="300">
+
+<div class="jumbotron" style="padding-top:0; padding-bottom:5px;">
+    <div class="container">
+        <h3><strong>What is 'Personalized'?</strong> Your trip can always be special. Ask your local friends to make the trip what you need and someting special just for you</h3>
+    </div>
+</div>
+
+<div class="container">
+    <a href="{% url 'Personalized:list_new' %}" class="btn btn-primary center-block" style="width:300px;">
+        <p class="text-center" style="padding: 10px; height:40px; font-size:24px;">Ask to Today Friend</p>
+    </a>
+    <div class="row" style="margin-top:15px;">
+        {% for i in list %}
+        <div class="col-md-6" style="padding:10px;">
+            <div class="well clearfix">
+                <div class="col-md-7">
+                    <h4>{{ i.title }}</h4>
+                    <div style="border:1px solid black; height:162px; border-radius:5px;padding:3px;">
+                        {{ i.Content }}
+                    </div>
+                </div>
+                <div class="col-md-5" style="border: 1px solid black; padding:8px; border-radius:5px;">
+                    <p style="margin: 0 7px;">Name : {{ i.FirstName }} {{ i.LastName }}</p>
+                    <p style="margin: 0 7px;">City : {{ i.City }}</p>
+                    <p style="margin: 0 7px;">Guest : {{ i.Guest }}</p>
+                    <p style="margin: 0 7px;">Language : {{ i.Language }}</p>
+                    <p style="margin: 0 7px;">Gender : {{ i.Gender }}</p>
+                    <p style="margin: 0 7px;">Price : {{ i.Price }}</p>
+                    <p style="margin: 0 7px;">Date : {{ i.Date }}</p>
+                    <div class="col-md-6" style="margin-top:8px;">
+                        <a class="btn btn-primary" style="width:70px; height:35px;">
+                            <span style="font-size:16px;">Modify</span>
+                        </a>
+                    </div>
+                    <div class="col-md-6" style="margin-top:8px;">
+                        <a class="btn btn-primary" style="width:70px; height:35px;">
+                            <span style="font-size:16px;">Try</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

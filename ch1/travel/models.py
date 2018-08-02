@@ -70,21 +70,21 @@ class Post(models.Model):
     City = models.ForeignKey(City, on_delete=models.CASCADE)
     Language = models.ForeignKey(Language, on_delete=models.CASCADE)
     DetailContent = models.CharField(max_length=1200, help_text='당신이 만든 local 여행에 대한 설명을 자유롭게 작성해 주세요.<br>Tip. 당신의 Tour만이 가지고 있는 특징에 대해 설명해주세요. 외국인은 언제나 local다움과 funny한 상품을 찾고 있습니다.')
-    BriefContent = models.CharField(max_length=250)
+    BriefContent = models.TextField(max_length=250)
     HashTag = models.CharField(max_length=20)
-    img = models.ImageField()
+    img = models.ImageField(blank=True, null=True)
 
     # Course Infomation
     MeetingPoint = models.CharField(max_length=50)
     MeetingTime = models.ForeignKey(Time)
-    Map = models.CharField(max_length=10)
+    Map = models.CharField(max_length=140)
     Direction = models.CharField(max_length=200)
 
 
     CourseName = models.CharField(max_length=40)
     DurationCourse = models.CharField(max_length=80)
     BriefCourse = models.CharField(max_length=1000)
-    Photography = models.ImageField()
+    Photography = models.ImageField(blank=True, null=True)
 
 
     Duration = models.ForeignKey(Duration)
@@ -102,10 +102,10 @@ class Post(models.Model):
     Created_at = models.DateTimeField(auto_now_add=True)
 
     # 대표 포스팅
-    representation = models.BooleanField(blank=True)
+    representation = models.NullBooleanField(blank=True, null=True)
 
     # 심사
-    confirm = models.BooleanField(blank=True)
+    confirm = models.NullBooleanField(null=True, blank=True)
 
     SeasonFrom = models.DateField()
     SeasonTo = models.DateField()
@@ -115,12 +115,12 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse('travel:local_detail_form', args=[self.City, self.name])
+    # def get_absolute_url(self):
+        # return reverse('travel:local_detail_form', args=[self.City, self.name])
 
 
 class Booking(models.Model):
-    content = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    content = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
     LastName = models.CharField(max_length=20)
     FirstName = models.CharField(max_length=20)
     Age = models.PositiveIntegerField()
