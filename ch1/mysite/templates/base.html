@@ -1,91 +1,92 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {% load static %}
         <title>Todays friend</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width", initial-scale="1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        {% load static %}
-    </head>
-<body>
-    <!-- navbar_top -->
-    <style>
-        .navbar-default{
-            background-color: #0F3A72;
-        }
-        .container-fluid  ul  li{
-            color: white;
-        }
 
-        @media (min-width: 768px){
-            /* 큰 화면 전용 설정 */
-            .container-fluid{
-                padding:0 20%;
+        <!-- navbar_top -->
+        <style>
+            .navbar-default{
+                background-color: #0F3A72;
             }
-            .fcontent {
-                padding:0 20%;
-                display: flex;
+            .container-fluid  ul  li{
+                color: white;
             }
-        }
-        @media (max-width: 786px) {
-            .fcontent{
-                display:flex;
+
+            @media (min-width: 768px){
+                /* 큰 화면 전용 설정 */
+                .container-fluid{
+                    padding:0 20%;
+                }
+                .fcontent {
+                    padding:0 20%;
+                    display: flex;
+                }
             }
-        }
-        #login-dp{
-            min-width: 250px;
-            padding: 14px 14px 0;
-            overflow:hidden;
-            background-color:rgba(255,255,255,.8);
-        }
-        #login-dp .help-block{
-            font-size:12px    
-        }
-        #login-dp .bottom{
-            background-color:rgba(255,255,255,.8);
-            border-top:1px solid #ddd;
-            clear:both;
-            padding:14px;
-        }
-        #login-dp .social-buttons{
-            margin:12px 0    
-        }
-        #login-dp .social-buttons a{
-            width: 49%;
-        }
-        #login-dp .form-group {
-            margin-bottom: 10px;
-        }
-        .btn-fb{
-            color: #fff;
-            background-color:#3b5998;
-        }
-        .btn-fb:hover{
-            color: #fff;
-            background-color:#496ebc 
-        }
-        .btn-tw{
-            color: #fff;
-            background-color:#55acee;
-        }
-        .btn-tw:hover{
-            color: #fff;
-            background-color:#59b5fa;
-        }
-        @media(max-width:768px){
+            @media (max-width: 786px) {
+                .fcontent{
+                    display:flex;
+                }
+            }
             #login-dp{
-                background-color: inherit;
-                color: #fff;
+                min-width: 250px;
+                padding: 14px 14px 0;
+                overflow:hidden;
+                background-color:rgba(255,255,255,.8);
+            }
+            #login-dp .help-block{
+                font-size:12px
             }
             #login-dp .bottom{
-                background-color: inherit;
-                border-top:0 none;
+                background-color:rgba(255,255,255,.8);
+                border-top:1px solid #ddd;
+                clear:both;
+                padding:14px;
             }
-        }
-    </style>
+            #login-dp .social-buttons{
+                margin:12px 0
+            }
+            #login-dp .social-buttons a{
+                width: 49%;
+            }
+            #login-dp .form-group {
+                margin-bottom: 10px;
+            }
+            .btn-fb{
+                color: #fff;
+                background-color:#3b5998;
+            }
+            .btn-fb:hover{
+                color: #fff;
+                background-color:#496ebc
+            }
+            .btn-tw{
+                color: #fff;
+                background-color:#55acee;
+            }
+            .btn-tw:hover{
+                color: #fff;
+                background-color:#59b5fa;
+            }
+            @media(max-width:768px){
+                #login-dp{
+                    background-color: inherit;
+                    color: #fff;
+                }
+                #login-dp .bottom{
+                    background-color: inherit;
+                    border-top:0 none;
+                }
+            }
+        </style>
+    </head>
+    <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: rgb(40,86,141); border:1px solid rgb(40,86,141);">
         <div class="container">
             <div class="navbar-header">
@@ -100,7 +101,7 @@
                 <a class="navbar-brand" href="{% url 'travel:main' %}" style="color:white;font-size:20px;"><img style="width:26px; display:inline; height:26px; margin-right:9px; margin-top:-3px;" src="{% static 'img/logo1.jpeg' %}">Todays friend
                     <a href="https://www.instagram.com/todaysfriends/"><img style="margin-left: 15px;width:23px; display:inline; height:23px; margin-top:15px;" src="{% static 'img/instar.png' %}"></a>
                     <a href="https://www.facebook.com/Free-tour-in-Korea-by-Todaysfriend-216333222470217/?ref=bookmarks"><img style="margin-left:5px;width:23px; display:inline; height:23px; margin-top:15px;" src="{% static 'img/face.png' %}"></a>
-                    <a href="https://www.youtube.com/channel/UCX4u_oHkdl9ofYd3DqOYV6Q"><img style="margin-left: 5px;width:23px; display:inline; height:23px; margin-top:15px;" src="{% static 'img/youtube.jpeg' %}"></a>
+                    <a href="https://www.youtube.com/channel/UCX4u_oHkdl9ofYd3DqOYV6Q"><img style="margin-left: 5px;width:23px; display:inline; height:23px; margin-top:15px;" src="{% static 'img/youtube.png' %}"></a>
 
                 </a>
             </div>

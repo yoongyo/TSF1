@@ -1,8 +1,11 @@
 from django.db import models
 import sys
 sys.path.append('..')
-from travel.models import Country, SNS
+from travel.models import SNS
 
+import sys
+sys.path.append('..')
+from accounts.models import Country
 
 SEX = (
     ('Man', 'Man'),

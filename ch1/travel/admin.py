@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import City, Post, Country, Language, TypeOfTour, SNS, Booking, Time, Duration
+from .models import City, Post, Language, TypeOfTour, SNS, Booking, Time, Duration
 from .forms import BookMForm, PostMForm
 
 
@@ -13,10 +13,6 @@ class LaguageAdmin(admin.ModelAdmin):
 class TypeOfTourAdmin(admin.ModelAdmin):
     list_display = ['type']
 
-class CountryAdmin(admin.ModelAdmin):
-    list_display = ['name']
-    form = BookMForm
-
 class CityAdmin(admin.ModelAdmin):
     list_display = ['city']
 
@@ -26,7 +22,6 @@ class TimeAdmin(admin.ModelAdmin):
 class DurationAdmin(admin.ModelAdmin):
     list_display = ['duration']
 
-admin.site.register(Country, CountryAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Language, LaguageAdmin)
 admin.site.register(TypeOfTour, TypeOfTourAdmin)

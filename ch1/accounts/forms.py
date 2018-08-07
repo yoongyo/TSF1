@@ -2,6 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import password_validation
+
+from django.forms import ModelMultipleChoiceField
+
 from .models import Profile, Country, Language
 from django.contrib.auth.forms import AuthenticationForm
 from .widgets import AutoCompleteSelect, CounterTextInput
@@ -9,6 +12,7 @@ import unicodedata
 from django.core.validators import validate_email
 from .models import Profile
 from .widgets import AutoCompleteSelect, DatePickerWidget
+from django_select2.forms import ModelSelect2MultipleWidget
 
 class SignupForm(UserCreationForm):
 
@@ -113,17 +117,24 @@ class ProfileMForm(forms.ModelForm):
                 'class':'form-control',
                 'autocomplete': 'off'
             }),
-            'visitedCountry':AutoCompleteSelect(attrs={
-                'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control js-example-basic-multiple',
-                'dependent_fields': {'field1': 'field1', 'field2': 'field2'},
-                'multiple': 'multiple',
-                'name': 'states[]'
-            }),
-            'nextCountry':AutoCompleteSelect(attrs={
-                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
-            }),
+            'visitedCountry': ModelSelect2MultipleWidget(
+                model=Country,
+                search_fields=['country__icontains'],
+                attrs = {
+                    'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
+                    'class':'form-control js-example-basic-multiple',
+                    'multiple': 'multiple',
+                }
+            ),
+            'nextCountry': ModelSelect2MultipleWidget(
+                model=Country,
+                search_fields=['country__icontains'],
+                attrs = {
+                    'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
+                    'class':'form-control js-example-basic-multiple',
+                    'multiple': 'multiple',
+                }
+            ),
             'interest': forms.TextInput(attrs={
                 'style': 'height:27px; margin-top:4px; border: 1px solid gray;',
                 'class': 'form-control',

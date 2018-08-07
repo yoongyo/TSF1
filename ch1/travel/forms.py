@@ -1,7 +1,6 @@
 from .models import Post, Country, TypeOfTour, City, Language, SNS, Booking
 from django import forms
 from .widgets import DatePickerWidget, CounterTextInput, AutoCompleteSelect,LocationWidget, MultiDatePicker, BookingDatePickerWidget
-
 from django.core.urlresolvers import reverse_lazy
 import sys
 sys.path.append('..')
@@ -18,8 +17,8 @@ class PostMForm(forms.ModelForm):
             'Country',
             'City',
             'Language',
-            'DetailContent',
             'BriefContent',
+            'DetailContent',
             'HashTag',
             'MeetingPoint',
             'MeetingTime',

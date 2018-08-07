@@ -56,13 +56,18 @@ def profile(request):
     post = Post.objects.all()
     post = post.filter(user=request.user)
     bk = Booking.objects.filter(content__user=request.user)
-
+    for i in pf:
+        z = i.nextCountry.all()
+    for i in pf:
+        k = i.visitedCountry.all()
 
 
     return render(request, 'accounts/profile.html',{
         'profiles': pf,
         'list': post,
         'bk': bk,
+        'k' : k,
+        'z' : z,
     })
 
 
@@ -112,3 +117,38 @@ def profileEdit(request):
     return render(request, 'accounts/profile_edit.html', {
         'form':form,
     })
+
+import requests
+from bs4 import BeautifulSoup
+import sqlite3
+import urllib.request
+
+def country(request):
+    url = 'https://en.wikipedia.org/wiki/List_of_sovereign_states'
+
+    html = requests.get(url).text
+
+    soup = BeautifulSoup(html,'html.parser')
+
+    nationayliy = soup.select('b .flagicon img')
+    country = soup.select('b .flagicon + a')
+    m=[]
+    for i in country:
+        l = i.text
+        m.append(l)
+
+    conn = sqlite3.connect('/Users/javis/Desktop/TFS-master/ch1/mysite/db44.sqlite3')
+    curs = conn.cursor()
+
+    k=0
+    http = 'https:'
+    for j, i in enumerate(nationayliy):
+        image = i.get('src')
+        img = http + image
+        urllib.request.urlretrieve(img, '/home/todayfriend/TSF1/ch1/mysite/mysite/media/{}.png'.format(j))
+        curs.execute('insert into accounts_country values ("{}","{}","{}.png")'.format(k, m[k], k))
+        k = k+1
+
+    conn.commit()
+    conn.close()
+    return render(request, 'accounts/country.html')

@@ -1,7 +1,7 @@
 {
   "django": {
     "allowed_hosts": [
-      "todaysfriend.pythonanywhere.com",
+      "todayfriend.pythonanywhere.com",
       "127.0.0.1"
     ]
   }

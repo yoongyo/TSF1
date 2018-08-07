@@ -34,11 +34,7 @@ def local_list(request):
 
 def local_detail(request, City):
     queryset = Post.objects.all()
-    path = request.path
-    print(path)
-    filter = path.split('/')[3]
-    print(filter)
-    qs = queryset.filter(City__city=filter, confirm='True')
+    qs = queryset.filter(City__city=City, confirm='True')
     return render(request, 'travel/local_detail.html',{
         'local_list': qs
     })
@@ -47,12 +43,9 @@ def local_detail(request, City):
 def local_detail_form(request, City, pk):
     queryset = Post.objects.all()
 
-    path = request.path
-    print(path)
-    filter = path.split('/')[4]
-    print(filter)
-    qs = queryset.filter(pk=filter)
-    qs1 = Post.objects.get(pk=filter)
+
+    qs = queryset.filter(pk=pk)
+    qs1 = Post.objects.get(pk=pk)
     pf = models.Profile.objects.all()
     pf = pf.filter(user=qs1.user)
     FY, FM, FD = str(qs1.SeasonFrom).split('-')
@@ -68,6 +61,11 @@ def local_detail_form(request, City, pk):
         a[1] = str(int(a[1])-1)
         s = ','.join(a)
         b.append(s)
+    for i in pf:
+        z = i.nextCountry.all()
+    for i in pf:
+        k = i.visitedCountry.all()
+    print(qs1.Map)
     return render(request, 'travel/local_detail_form.html',{
         'local_detail': qs,
         'filter': filter,
@@ -85,6 +83,8 @@ def local_detail_form(request, City, pk):
         'H1': H1,
         'M1': M1,
         'b': b,
+        'z': z,
+        'k': k,
     })
 
 
@@ -137,11 +137,9 @@ def booking(request, City, pk):
     else:
         form = BookMForm()
 
-    path = request.path
-    filter = path.split('/')[4]
-    qs1 = Post.objects.get(pk=filter)
+    qs1 = Post.objects.get(pk=pk)
     post = Post.objects.all()
-    post = post.filter(pk=filter)
+    post = post.filter(pk=pk)
     l = len(qs1.NotDate.split(','))
     b=[]
     for i in range(l):

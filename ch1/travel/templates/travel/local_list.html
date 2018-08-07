@@ -19,19 +19,21 @@
                 <article class="box">
                     <a href="{% url 'travel:local_detail_form' i.City i.pk %}">
                         <figure class="col-md-6">
-                        <img src="{{ i.img.url }}" style="max-height:140px; width:100%">
+                        <img src="{{ i.img.url }}" style="height:140px; width:100%">
                         <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
                         </figure>
-                        <div class="col-md-6">
-                            <h3>{{ i.title }}</h3>
+                        <div class="col-md-6" style="height:166px;">
+                            <h3 style="margin:0px; margin-top:4px; height:63px;">{{ i.title }}</h3>
                             <br>
-                            {{ i.Price}}
-                            <br>
-                            {{ i.Duration}}
-                            <br>
-                            {{ i.Language }}
-                            <br>
-                            {{ i.HashTag }}
+                            <div>
+                                {{ i.Price}}
+                                <br>
+                                {{ i.Duration}}
+                                <br>
+                                {{ i.Language }}
+                                <br>
+                                {{ i.HashTag }}
+                            </div>
                         </div>
 
                     </a>

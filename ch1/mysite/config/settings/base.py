@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'Booking',
     'Personalized',
-    # 캘린더 스캐줄 표
+    'Rating',
+    'imagekit',
+    'django_select2',
     # 로그인 부분
     'django.contrib.sites',
     'allauth',
@@ -167,3 +169,6 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
+
+
+GOOGLE_API_KEY = 'AIzaSyBJlyU9z-Iw3444-WAiDYPHNc-fKsj51Bc'

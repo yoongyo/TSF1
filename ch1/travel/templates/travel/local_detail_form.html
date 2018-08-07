@@ -2,20 +2,20 @@
 
 {% block content %}
 <head>
+
     {% load static %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
     <!-- 이미지 슬라이드 -->
     <link rel="stylesheet"  href="{% static 'css/lightslider.css' %}"/>
     <script src="{% static 'js/lightslider.min.js' %}"></script>
 
     <!-- 캘린더 -->
-    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
     <link rel="stylesheet" href="{% static 'css/fullcalendar.css' %}" type="text/css">
-    <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.js"></script>-->
-    <!--<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>-->
     <script type="text/javascript" src="{% static 'js/fullcalendar.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/gcal.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.youtubepopup.min.js' %}"></script>
 
+    <!-- youtube -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/YouTubePopUp.css' %}">
     <script type="text/javascript" src="{% static 'js/YouTubePopUp.jquery.js' %}"></script>
     <script type="text/javascript">
@@ -145,9 +145,8 @@
 
 
     <!-- 이미지 슬라이드-->
+
     {% load static %}
-
-
     <style>
     	ul{
 			list-style: none outside none;
@@ -165,13 +164,45 @@
 		    padding: 70px 0;
 		}
 		li img{
-		    width:100%;
-		    height:100%;
+		    height:407px;
+		    width: 661.66px;
+		}
+		.lSPager.lSGallery{
 		}
     </style>
 
-</head>
+    <!-- 구글 맵-->
+    <style>
+        .post-map {
+            height:300px;
+            width:600px;;
+        }
+    </style>
+    <script>
+    {% for post in local_detail %}
+    $(function() {
+       var lat = {{ post.lat }}
+       var lng = {{ post.lng }}
+       var myLatLng = {lat: lat, lng: lng};
+       var container = $('.post-map')[0];
+       var map = new google.maps.Map(container, {
+          zoom: 15,
+          center: myLatLng
+        });
 
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hello World!'
+        });
+    });
+    {% endfor %}
+    </script>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJlyU9z-Iw3444-WAiDYPHNc-fKsj51Bc">
+    </script>
+
+</head>
 <body>
 {% for i in local_detail %}
 <div class="container">
@@ -186,31 +217,30 @@
                     <h3>{{ i.Tourtype.img }}{{ i.Tourtype }}</h3>
                 </div>
             </div>
-
+            <!-- 이미지 슬라이드 -->
+            {% load imagekit %}
             <div class="row">
                 <div class="col-md-12">
                     <div class="demo">
                         <div class="item">
                             <div class="clearfix" style="width:100%">
-                                <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-
-                                    <li data-thumb="{% static 'img/img3.jpeg' %}">
-                                        <img width="100%" src="{% static 'img/img3.jpeg' %}"/>
+                                <ul id="image-gallery" class="gallery list-unstyled cS-hidden" style="width:35px; height:35px;">
+                                    <li data-thumb="{% static 'img/img3.jpeg' %}" style="width:30px !important;">
+                                        <img src="{% static 'img/img3.jpeg' %}"/>
                                     </li>
                                     <li data-thumb="{% static 'img/dma.jpeg' %}">
                                         <img src="{% static 'img/dma.jpeg' %}"/>
                                     </li>
                                     <li data-thumb="{{ i.img.url }}">
-                                        <img height="100%" src="{{ i.img.url }}"/>
+                                        <img src="{{ i.img.url }}"/>
                                     </li>
-
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <br>
+
             <br>
             <div class="row">
                 <div class="col-md-12">
@@ -236,16 +266,16 @@
                                 6. Includes : <br>
                                 {{ i.Price_include }}
                             </div>
-                            <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
+                            <div style="border:2px solid rgb(49,86,137); padding:7px;">
                                 7. Meeting Point: {{ i.MeetingPoint}}
                             </div>
+                            <div style="margin-bottom:15px; width:100%;" class="post-map"></div>
                             <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
                                 8. Direction : {{ i.Direction }}
                             </div>
                             <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
                                 9.Thing to Note : {{ i.GuestInfo }}
                             </div>
-
                     <!--</div>-->
                 </div>
             </div>
@@ -253,9 +283,9 @@
         <div class="col-md-5">
             <div class="col-md-12" style="border: 2px solid rgb(49,86,137)">
                     <div style="width: 380px; border: 1px solid black; margin: 25px 0; padding:20px;">
-                        <a class="bla-1" href="https://www.youtube.com/watch?v=3qyhgV0Zew0">Profile Video</a>
-                        <h3>
                         {% for profile in profiles %}
+                        <a class="bla-1" href="{{ profile.video }}">Profile Video</a>
+                        <h3>
                         {% if profile.img %}
                             <img style="margin-right:20px; width:100px; height:100px;"src="{{ profile.img.url }}">
                         {% endif %}
@@ -264,8 +294,8 @@
                         <br>
                         <p style="font-size: 20px;">Laguage : {{ profile.language }}</p><br>
                         <p style="font-size: 20px;">Major: {{ profile.major }}</p><br>
-                        <p style="font-size: 20px; margin-bottom:15px;">Visited Country : {{ profile.visitedCountry }}</p><br>
-                        <p style="font-size: 20px; margin-bottom:15px;">Next travel : {{ profile.nextCountry }}</p><br>
+                        <p style="font-size: 20px; margin-bottom:15px;">Visited Country : {% for j in k %} <img style="height:17px;width:24px" src="{{ j.image.url }}"> {% endfor %}</p><br>
+                        <p style="font-size: 20px; margin-bottom:15px;">Next travel : {% for k in z %} <img style="width:24px; height:17px" src="{{ k.image.url|default:'Empty' }}"> {% endfor %}</p><br>
                         <p style="font-size: 20px; margin-bottom:15px;">Interest : {{ profile.interest }}</p><br>
                         {% endfor %}
                     </div>
@@ -277,6 +307,7 @@
         </div>
     </div>
 </div>
+
 <script>
     // 이미지 슬라이드
     $(document).ready(function() {
@@ -290,16 +321,15 @@
             item:1,
             thumbItem:9,
             slideMargin: 0,
-            speed:500,
-            auto:true,
-            loop:true,
+            speed:1000,
+            auto:false,
+            loop:false,
             onSliderLoad: function() {
             $('#image-gallery').removeClass('cS-hidden');
             }
         });
 	});
 </script>
-
 
 </body>
 {% endfor %}

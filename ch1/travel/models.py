@@ -8,6 +8,9 @@ import sys
 sys.path.append('..')
 from accounts import models as pd
 
+import sys
+sys.path.append('..')
+from accounts.models import Country
 
 
 class TypeOfTour(models.Model):
@@ -17,12 +20,7 @@ class TypeOfTour(models.Model):
     def __str__(self):
         return self.type
 
-class Country(models.Model):
-    name = models.CharField(max_length=20)
-    image = models.ImageField()
 
-    def __str__(self):
-        return self.name
 
 class City(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
@@ -66,16 +64,16 @@ class Post(models.Model):
     # Basic Infomation
     title = models.CharField(max_length=30)
     Tourtype = models.ForeignKey(TypeOfTour, on_delete=models.CASCADE)
-    Country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    Country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='travel_country')
     City = models.ForeignKey(City, on_delete=models.CASCADE)
     Language = models.ForeignKey(Language, on_delete=models.CASCADE)
     DetailContent = models.CharField(max_length=1200, help_text='당신이 만든 local 여행에 대한 설명을 자유롭게 작성해 주세요.<br>Tip. 당신의 Tour만이 가지고 있는 특징에 대해 설명해주세요. 외국인은 언제나 local다움과 funny한 상품을 찾고 있습니다.')
     BriefContent = models.TextField(max_length=250)
-    HashTag = models.CharField(max_length=20)
+    HashTag = models.CharField(max_length=100)
     img = models.ImageField(blank=True, null=True)
 
     # Course Infomation
-    MeetingPoint = models.CharField(max_length=50)
+    MeetingPoint = models.CharField(max_length=130)
     MeetingTime = models.ForeignKey(Time)
     Map = models.CharField(max_length=140)
     Direction = models.CharField(max_length=200)
@@ -83,7 +81,7 @@ class Post(models.Model):
 
     CourseName = models.CharField(max_length=40)
     DurationCourse = models.CharField(max_length=80)
-    BriefCourse = models.CharField(max_length=1000)
+    BriefCourse = models.CharField(max_length=250)
     Photography = models.ImageField(blank=True, null=True)
 
 
@@ -115,6 +113,19 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def lng(self):
+        if self.Map:
+            return self.Map.split(',')[1]
+        return None
+
+    @property
+    def lat(self):
+        if self.Map:
+            return self.Map.split(',')[0]
+        return None
+
+
     # def get_absolute_url(self):
         # return reverse('travel:local_detail_form', args=[self.City, self.name])
 
@@ -141,6 +152,7 @@ class Booking(models.Model):
 
     def get_absolute_url(self):
         return reverse('travel:bookingcomplete', args=[self.content__City, self.content_pk])
+
 
 
 

@@ -11,11 +11,12 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url(r'^travel/', include('travel.urls', namespace='travel')),
+    url(r'^', include('travel.urls', namespace='travel')),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^Personalized/', include('Personalized.urls', namespace='Personalized')),
     url(r'^Booking/', include('Booking.urls', namespace='Booking')),
+    url(r'^select2/', include('django_select2.urls')),
 ]
 
 

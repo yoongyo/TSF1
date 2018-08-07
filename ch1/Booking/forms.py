@@ -1,7 +1,9 @@
 from django import forms
-from .models import Language,Nationality,SNS,Booking
+from .models import Language,SNS,Booking
 from .widgets import DatePickerWidget, CounterTextInput, AutoCompleteSelect
-
+import sys
+sys.path.append('..')
+from accounts.models import Country
 
 class BookMForm(forms.ModelForm):
     class Meta:
@@ -150,7 +152,7 @@ class BookForm(forms.Form):
         )
     )
     Nationality = forms.ModelChoiceField(
-        queryset=Nationality.objects.all(),
+        queryset=Country.objects.all(),
         widget=forms.Select(
             attrs={
                 'style': 'border:1px solid gray;height:27px;margin-top:3px;',
