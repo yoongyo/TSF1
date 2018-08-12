@@ -3,7 +3,7 @@
 {% block content %}
 {% load static %}
 
-<img src="{% static 'img/top.jpg' %}" width="100%" height="300">
+<img src="{% static 'img/Tourprogram.jpg' %}" width="100%" height="200px">
 
 <div class="jumbotron" style="padding-top:0; padding-bottom:5px;">
     <div class="container">
@@ -19,14 +19,18 @@
                 <article class="box">
                     <a href="{% url 'travel:local_detail_form' i.City i.pk %}">
                         <figure class="col-md-6">
+                            {% if i.img %}
                         <img src="{{ i.img.url }}" style="height:140px; width:100%">
+                            {% else %}
+                            <img src="{% static 'img/logo1.jpeg' %}" style="height:140px; width:100%">
+                            {% endif %}
                         <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
                         </figure>
                         <div class="col-md-6" style="height:166px;">
                             <h3 style="margin:0px; margin-top:4px; height:63px;">{{ i.title }}</h3>
                             <br>
                             <div>
-                                {{ i.Price}}
+                                ₩{{ i.Price}}
                                 <br>
                                 {{ i.Duration}}
                                 <br>

@@ -2,7 +2,7 @@
 
 {% block content %}
 {% load static %}
-<img src="{% static 'img/top.jpg' %}" width="100%" height="300">
+<img src="{% static 'img/Personalized.JPG' %}" width="100%" height="200px">
 
 <div class="jumbotron" style="padding-top:0; padding-bottom:5px;">
     <div class="container">
@@ -27,20 +27,46 @@
                 <div class="col-md-5" style="border: 1px solid black; padding:8px; border-radius:5px;">
                     <p style="margin: 0 7px;">Name : {{ i.FirstName }} {{ i.LastName }}</p>
                     <p style="margin: 0 7px;">City : {{ i.City }}</p>
-                    <p style="margin: 0 7px;">Guest : {{ i.Guest }}</p>
+                    <p style="margin: 0 7px;">Guest number : {{ i.Guest }}</p>
                     <p style="margin: 0 7px;">Language : {{ i.Language }}</p>
                     <p style="margin: 0 7px;">Gender : {{ i.Gender }}</p>
-                    <p style="margin: 0 7px;">Price : {{ i.Price }}</p>
+                    <p style="margin: 0 7px;">Price : ${{ i.Price }} (per person)</p>
                     <p style="margin: 0 7px;">Date : {{ i.Date }}</p>
                     <div class="col-md-6" style="margin-top:8px;">
-                        <a class="btn btn-primary" style="width:70px; height:35px;">
-                            <span style="font-size:16px;">Modify</span>
+                        {% if i.personalized %}
+                        {% if i.personalized.confirm %}
+                        <a href="{% url 'Personalized:detail' i.personalized.pk %}" class="btn btn-primary" style="width:80px; height:35px;">
+                            <span style="font-size:16px;">Product</span>
                         </a>
-                    </div>
-                    <div class="col-md-6" style="margin-top:8px;">
-                        <a class="btn btn-primary" style="width:70px; height:35px;">
+                        {% else %}
+                        <a href="{% url 'Personalized:new' i.pk %}" class="btn btn-primary" style="width:80px; height:35px;">
                             <span style="font-size:16px;">Try</span>
                         </a>
+                        {% endif %}
+                        {% else %}
+                        <a href="{% url 'Personalized:new' i.pk %}" class="btn btn-primary" style="width:80px; height:35px;">
+                            <span style="font-size:16px;">Try</span>
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6" style="margin-top:8px;">
+                        <a href="{% url 'Personalized:Personalized_edit' i.pk %}" id="btn{{i.pk}}" class="btn btn-primary" style="width:80px; height:35px;">
+                            <span style="font-size:16px;">Modify</span>
+                        </a>
+                        <script>
+                        $(function() {
+                            $("#btn{{ i.pk }}").on("click", function(e) {
+                                var password = prompt("password?","");
+                                if (password == {{ i.Password }}){
+
+                                }
+                                else{
+                                    e.preventDefault();
+                                    alert("not password");
+                                }
+                            });
+                        });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -48,6 +74,7 @@
         {% endfor %}
     </div>
 </div>
+
 
 
 {% endblock %}

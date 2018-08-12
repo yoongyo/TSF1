@@ -14,6 +14,7 @@ from .models import Profile
 import sys
 sys.path.append('..')
 from travel.models import Post, Booking
+from Personalized.models import PersonalizedTour
 
 
 
@@ -33,21 +34,6 @@ class SignupView(CreateView):
 signup = SignupView.as_view()
 
 
-def skignup(request):
-    if request.method =='POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-
-            auth_login(request, user)  # 로그인 처리
-
-
-            return redirect('accounts:profile')
-        else:
-            form = SignupForm()
-        return render(request, 'accounts/signup_form.html',{
-            'form':form,
-        })
 
 @login_required     # settings.LOGIN_URL
 def profile(request):
@@ -60,14 +46,26 @@ def profile(request):
         z = i.nextCountry.all()
     for i in pf:
         k = i.visitedCountry.all()
-
+    for j in post:
+        s = str(j.SeasonFrom)
+        s = s.split('-')
+        s = ','.join(s)
+    for j in post:
+        n = str(j.SeasonTo)
+        n = n.split('-')
+        n = ','.join(s)
+    personal = PersonalizedTour.objects.all()
+    ps = personal.filter(user=request.user)
 
     return render(request, 'accounts/profile.html',{
         'profiles': pf,
         'list': post,
-        'bk': bk,
-        'k' : k,
-        'z' : z,
+        'bk' : bk,
+        'k': k,
+        'z': z,
+        's': s,
+        'n': n,
+        'ps':ps,
     })
 
 
@@ -84,7 +82,7 @@ def login(request):
 
     return auth_login(request,
         authentication_form=LoginForm,
-        template_name='accounts/login_form.html',
+        template_name='accounts/login.html',
         extra_context={'providers': providers})
 
 def new_profile(request):
@@ -137,7 +135,7 @@ def country(request):
         l = i.text
         m.append(l)
 
-    conn = sqlite3.connect('/Users/javis/Desktop/TFS-master/ch1/mysite/db44.sqlite3')
+    conn = sqlite3.connect('/Users/javis/Desktop/TFS-master/ch1/mysite/db12.sqlite3')
     curs = conn.cursor()
 
     k=0
@@ -145,7 +143,7 @@ def country(request):
     for j, i in enumerate(nationayliy):
         image = i.get('src')
         img = http + image
-        urllib.request.urlretrieve(img, '/home/todayfriend/TSF1/ch1/mysite/mysite/media/{}.png'.format(j))
+        urllib.request.urlretrieve(img, '/Users/javis/Desktop/TFS-master/ch1/mysite/mysite/media/{}.png'.format(j))
         curs.execute('insert into accounts_country values ("{}","{}","{}.png")'.format(k, m[k], k))
         k = k+1
 

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <title>Todays friend</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+        <!-- navbar_top -->
+        <style>
+            .navbar-default{
+                background-color: #0F3A72;
+            }
+            .container-fluid  ul  li{
+                color: white;
+            }
+
+            @media (min-width: 768px){
+                /* 큰 화면 전용 설정 */
+                .container-fluid{
+                    padding:0 20%;
+                }
+                .fcontent {
+                    padding:0 20%;
+                    display: flex;
+                }
+            }
+            @media (max-width: 786px) {
+                .fcontent{
+                    display:flex;
+                }
+            }
+            #login-dp{
+                min-width: 250px;
+                padding: 14px 14px 0;
+                overflow:hidden;
+                background-color:rgba(255,255,255,.8);
+            }
+            #login-dp .help-block{
+                font-size:12px
+            }
+            #login-dp .bottom{
+                background-color:rgba(255,255,255,.8);
+                border-top:1px solid #ddd;
+                clear:both;
+                padding:14px;
+            }
+            #login-dp .social-buttons{
+                margin:12px 0
+            }
+            #login-dp .social-buttons a{
+                width: 49%;
+            }
+            #login-dp .form-group {
+                margin-bottom: 10px;
+            }
+            .btn-fb{
+                color: #fff;
+                background-color:#3b5998;
+            }
+            .btn-fb:hover{
+                color: #fff;
+                background-color:#496ebc
+            }
+            .btn-tw{
+                color: #fff;
+                background-color:#55acee;
+            }
+            .btn-tw:hover{
+                color: #fff;
+                background-color:#59b5fa;
+            }
+            @media(max-width:768px){
+                #login-dp{
+                    background-color: inherit;
+                    color: #fff;
+                }
+                #login-dp .bottom{
+                    background-color: inherit;
+                    border-top:0 none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+    <nav>
+        <div class="container">
+            <div style="height:35px;">
+                <div style="float:right;margin-top:5px;">
+                <a href="https://www.instagram.com/todaysfriends/"><img width="30px" height="30px" src="{% static 'img/btn/7.png' %}"></>
+                <a href="https://www.youtube.com/channel/UCX4u_oHkdl9ofYd3DqOYV6Q"><img width="30px" height="30px" src="{% static 'img/btn/6.png' %}"></a>
+                <a href="https://www.facebook.com/Free-tour-in-Korea-by-Todaysfriend-216333222470217/?ref=bookmarks"><img width="30px" height="30px" src="{% static 'img/btn/8.png' %}"></a>
+                </div>
+            </div>
+            <div style="display:flex;">
+                <div style="margin-top:40px;width:100%; ">
+                    <a href="{% url 'travel:local_list' %}"><img width="38%" height="110px" style="margin-right:60px;" src="{% static 'img/btn/111.png' %}"></a>
+                    <a href="{% url 'Personalized:list' %}"><img width="38%" height="110px" src="{% static 'img/btn/222.png' %}"></a>
+                </div>
+
+                <div style="margin:0 auto; display:inline-block; width:50%">
+                    <div style="position: relative; width:100%" >
+                        <a href="{% url 'travel:main' %}"><img width="100%" height="90px" src="{% static 'img/btn/11.png' %}"></a>
+                    </div>
+                    <div style="margin-top:30px;position:absolute;top:100px;right:45.8%">
+                    <a href="{% url 'travel:main' %}" style="margin:0 auto;"><img width="125px" height="125px" src="{% static 'img/btn/center.png' %}"></a>
+                    </div>
+                </div>
+
+                <div style="margin-top:40px;  width:100%">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'accounts:profile' %}"><img width="38%" height="110px" style="float:right;" src="{% static 'img/btn/555.png' %}"></a>
+                    {% else %}
+                    <a href="{% url 'accounts:login' %}?next={{ request.path }}"><img width="38%" height="110px" style="" src="{% static 'img/btn/444.png' %}"></a>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'accounts:new_profile' %}"><img style="margin-right:60px;float:right;" width="38%" height="110px" src="{% static 'img/btn/333.png' %}"></a>
+                    {% else %}
+                    <a href="{% url 'accounts:login' %}?next={% url 'accounts:new_profile' %}"><img width="38%" height="110px" src="{% static 'img/btn/333.png' %}"></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div style="height:10px;"></div>
+    {% block content %}
+    {% endblock %}
+    <footer style="background-color:rgb(181, 184, 191)">
+        <div class="container">
+            <br>
+            <div class="row" style="margin:0 auto">
+                <p class="text-center">
+                    회사소개 &nbsp; |&emsp;
+                    이용약관 &nbsp; |&emsp;
+                    개인정보 처리방침 &nbsp; |&emsp;
+                    위치기반 서비스 이용약관 &nbsp; |&emsp;
+                    중개사 사이트 바로가기
+                </p>
+            </div>
+            <br>
+            <p class="text-center">상호 : Tryground&emsp; 대표 : 김희인 &emsp;주소: 경기도 광명시 소하동 1391-4번지(14328)</p>
+            <p class="text-center">서비스 이용문의 : 010-5016-1069 &emsp;&emsp;이메일 : gmldls420@naver.com </p>
+            <br>
+            <br>
+            <p class="text-center">
+                Copyright @ Tryground. All Right Reserved.
+            </p>
+        </div>
+    </footer>
+    {% load static %}
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

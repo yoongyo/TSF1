@@ -1,4 +1,6 @@
 from django import forms
+from django.shortcuts import render
+from .models import Post
 
 
 class BookingDatePickerWidget(forms.DateInput):
@@ -76,6 +78,9 @@ class MultiDatePicker(forms.TextInput):
         js = [
              '//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js'
         ]
+
+class MultiUpload(forms.ClearableFileInput):
+    template_name = 'widgets/MultiUpload.html'
 
 
 

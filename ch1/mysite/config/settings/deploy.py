@@ -23,5 +23,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mysite', 'media')
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'mysite', 'staticfiles')
 STATICFILES_DIRS = [
- os.path.join(BASE_DIR,  'mysite','static'),
+ os.path.join(BASE_DIR, 'static'),
 ]

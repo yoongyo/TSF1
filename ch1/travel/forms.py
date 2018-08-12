@@ -1,6 +1,6 @@
 from .models import Post, Country, TypeOfTour, City, Language, SNS, Booking
 from django import forms
-from .widgets import DatePickerWidget, CounterTextInput, AutoCompleteSelect,LocationWidget, MultiDatePicker, BookingDatePickerWidget
+from .widgets import DatePickerWidget, CounterTextInput, AutoCompleteSelect,LocationWidget, MultiDatePicker, BookingDatePickerWidget,MultiUpload
 from django.core.urlresolvers import reverse_lazy
 import sys
 sys.path.append('..')
@@ -24,7 +24,6 @@ class PostMForm(forms.ModelForm):
             'MeetingTime',
             'Map',
             'Direction',
-            'CourseName',
             'Duration',
             'Price',
             'Minimum',
@@ -32,13 +31,9 @@ class PostMForm(forms.ModelForm):
             'Price_include',
             'NotDate',
             'GuestInfo',
-            'img',
+            'file',
             'SeasonFrom',
             'SeasonTo',
-            'CourseName',
-            'DurationCourse',
-            'Photography',
-            'BriefCourse',
         ]
         widgets = {
             'title':forms.TextInput(
@@ -176,10 +171,14 @@ class PostMForm(forms.ModelForm):
                     'autocomplete': 'off'
                 }
             ),
-            'img': forms.ClearableFileInput(
+            'file': MultiUpload(
                 attrs={
-                    'style': 'width:100%; height:30px; margin-top:4px; border:1px solid gray;',
+                    'type': "file",
+                    'id': "pro-image",
+                    'name': "pro-image",
+                    'style' : 'display:none;',
                     'class': 'form-control',
+                    'multiple': True,
                 }
             ),
             'SeasonFrom': DatePickerWidget(
@@ -196,33 +195,6 @@ class PostMForm(forms.ModelForm):
                     'autocomplete': 'off'
                 }
             ),
-            'CourseName': forms.TextInput(
-                attrs={
-                    'style': 'width:100%; height:30px; margin-top:4px;border:1px solid gray;',
-                    'class': 'form-control',
-                    'autocomplete': 'off'
-                }
-            ),
-            'DurationCourse': forms.TextInput(
-                attrs={
-                    'style': 'width:100%; height:30px; margin-top:4px;border:1px solid gray;',
-                    'class': 'form-control',
-                    'autocomplete': 'off'
-                }
-            ),
-            'Photography': forms.ClearableFileInput(
-                attrs={
-                    'style': 'width:100%; height:30px; margin-top:4px;border:1px solid gray;',
-                    'class': 'form-control'
-                }
-            ),
-            'BriefCourse': forms.TextInput(
-                attrs={
-                    'style': 'width:100%; height:30px; margin-top:4px;border:1px solid gray;',
-                    'class': 'form-control',
-                    'autocomplete': 'off'
-                }
-            )
         }
 
     def save(self, commit=True):
@@ -303,7 +275,6 @@ class BookMForm(forms.ModelForm):
                     'style': 'border:1px solid gray;height:27px;margin-top:3px;',
                     'class': 'form-control',
                     'autocomplete': 'off',
-                    'multiple': True
                 }
             ),
             'phone': forms.TextInput(
@@ -349,3 +320,13 @@ class BookMForm(forms.ModelForm):
         post.save()
 
         return post
+
+    def clean(self):
+        cleaned_data = super(BookMForm, self).clean()
+        Email = cleaned_data.get("Email")
+        ConfirmedEmail = cleaned_data.get("ConfirmedEmail")
+
+        if Email != ConfirmedEmail:
+            raise forms.ValidationError(
+                "E-mail and confirmed E-mail does not match"
+            )

@@ -57,17 +57,18 @@
             ],
             eventColor: 'blue',
             // Event 객체에서의 지정
-            events: [
 
+            events: [
+                {% for i in bk %}
                 {
-                    title: 'i.title',
-                    start: new Date(2018,7,20),
-                    end: new Date(2018,7,21),
-                    allDay: true,
+                    title: '{{ i.content }} {{ i.Guest }}',
+                    start: new Date(2018,),
+                    end: new Date(),
+                    allDay: True,
                     textColor: 'black',
                     color: 'rgb(149,205,232)',
                 },
-
+                {% endfor %}
 
                 {
                     title: 'Not',
@@ -138,7 +139,7 @@
             <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;" >Name : {{ user.profile.name|default:'Empty' }}</div>
             <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;" >Language : {{ user.profile.language|default:'Empty' }}</div>
             <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Major : {{ user.profile.major|default:'Empty' }}</div>
-            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Visited Country : {% for j in k %} <img style="height:17px;width:24px" src="{{ j.image.url }}"> {% endfor %}</div>
+            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Visited Country : {% for j in k %} <img style="height:17px;width:24px;" src="{{ j.image.url }}"> {% endfor %}</div>
             <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Next Travel : {% for k in z %} <img style="width:24px; height:17px" src="{{ k.image.url|default:'Empty' }}"> {% endfor %}</div>
             <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Interest : {{ user.profile.interest|default:'Empty' }}</div>
             <a href="{% url 'accounts:profileEdit' %}" style="margin: 10px 120px;"class="btn btn-primary">Change Profile</a>
@@ -148,6 +149,7 @@
                 <li class="active"><a data-toggle="tab" href="#home">Your Product</a></li>
                 <li><a data-toggle="tab" href="#menu1">Your Booking</a></li>
                 <li><a data-toggle="tab" href="#menu2">Your Schedule</a></li>
+                <li><a data-toggle="tab" href="#menu3">Personalized</a></li>
             </ul>
 
             <div class="tab-content">
@@ -161,13 +163,15 @@
                                         <figure class="col-md-5" style="padding:0px">
                                             {% if i.img %}
                                             <img src="{{ i.img.url }}" style="height:120px; width:100%">
+                                            {% else %}
+                                            <img src="{% static 'img/logo1.jpeg' %}" style="height:120px; width:100%">
                                             {% endif %}
                                             <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
                                         </figure>
                                         <div class="col-md-7">
                                             <h4>{{ i.title }}</h4>
                                             <br>
-                                            {{ i.Price}}
+                                            ₩{{ i.Price}}
                                             <br>
                                             {{ i.Duration}}
                                             <br>
@@ -179,8 +183,9 @@
                                 </article>
                             </div>
                         </div>
-                        <div class="col-md-1" style="padding-top:11%">
+                        <div class="col-md-1">
                             <a href="{% url 'travel:post_edit' i.City i.pk %}" class="btn btn-primary">Modify</a>
+                            <a href="{% url 'travel:post_edit' i.City i.pk %}" class="btn btn-primary">Delete</a>
                         </div>
                     </div>
                     {% endfor %}
@@ -195,23 +200,86 @@
                                 {{ i.FirstName }}
                                 {{ i.LastName }}
                                 {{ i.Age }}
-                                <div class="collapse" id="demo">
-                                    adjfkaljfk<br>
-                                    adkfja;kfj<br>
-                                    sdfkadjl;k<br>
-                                </div>
                             </div>
 
                         </div>
                         <div class="col-md-3" style="margin:0px;padding:0px;">
-                            <button class="btn btn-primary" id="ww" data-toggle="collapse" data-target="#demo">Detail</button>
+                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">Detail</button>
                             <div class="btn btn-primary">Reject</div>
+                        </div>
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">{{ i.content }} booking</h4>
+                                </div>
+                                <div class="modal-body">
+                                  <p>First Name : {{ i.FirstName }}<br>
+                                      Last Name : {{ i.LastName }}<br>
+                                      Age : {{ i.Age }} <br>
+                                      Nationality : {{ i.Nationality }}<br>
+                                      Gender : {{ i.gender }}<br>
+                                      Language : {{ i.Language }}<br>
+                                      E-mail : {{ i.Email }}<br>
+                                      Date : {{ i.Date }}<br>
+                                      SNS : {{ i.SNS }} {{ i.SNSID }}<br>
+                                      Ting to Demand : {{ i.Demand }}<br>
+                                      Number of People : {{ i.NOP }}<br>
+                                  </p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+
+                            </div>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
+
+
                 <div style="padding:10px;" id="menu2" class="tab-pane fade">
                     <div id="calendar"></div>
+                </div>
+                <div style="padding:10px;" id="menu3" class="tab-pane fade">
+                    {% for i in ps %}
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="well clearfix" style="background-color:rgb(243,243,243); padding:10px;">
+                                <article class="box">
+                                    <a href="{% url 'Personalized:detail' i.pk %}">
+                                        <figure class="col-md-5" style="padding:0px">
+                                            {% if i.img %}
+                                            <img src="{{ i.img.url }}" style="height:120px; width:100%">
+                                            {% else %}
+                                            <img src="{% static 'img/logo1.jpeg' %}" style="height:120px; width:100%">
+                                            {% endif %}
+                                            <div style="text-align:center; background:#fff;padding:3px 10px">{{ i.Tourtype }}</div>
+                                        </figure>
+                                        <div class="col-md-7">
+                                            <h4>{{ i.title }}</h4>
+                                            <br>
+                                            ₩{{ i.Price}}
+                                            <br>
+                                            {{ i.Duration}}
+                                            <br>
+                                            {{ i.Language }}
+                                            <br>
+                                            {{ i.HashTag }}
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <a href="{% url 'travel:post_edit' i.City i.pk %}" class="btn btn-primary">Modify</a>
+                            <a href="{% url 'travel:post_edit' i.City i.pk %}" class="btn btn-primary">Delete</a>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

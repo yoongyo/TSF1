@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^Personalized/', include('Personalized.urls', namespace='Personalized')),
     url(r'^Booking/', include('Booking.urls', namespace='Booking')),
     url(r'^select2/', include('django_select2.urls')),
+    url(r'review/', include('Review.urls', namespace='Review'))
 ]
 
 

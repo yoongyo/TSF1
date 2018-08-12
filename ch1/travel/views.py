@@ -1,10 +1,16 @@
 from django.shortcuts import render, redirect,get_object_or_404
+
+from ch1 import travel
 from .forms import BookMForm,PostMForm
 from django.shortcuts import render,redirect
 from django.http import JsonResponse, HttpResponseRedirect
-from .models import Post,City,Country,Booking
+from .models import Post,Country,Booking
+from .models import City as ct
+import os
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
+from django.core.files.storage import FileSystemStorage
+
 
 import sys
 sys.path.append('..')
@@ -14,7 +20,7 @@ def main(request):
     return render(request, 'travel/_main.html')
 
 def local_list(request):
-    queryset = City.objects.all()
+    queryset = ct.objects.all()
 
     queryset1 = Post.objects.all()
 
@@ -35,8 +41,14 @@ def local_list(request):
 def local_detail(request, City):
     queryset = Post.objects.all()
     qs = queryset.filter(City__city=City, confirm='True')
+    img = ct.objects.all()
+    img = img.filter(city=City)
+    for i in img:
+        img = i.img
+        print(img.url)
     return render(request, 'travel/local_detail.html',{
-        'local_list': qs
+        'local_list': qs,
+        'img':img
     })
 
 
@@ -93,10 +105,12 @@ def post_new(request):
     if request.method == 'POST':
         form = PostMForm(request.POST, request.FILES)
         if form.is_valid():
-            post = form.save()
+            print(os.getcwd())
+            print("POST method")
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
             return redirect('travel:complete')
-        else:
-            print(form.errors)
     else:
         form = PostMForm()
     return render(request, 'travel/post_form.html', {
@@ -108,7 +122,9 @@ def post_edit(request, City, pk):
     if request.method == 'POST':
         form = PostMForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
-            post = form.save()
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
             return redirect('accounts:profile')
     else:
         form = PostMForm(instance=post)
@@ -116,10 +132,13 @@ def post_edit(request, City, pk):
         'form':form,
     })
 
+def post_delete(reuqest, City ,pk):
+    delete = get_object_or_404(pk=pk)
+    delete.delete()
+
 
 def postcomplete(request):
     return render(request, 'travel/complete.html')
-
 
 
 def booking(request, City, pk):
@@ -145,9 +164,12 @@ def booking(request, City, pk):
     for i in range(l):
         a = qs1.NotDate.split(',')[i].split('-')
         a[1] = str(int(a[1])-1)
-        s = ','.join(a)
+        s = '-'.join(a)
         b.append(s)
-    return render(request, 'travel/booking.html', {
+    print(b)
+    for i in b:
+        print(i)
+    return render(request, ['travel/booking.html','widgets/booking_date.html'], {
         'form': form,
         'post': post,
         'b': b,
@@ -178,4 +200,19 @@ def datewidget(request, City, pk):
         b.append(s)
     return render(request, 'widgets/booking_date.html', {
         'b': b,
+    })
+
+def notbooking(request, City, pk):
+    qs1 = Post.objects.get(pk=pk)
+    post = Post.objects.all()
+    post = post.filter(pk=pk)
+    l = len(qs1.NotDate.split(','))
+    b = []
+    for i in range(l):
+        a = qs1.NotDate.split(',')[i].split('-')
+        a[1] = str(int(a[1]) - 1)
+        s = ','.join(a)
+        b.append(s)
+    return render(request, 'widgets/booking_date.html', {
+        'b':b
     })

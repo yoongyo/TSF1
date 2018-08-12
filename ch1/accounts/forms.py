@@ -15,26 +15,24 @@ from .widgets import AutoCompleteSelect, DatePickerWidget
 from django_select2.forms import ModelSelect2MultipleWidget
 
 class SignupForm(UserCreationForm):
-
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].validators = [validate_email]
         self.fields['username'].help_text = '이메일 형식으로 입력 가능합니다.'
         self.fields['username'].label = '이메일'
         self.fields['username'].widget = forms.EmailInput(
-            attrs={'class':'form-control','style':'margin-top:10px;margin-bottom:14px;','placeholder':'Your Email'}
+            attrs={'class':'form-control','style':'margin-top:30px;margin-bottom:14px;','placeholder':'Your Email','autocomplete': 'off'}
 
         )
         #self.fields['password1'].validators = password_validation.password_validators_help_text_html(),
         self.fields['password1'].help_text = '비밀번호 형식에 맞게 넣어주세요'
         self.fields['password1'].widget = forms.PasswordInput(
-            attrs={'class':'form-control','style':'margin-bottom:14px;', 'placeholder':'Password'}
+            attrs={'class':'form-control','style':'margin-bottom:14px;', 'placeholder':'Password','autocomplete': 'off'}
         )
         self.fields['password2'].validators = []
         self.fields['password2'].help_text = "Enter the same password as before, for verification."
         self.fields['password2'].widget = forms.PasswordInput(
-            attrs={'class': 'form-control','style':'margin-bottom:20px;', 'placeholder':'Confirm Password'}
+            attrs={'class': 'form-control','style':'margin-bottom:20px;', 'placeholder':'Confirm Password', 'autocomplete': 'off'}
         )
 
     error_messages = {
@@ -119,7 +117,7 @@ class ProfileMForm(forms.ModelForm):
             }),
             'visitedCountry': ModelSelect2MultipleWidget(
                 model=Country,
-                search_fields=['country__icontains'],
+                search_fields=['visitedCountry__name__icontains'],
                 attrs = {
                     'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
                     'class':'form-control js-example-basic-multiple',

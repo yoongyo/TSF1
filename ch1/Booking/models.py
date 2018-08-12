@@ -19,6 +19,7 @@ class Language(models.Model):
 SEX = (
     ('Man', 'Man'),
     ('Woman', 'Woman'),
+    ('Ohter','Other'),
 )
 
 

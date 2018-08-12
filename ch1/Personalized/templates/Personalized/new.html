@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<style>
+    #wrap {
+        position: relative;
+    }
+    #wrap textarea {
+        width: 100%;
+        resize: none;
+        min-height: 130px;
+        line-height:1.6em;
+        max-height: 9em;
+    }
+    #wrap span {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+    }
+    #counter {
+      background:rgba(0,55,125,0.5);
+      border-radius: 0.5em;
+      padding: 0 .5em 0 .5em;
+      font-size: 0.75em;
+    }
+
+    #wrap1 {
+        position: relative;
+    }
+    #wrap1 textarea {
+        width: 100%;
+        resize: none;
+        min-height: 50px;
+        line-height:1.6em;
+        max-height: 9em;
+    }
+    #wrap1 span {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+    }
+    #counter1 {
+      background:rgba(0,55,125,0.5);
+      border-radius: 0.5em;
+      padding: 0 .5em 0 .5em;
+      font-size: 0.75em;
+    }
+
+</style>
+{% load static %}
+<img src="{% static 'img/Become.jpg' %}" width="100%" height="300">
+
+<div class="container">
+     <form action="" method="post" enctype="multipart/form-data">
+         {% csrf_token %}
+         <div style="background-color:rgb(242, 246, 248);">
+         <div style="border:1px solid gray; margin-top:40px; margin-bottom:40px;">
+             <div style="border-bottom:1px solid gray">
+                <h2 class="text-center" style="margin-left:20px;">Create a Prodect - 1. Basic Information</h2>
+             </div>
+
+            <div class="container" style="padding:30px;">
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-4 col-sm-11">
+                        <span>Name of tour</span>
+                        <br>
+                        {{ form.title }}
+                        {{ form.title.errors}}
+                    </div>
+                    <div class="col-md-3 col-md-offset-2 col-sm-11">
+                        <span>Type of tour</span>
+                        <br>
+                        {{ form.Tourtype }}
+                        {{ form.Tourtype.errors }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-2">
+                        <span style="margin-bottom:4px;">Country</span>
+                        <br>
+                        {{ form.Country }}
+                        {{ form.Country.errors }}
+                    </div>
+                    <div class="col-md-3 col-md-offset-1 col-sm-11">
+                        <span>City</span>
+                        <br>
+                        {{ form.City }}
+                        {{ form.City.errors }}
+                    </div>
+                    <div class="col-md-3 col-md-offset-1 col-sm-11">
+                        <span>Language</span>
+                        <br>
+                        {{ form.Language }}
+                        {{ form.Language.errors }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-11 col-sm-11">
+                        <span>Brief description of tour</span>
+                        <br>
+                        <div id="wrap1">
+                            {{ form.BriefContent }}
+                            {{ form.BriefContent.errors }}
+                            <span id="counter">###</span>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-11 col-sm-11">
+                        <span>Detailed description of tour</span>
+                        <br>
+                        <div id="wrap" style="height:130px;">
+                            {{ form.DetailContent }}
+                            {{ form.DetailContent.errors }}
+                            <span id="counter1">###</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-11 col-sm-11">
+                        <span>Hash tag <small>(당신의 여행이 가지고 있는 특징을 5~7개를 해시태그로 보여주세요.)</small></span>
+                        <br>
+                        {{ form.HashTag }}
+                        {{ form.HashTag.errors }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-11 col-sm-11">
+                        <span>Hash tag <small>(당신의 여행이 가지고 있는 특징을 5~7개를 해시태그로 보여주세요.)</small></span>
+                        <br>
+                        {{ form.img }}
+                    </div>
+                </div>
+            </div>
+            <div style="border-top:1px solid gray; border-bottom:1px solid gray">
+                <h2 class="text-center" style="margin-left:20px;">Create a Product - 2. Course Information</h2>
+            </div>
+            <div class="container" style="padding:30px;">
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-8 col-sm-11">
+                        <span>Meeting point of tour <small>(네이버에서 영어주소 이용 시 편리합니다.)</small></span>
+                        <br>
+                        {{ form.MeetingPoint }}
+                        {{ form.MeetingPoint.errors }}
+                    </div>
+                    <div class="col-md-3 col-sm-11">
+                        <span>Meeting time <small>(시작과 총 시간을 선택해 주세요.)</small></span>
+                        <br>
+                        {{ form.MeetingTime }}
+                        {{ form.MeetingTime.errors }}
+                        {{ form.Duration }}
+                        {{ form.Duration.errors }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-11 col-sm-11">
+                        <span>Map of tour <small>(지도에서 만나는 장소를 선택해 주세요.)</small></span>
+                        <br>
+                        {{ form.Map }}
+                        {{ form.Map.errors }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-11 col-sm-11">
+                        <span>Please give directions and explain how your costumers can find your activity</span>
+                        <small>(외국인이 미팅장소를 찾기 힘들 수 있습니다. 간략하게 미팅장소를 찾아오는 방법을 설명해 주세요.)</small>
+                        <br>
+                        {{ form.Direction }}
+                        {{ form.Direction.errors }}
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid gray;border-bottom:1px solid gray">
+                <h2 class="text-center" style="margin-left:20px;">Create a Prodect - 3. Price & Other Information</h2>
+            </div>
+            <div class="container" style="padding:30px;">
+                <div class="row" style="margin-bottom:30px;">
+                    <div class="col-md-3 col-sm-11">
+                        <span>Price of tour</span>
+                        <br>
+                        {{ form.Price }}
+                        {{ form.Price.errors }}
+                    </div>
+                    <div class="col-md-3 col-md-offset-1 col-sm-11">
+                        <span>Minimum number of people</span>
+                        <br>
+                        {{ form.Minimum }}
+                        {{ form.Mininum.errors }}
+                    </div>
+                    <div class="col-md-1 col-sm-11">
+                        <br>
+                        <p class="text-center" style="font-size:25px;">~</p>
+                    </div>
+                    <div class="col-md-3 col-sm-11">
+                        <span>Maximum number of people</span>
+                        <br>
+                        {{ form.Maximum }}
+                        {{ form.Maximum.errors }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:15px;">
+                    <div class="col-md-11 col-sm-11" style="margin-bottom:30px;">
+                        <span>Price included <small>(개발 상품 비용에 포함된 식사, 여행지, 체험 등 간략한 활동을 나열해 주시면 됩니다.)</small></span>
+                        <br>
+                        {{ form.Price_include }}
+                        {{ form.Price_include.errors }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:10px">
+                    <div class="col-md-4 col-sm-11" style="margin-bottom:30px;">
+                        <span>Season from</span>
+                        <br>
+                        {{ form.SeasonFrom }}
+                        {{ form.SeasonFrom.errors }}
+                    </div>
+                    <div class="col-md-1 col-sm-11">
+                        <br>
+                        <p class="text-center" style="font-size:25px;">~</p>
+                    </div>
+                    <div class="col-md-4 col-sm-11" style="margin-bottom:30px;">
+                        <span>Season To <small>(Tour를 운영하실 기간을 선택해 주세요.)</small></span>
+                        <br>
+                        {{ form.SeasonTo }}
+                        {{ form.SeasonTo.errors }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:35px">
+                    <div class="col-md-11 col-sm-11">
+                        <span>Date not allowed <small>(불가능한 날짜를 선택해주시면 해당일에 대한 예약은 진행되지 않습니다.)</small></span>
+                        <br>
+                        {{ form.media }}
+                        {{ form.NotDate }}
+                        {{ form.NotDate.errors }}
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:10px;">
+                    <div class="col-md-11 col-sm-11">
+                        <span>Please include here any additional information for your guest <small>(게스트들에게 알리고 싶거나 당부하고 싶은 내용이 있으면 작성해 주세요.)</small></span>
+                        <br>
+                        {{ form.GuestInfo }}
+                        {{ form.GuestInfo.errors }}
+                    </div>
+                </div>
+            </div>
+         </div>
+         </div>
+         <div class="center-block" style="width:200px;">
+        <input class="btn btn-primary" type="submit" style="margin-bottom:25px; float:right; width:200px; height:50px; font-size:24px;" value="완 료">
+        </div>
+     </form>
+    <script>
+        $(function() {
+              $('#brief').keyup(function (e){
+                  var content = $(this).val();
+                  $(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
+                  $('#counter').html(content.length + '/250');
+              });
+              $('#brief').keyup();
+        });
+        $(function() {
+              $('#detail').keyup(function (e){
+                  var content = $(this).val();
+                  $(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
+                  $('#counter1').html(content.length + '/1200');
+              });
+              $('#detail').keyup();
+        });
+    </script>
+</div>
+
+{% endblock %}

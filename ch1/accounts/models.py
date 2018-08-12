@@ -23,10 +23,11 @@ class Country(models.Model):
 SEX = (
     ('Man', 'Man'),
     ('Woman', 'Woman'),
+    ('Other','Other'),
 )
 
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     img = models.ImageField(blank=True)
     name = models.CharField(max_length=10)
     phone_number = models.CharField(max_length=20, validators=[RegexValidator(r'^010[1-9]\d{7}$')], blank=True)
@@ -44,7 +45,7 @@ class Profile(models.Model):
     video = models.URLField(blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return str(self.user)
 
 def on_post_save_for_user(sender, **kwargs):
     if kwargs['created']:
