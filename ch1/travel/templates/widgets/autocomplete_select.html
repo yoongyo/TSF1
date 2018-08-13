@@ -1,13 +1,28 @@
+
+<style>
+    .select2-container--default.select2-selection--single{
+        background-color:red;
+    }
+</style>
 {% include "django/forms/widgets/select.html" %}
 <script>
 $(function() {
     var options = {minimumInputLength: 1};
-    var ajax_url = "{{ ajax_url|default:"" }}";
+    var ajax_url = "{{ ajax_url|default:'' }}";
     if ( ajax_url.length > 0 ) {
         options['ajax'] = {
             'url': ajax_url,
             'dataType': 'json'
-}; }
+            };
+    }
     $('#{{ widget.attrs.id }}').select2(options);
+    $('.select2-selection--single').css({
+        "width": "100%",
+        "height": "30px",
+        "margin-top": "4px",
+        "border": "1px solid gray",
+        "margin-bottom": "8px",
+    });
 });
 </script>
+

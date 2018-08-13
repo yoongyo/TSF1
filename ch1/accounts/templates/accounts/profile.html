@@ -204,10 +204,10 @@
 
                         </div>
                         <div class="col-md-3" style="margin:0px;padding:0px;">
-                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">Detail</button>
+                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal{{ i.pk }}">Detail</button>
                             <div class="btn btn-primary">Reject</div>
                         </div>
-                        <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal fade" id="myModal{{ i.pk }}" role="dialog">
                             <div class="modal-dialog">
                               <!-- Modal content-->
                               <div class="modal-content">

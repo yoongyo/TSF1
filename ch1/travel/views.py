@@ -105,8 +105,6 @@ def post_new(request):
     if request.method == 'POST':
         form = PostMForm(request.POST, request.FILES)
         if form.is_valid():
-            print(os.getcwd())
-            print("POST method")
             post = form.save(commit=False)
             post.user = request.user
             post.save()

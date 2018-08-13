@@ -87,6 +87,7 @@ def login(request):
 
 def new_profile(request):
     profile = get_object_or_404(Profile, user=request.user)
+    k = request.user.profile.img
     if request.method == 'POST':
         form = ProfileMForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
@@ -98,11 +99,13 @@ def new_profile(request):
         form = ProfileMForm(instance=profile)
     return render(request, 'accounts/newprofile.html', {
         'form':form,
+        'k':k,
     })
 
 
 def profileEdit(request):
     profile = get_object_or_404(Profile, user=request.user)
+    k = request.user.profile.img
     if request.method == 'POST':
         form = ProfileMForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
@@ -114,6 +117,7 @@ def profileEdit(request):
         form = ProfileMForm(instance=profile)
     return render(request, 'accounts/profile_edit.html', {
         'form':form,
+        'k': k,
     })
 
 import requests

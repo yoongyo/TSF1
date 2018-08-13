@@ -1,2 +1,0 @@
-Requirement already satisfied: django in /Users/javis/anaconda3/lib/python3.6/site-packages (2.0.7)
-Requirement already satisfied: pytz in /Users/javis/anaconda3/lib/python3.6/site-packages (from django) (2017.3)

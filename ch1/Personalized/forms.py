@@ -57,7 +57,7 @@ class PersonalizedForm(forms.ModelForm):
                     'placeholder': 'only four numbers'
                 }
             ),
-            'Date': DatePickerWidget(
+            'Date': forms.TextInput(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px; border:1px solid gray; margin-bottom:8px;',
                     'class': 'form-control',
@@ -72,7 +72,7 @@ class PersonalizedForm(forms.ModelForm):
                     'autocomplete': 'off'
                 }
             ),
-            'Nationality': forms.Select(
+            'Nationality': AutoCompleteSelect(
                 attrs={
                     'style': 'width:100%; height:30px; margin-top:4px; border:1px solid gray; margin-bottom:8px;',
                     'class': 'form-control',

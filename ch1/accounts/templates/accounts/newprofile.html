@@ -7,6 +7,39 @@
         background-color:white;
         border-radius: 5px;
     }
+    .image-preview-input {
+        position: relative;
+        overflow: hidden;
+        margin: 0px;
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+    }
+    .image-preview-input input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    .image-preview-input-title {
+        margin-left:2px;
+    }
+    .select2-selection--multiple{
+        width:100% !important;
+        margin-top:4px !important;
+        border: 1px solid gray !important;
+        display: block !important;
+
+    }
+    .select2.select2-container.select2-container--default.select2-container--above{
+        width: 100% !important;
+        display: block !important;
+    }
 </style>
 <div>
     {% load static %}
@@ -25,7 +58,28 @@
             <div class="col-sm-6">
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Name  {{ form.name }}</div>
                 <span>* 외국인에게 보여질 이름입니다.</span>
-                <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px">Profile image {{ form.img }}</div>
+                <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px">
+                    Profile image<br>
+                    {% if k %}
+                    변경 전 : <a href="{{ k.url }}">{{ k }}</a>
+                    {% endif %}
+                    <!-- image-preview-filename input [CUT FROM HERE]-->
+                    <div class="input-group image-preview">
+                        <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+                        <span class="input-group-btn">
+                            <!-- image-preview-clear button -->
+                            <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                <span class="glyphicon glyphicon-remove"></span> Clear
+                            </button>
+                            <!-- image-preview-input -->
+                            <div class="btn btn-default image-preview-input">
+                                <span class="glyphicon glyphicon-folder-open"></span>
+                                <span class="image-preview-input-title">Browse</span>
+                                {{ form.img }}
+                            </div>
+                        </span>
+                    </div><!-- /input-group image-preview [TO HERE]-->
+                </div>
                 <div id="ks" style="border:1px solid black; width:100%;padding:10px; margin-top:20px;">Genger  {{ form.gender }}</div>
                 {{ form.gender.errors }}
                 <span>* 통계목적으로 사용되며, 타인에게 절대 공개되지 않습니다.</span>

@@ -1,6 +1,5 @@
 {% include "admin/widgets/clearable_file_input.html" %}
 
-
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(document).ready(function() {
@@ -21,7 +20,6 @@
             if (window.File && window.FileList && window.FileReader) {
                 var files = event.target.files; //FileList object
                 var output = $(".preview-images-zone");
-
                 for (let i = 0; i < files.length; i++) {
                     var file = files[i];
                     if (!file.type.match('image')) continue;
@@ -42,7 +40,8 @@
 
                     picReader.readAsDataURL(file);
                 }
-                $("#pro-image").val('');
+                var ka = $("#pro-image").val('');
+                console.log(ka);
             } else {
                 console.log('Browser not support');
             }

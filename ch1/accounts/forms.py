@@ -3,15 +3,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import password_validation
 
-from django.forms import ModelMultipleChoiceField
 
 from .models import Profile, Country, Language
 from django.contrib.auth.forms import AuthenticationForm
-from .widgets import AutoCompleteSelect, CounterTextInput
 import unicodedata
 from django.core.validators import validate_email
 from .models import Profile
-from .widgets import AutoCompleteSelect, DatePickerWidget
+from .widgets import DatePickerWidget, ProfileWidget
 from django_select2.forms import ModelSelect2MultipleWidget
 
 class SignupForm(UserCreationForm):
@@ -117,7 +115,7 @@ class ProfileMForm(forms.ModelForm):
             }),
             'visitedCountry': ModelSelect2MultipleWidget(
                 model=Country,
-                search_fields=['visitedCountry__name__icontains'],
+                search_fields=['name__icontains'],
                 attrs = {
                     'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
                     'class':'form-control js-example-basic-multiple',
@@ -126,7 +124,7 @@ class ProfileMForm(forms.ModelForm):
             ),
             'nextCountry': ModelSelect2MultipleWidget(
                 model=Country,
-                search_fields=['country__icontains'],
+                search_fields=['name__icontains'],
                 attrs = {
                     'style':  'height:27px; margin-top:4px;border: 1px solid gray;',
                     'class':'form-control js-example-basic-multiple',
@@ -175,9 +173,10 @@ class ProfileMForm(forms.ModelForm):
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
                 'class': 'form-control',
             }),
-            'img': forms.ClearableFileInput(attrs={
+            'img': ProfileWidget(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class':'form-control'
+                'class':'form-control',
+                'name': 'input-file-preview',
             }),
             'video': forms.TextInput(attrs={
                 'style': 'height:27px; margin-top:4px;border: 1px solid gray;',

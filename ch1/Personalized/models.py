@@ -26,7 +26,7 @@ def password(value):
 
 
 class Personalized(models.Model):
-    # tourtype
+    # tour type
     title = models.CharField(max_length=20)
     LastName = models.CharField(max_length=20)
     FirstName = models.CharField(max_length=20)
@@ -34,7 +34,7 @@ class Personalized(models.Model):
     City = models.CharField(max_length=20)
     Email = models.EmailField()
     Password = models.CharField(max_length=4, validators=[RegexValidator(r'^[0-9]+$', "only number")])
-    Date = models.DateField()
+    Date = models.CharField(max_length=100)
     SNS = models.ForeignKey(SNS)
     Language = models.CharField(max_length=20)
     Cellnumber = models.CharField(max_length=20, blank=True, null=True)
@@ -50,7 +50,7 @@ class Personalized(models.Model):
 class PersonalizedTour(models.Model):
     content = models.OneToOneField(Personalized, null=True, blank=True, unique=True, related_name="personalized")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
-    # Basic Infomation
+    # Basic Information
     title = models.CharField(max_length=30)
     Tourtype = models.ForeignKey(TypeOfTour, on_delete=models.CASCADE)
     Country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='Personalized_country')
@@ -62,7 +62,7 @@ class PersonalizedTour(models.Model):
     HashTag = models.CharField(max_length=100)
     img = models.ImageField(blank=True, null=True)
 
-    # Course Infomation
+    # Course Information
     MeetingPoint = models.CharField(max_length=130)
     MeetingTime = models.ForeignKey(Time)
     Map = models.CharField(max_length=140)
