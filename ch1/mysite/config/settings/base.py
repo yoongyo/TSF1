@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'travel',
     'accounts',
-    'widget_tweaks',
     'Booking',
     'Personalized',
     'Review',

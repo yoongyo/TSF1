@@ -88,13 +88,14 @@
     </head>
     <body>
     <nav>
+        <div style="float:right;margin-top:5px;margin-right:20px;">
+            <a href="https://www.instagram.com/todaysfriends/"><img width="30px" height="30px" src="{% static 'img/btn/7.png' %}"></>
+            <a href="https://www.youtube.com/channel/UCX4u_oHkdl9ofYd3DqOYV6Q"><img width="30px" height="30px" src="{% static 'img/btn/6.png' %}"></a>
+            <a href="https://www.facebook.com/Free-tour-in-Korea-by-Todaysfriend-216333222470217/?ref=bookmarks"><img width="30px" height="30px" src="{% static 'img/btn/8.png' %}"></a>
+        </div>
         <div class="container">
             <div style="height:35px;">
-                <div style="float:right;margin-top:5px;">
-                <a href="https://www.instagram.com/todaysfriends/"><img width="30px" height="30px" src="{% static 'img/btn/7.png' %}"></>
-                <a href="https://www.youtube.com/channel/UCX4u_oHkdl9ofYd3DqOYV6Q"><img width="30px" height="30px" src="{% static 'img/btn/6.png' %}"></a>
-                <a href="https://www.facebook.com/Free-tour-in-Korea-by-Todaysfriend-216333222470217/?ref=bookmarks"><img width="30px" height="30px" src="{% static 'img/btn/8.png' %}"></a>
-                </div>
+
             </div>
             <div style="display:flex;">
                 <div style="margin-top:40px;width:100%; ">
@@ -115,12 +116,12 @@
                     {% if user.is_authenticated %}
                     <a href="{% url 'accounts:profile' %}"><img width="38%" height="110px" style="float:right;" src="{% static 'img/btn/555.png' %}"></a>
                     {% else %}
-                    <a href="{% url 'accounts:login' %}?next={{ request.path }}"><img width="38%" height="110px" style="" src="{% static 'img/btn/444.png' %}"></a>
+                    <a href="{% url 'accounts:login' %}?next={{ request.path }}"><img width="38%" height="110px" style="float:right;" src="{% static 'img/btn/444.png' %}"></a>
                     {% endif %}
                     {% if user.is_authenticated %}
                     <a href="{% url 'accounts:new_profile' %}"><img style="margin-right:60px;float:right;" width="38%" height="110px" src="{% static 'img/btn/333.png' %}"></a>
                     {% else %}
-                    <a href="{% url 'accounts:login' %}?next={% url 'accounts:new_profile' %}"><img width="38%" height="110px" src="{% static 'img/btn/333.png' %}"></a>
+                    <a href="{% url 'accounts:login' %}?next={% url 'accounts:new_profile' %}"><img width="38%" height="110px" style="margin-right:60px;float:right;" src="{% static 'img/btn/333.png' %}"></a>
                     {% endif %}
                 </div>
             </div>

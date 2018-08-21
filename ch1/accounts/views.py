@@ -42,30 +42,36 @@ def profile(request):
     post = Post.objects.all()
     post = post.filter(user=request.user)
     bk = Booking.objects.filter(content__user=request.user)
-    for i in pf:
-        z = i.nextCountry.all()
-    for i in pf:
-        k = i.visitedCountry.all()
-    for j in post:
-        s = str(j.SeasonFrom)
-        s = s.split('-')
-        s = ','.join(s)
-    for j in post:
-        n = str(j.SeasonTo)
-        n = n.split('-')
-        n = ','.join(s)
+    seasonFrom = ''
+    seasonTo = ''
+    visitedCountry = ''
+    nextCountry = ''
+    if post:
+        for j in post:
+            if j.SeasonFrom:
+                s = str(j.SeasonFrom)
+                s = s.split('-')
+                s = ','.join(s)
+        for j in post:
+            if j.SeasonTo:
+                seasonTo = str(j.SeasonTo)
+                seasonTo = seasonTo.split('-')
+                seasonTo = ','.join(seasonTo)
+    for j in pf:
+        visitedCountry = j.visitedCountry.all()
+        nextCountry = j.nextCountry.all()
     personal = PersonalizedTour.objects.all()
     ps = personal.filter(user=request.user)
 
     return render(request, 'accounts/profile.html',{
         'profiles': pf,
         'list': post,
-        'bk' : bk,
-        'k': k,
-        'z': z,
-        's': s,
-        'n': n,
-        'ps':ps,
+        'bk': bk,
+        's': seasonFrom,
+        'n': seasonTo,
+        'ps': ps,
+        'VC': visitedCountry,
+        'NC': nextCountry,
     })
 
 
@@ -134,7 +140,7 @@ def country(request):
 
     nationayliy = soup.select('b .flagicon img')
     country = soup.select('b .flagicon + a')
-    m=[]
+    m = []
     for i in country:
         l = i.text
         m.append(l)
@@ -142,7 +148,7 @@ def country(request):
     conn = sqlite3.connect('/Users/javis/Desktop/TFS-master/ch1/mysite/db12.sqlite3')
     curs = conn.cursor()
 
-    k=0
+    k = 0
     http = 'https:'
     for j, i in enumerate(nationayliy):
         image = i.get('src')

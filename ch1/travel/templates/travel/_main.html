@@ -9,46 +9,44 @@
 <a href="{% url 'travel:local_list' %}" style="margin:0 auto; ">
     <h1 class="text-center" style="margin:0 auto;width:1000px;"><img style="margin-top:-120px;"width="400px" height="300px" src="{% static 'img/btn/123.png' %}"></h1>
 </a>
-
-
-<div class="jumbotron">
+<div style="height:90px"></div>
+<div style="margin-top:-150px;">
     <div class="container">
-        <div class="center-block well" style="margin-top:-120px;background-color:gray;height:65px;width:50%; color:white;margin-bottom:30px;">
-            <h2 class="text-center" style="margin-top:-5px;">Most popular city in Korea</h2>
+        <div class="container">
+        <div style="position: relative;margin: 0px 150px;">
+            <img id="img" width="100%" src="{% static 'img/main/base.png' %}">
+            <a class="link" href=""><div id="seoul" style="position: absolute; top:230px; left:280px; width:40px; height:40px;"></div></a>
+            <a class="link" href=""><div id="jeonju" style="position: absolute; top:492px; left:280px; width:40px; height:40px;"></div></a>
+            <a class="link" href=""><div id="busan" style="position: absolute; top:615px; left:500px; width:40px; height:40px;"></div></a>
+            <a class="link" href=""><div id="jeju" style="position: absolute; top:820px; left:260px; width:40px; height:40px;"></div></a>
+            <a class="link" href=""><div id="gyeongju" style="position: absolute; top:510px; left:555px; width:40px; height:40px;"></div></a>
         </div>
-        <div style="display:flex">
-            <div class="center-block" style="margin-bottom:7px; margin-right:2px; position:relative;">
-                <a href="/local/Seoul"><img  src="{% static 'img/local/Seoul1.jpg' %}" style="height:335px; width:550px;"></a>
-                <a class="btn btn-primary" href="/local/Seoul" style="width:200px;position:absolute;top:80%; font-size:30px; left:32%">Seoul</a>
-            </div>
-            <div class="center-block" style="margin-bottom:7px; margin-left:2px; position:relative;">
-                <a href="/local/Seoul"><img src="{% static 'img/local/Seoul2.jpg' %}" style="height: 335px; width:550px;"></a>
-                <a class="btn btn-primary" href="/local/Seoul" style="width:200px;position:absolute;top:80%; font-size:30px; left:32%">Seoul</a>
-
-            </div>
-        </div>
-        <div style="display:flex">
-            <div class="center-block" style="margin-bottom:7px; margin-right:2px; position:relative;">
-                <a href="/local/Busan"><img src="{% static 'img/local/Busan.jpg' %}" style="height:335px; width:550px;"></a>
-                <a class="btn btn-primary" href="/local/Busan" style="width:200px;position:absolute;top:80%; font-size:30px; left:32%">Busan</a>
-            </div>
-            <div class="center-block" style="margin-bottom:7px; margin-left:2px; position:relative;">
-                <a href="/local/Gyeongju"><img src="{% static 'img/local/Gyeongju.JPG' %}" style="height: 335px; width:550px;"></a>
-                <a class="btn btn-primary" href="/local/Gyeongju" style="width:200px;position:absolute;top:80%; font-size:30px; left:32%">Gyeongju</a>
-
-            </div>
-        </div>
-        <div style="display:flex">
-            <div class="center-block" style="margin-bottom:7px; margin-right:2px; position:relative;">
-                <a href="/local/Jeju"><img src="{% static 'img/local/Jeju.jpg' %}" style="height:335px; width:550px;"></a>
-                <a class="btn btn-primary" href="/local/Jeju" style="width:200px;position:absolute;top:80%; font-size:30px; left:32%">Jeju</a>
-            </div>
-            <div class="center-block" style="margin-bottom:7px; margin-left:2px; position:relative;">
-                <a href="/local/Jeonju"><img src="{% static 'img/local/Jeonju.jpg' %}" style="height: 335px; width:550px;"></a>
-                <a class="btn btn-primary" href="/local/Jeonju" style="width:200px;position:absolute;top:80%; font-size:30px; left:32%">Jeonju</a>
-            </div>
         </div>
     </div>
 </div>
+<script>
+    $("#seoul").hover(function() {
+        $("#img").attr('src', "{% static 'img/main/Seoul.png' %}");
+        $(".link").attr('href', "/local/Seoul");
+    });
+    $("#busan").hover(function() {
+        $("#img").attr('src', "{% static 'img/main/Busan.png' %}");
+        $(".link").attr('href', "/local/Busan");
+    });
+    $("#jeonju").hover(function() {
+        $("#img").attr('src', "{% static 'img/main/Jeonju.png' %}");
+        $(".link").attr('href', "/local/Jeonju");
+    });
+    $("#jeju").hover(function() {
+        $("#img").attr('src', "{% static 'img/main/Jeju.png' %}");
+        $(".link").attr('href', "/local/Jeju");
+    });
+    $("#gyeongju").hover(function() {
+        $("#img").attr('src', "{% static 'img/main/Gyeongju.png' %}");
+        $(".link").attr('href', "/local/Gyeongju");
+    });
+</script>
+
+
 
 {% endblock %}

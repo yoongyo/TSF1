@@ -1,3 +1,9 @@
 django==1.11.0
 pillow
 requests
+django-imagekit
+pillow
+django-select2
+django-allauth
+Beautifulsoup4
+django_select2

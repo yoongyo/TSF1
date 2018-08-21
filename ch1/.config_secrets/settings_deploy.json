@@ -2,7 +2,9 @@
   "django": {
     "allowed_hosts": [
       "todayfriend.pythonanywhere.com",
-      "127.0.0.1"
+      "127.0.0.1",
+      "todaysfriend.azurewebsites.net",
+      "www.todaysfriend.com"
     ]
   }
 }

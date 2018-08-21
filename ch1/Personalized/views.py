@@ -7,7 +7,6 @@ from accounts import models
 
 def list(request):
     qs = Personalized.objects.all()
-    qt = Personalized.objects.get(pk=1)
     b=[]
     for i in qs:
         k = i.Password

@@ -296,8 +296,8 @@
                         <br>
                         <p style="font-size: 20px;">Laguage : {{ profile.language }}</p><br>
                         <p style="font-size: 20px;">Major: {{ profile.major }}</p><br>
-                        <p style="font-size: 20px; margin-bottom:15px;">Visited Country : {% for j in k %} <img style="height:17px;width:24px;" src="{{ j.image.url }}"> {% endfor %}</p><br>
-                        <p style="font-size: 20px; margin-bottom:15px;">Next travel : {% for k in z %} <img style="width:24px; height:17px" src="{{ k.image.url|default:'Empty' }}"> {% endfor %}</p><br>
+                        <p style="font-size: 20px; margin-bottom:15px;">Visited Country : {% for j in k %} <img style="height:30px;width:30px;" src="{{ j.image.url }}"> {% endfor %}</p><br>
+                        <p style="font-size: 20px; margin-bottom:15px;">Next travel : {% for k in z %} <img style="width:30px; height:30px" src="{{ k.image.url|default:'Empty' }}"> {% endfor %}</p><br>
                         <p style="font-size: 20px; margin-bottom:15px;">Interest : {{ profile.interest }}</p><br>
                         {% endfor %}
                     </div>

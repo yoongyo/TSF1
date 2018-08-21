@@ -73,7 +73,7 @@ class Post(models.Model):
     DetailContent = models.CharField(max_length=1200, help_text='당신이 만든 local 여행에 대한 설명을 자유롭게 작성해 주세요.<br>Tip. 당신의 Tour만이 가지고 있는 특징에 대해 설명해주세요. 외국인은 언제나 local다움과 funny한 상품을 찾고 있습니다.')
     BriefContent = models.TextField(max_length=250)
     HashTag = models.CharField(max_length=100)
-    file = models.FileField(blank=True, null=True, upload_to='photos/')
+    img = models.ImageField(blank=True, null=True, upload_to='photos/')
 
     # Course Infomation
     MeetingPoint = models.CharField(max_length=130)
@@ -92,7 +92,7 @@ class Post(models.Model):
 
     # 달력 구현원함
     NotDate = models.TextField(blank=True)
-    GuestInfo = models.CharField(max_length=100)
+    GuestInfo = models.CharField(max_length=1000)
 
     # etc
     Created_at = models.DateTimeField(auto_now_add=True)

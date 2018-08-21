@@ -13,7 +13,7 @@ WSGI_APPLICATION = 'mysite.config.wsgi.debug.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db11.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db21.sqlite3'),
     }
 }
 
@@ -22,8 +22,12 @@ DATABASES = {
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mysite', 'media')
 MEDIA_URL = '/media/'
 
+
+INSTALLED_APPS += ["debug_toolbar"]
+MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 MIDDLEWARE += ['django.middleware.security.SecurityMiddleware']
-INTERNAL_IPS = ['127.0.0.1']
+INTERNAL_IPS = ["127.0.0.1"]
+
 
 
 STATIC_URL = '/static/'

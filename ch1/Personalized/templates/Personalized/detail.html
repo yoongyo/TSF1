@@ -250,33 +250,36 @@
                                 {{ i.DetailContent }}
                             </div>
                             <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
-                                2. Language : {{ i.Language }}
+                                2. City : {{ i.City }}
                             </div>
                             <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
-                                3. Price : ₩{{ i.Price }}
+                                3. Language : {{ i.Language }}
                             </div>
                             <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
-                                4. Meeting time : {{ i.MeetingTime }}
+                                4. Price : ₩{{ i.Price }}
                             </div>
                             <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
-                                5. Duration : {{ H1 }}hr {{ M1 }}min
+                                5. Meeting time : {{ i.MeetingTime }}
                             </div>
                             <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
-                                6. The number of people : {{ i.Minimum }} - {{ i.Maximum }}
+                                6. Duration : {{ H1 }}hr {{ M1 }}min
                             </div>
                             <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
-                                7. Includes : <br>
+                                7. The number of people : {{ i.Minimum }} - {{ i.Maximum }}
+                            </div>
+                            <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
+                                8. Includes : <br>
                                 {{ i.Price_include }}
                             </div>
                             <div style="border:2px solid rgb(49,86,137); padding:7px;">
-                                8. Meeting Point: {{ i.MeetingPoint}}
+                                9. Meeting Point: {{ i.MeetingPoint}}
                             </div>
                             <div style="margin-bottom:15px; width:100%;" class="post-map"></div>
                             <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
-                                9. Direction : {{ i.Direction }}
+                                10. Direction : {{ i.Direction }}
                             </div>
                             <div style="border:2px solid rgb(49,86,137); margin-bottom:15px; padding:7px;">
-                                10.Thing to Note : {{ i.GuestInfo }}
+                                11.Thing to Note : {{ i.GuestInfo }}
                             </div>
                     <!--</div>-->
                 </div>
@@ -296,8 +299,8 @@
                         <br>
                         <p style="font-size: 20px;">Laguage : {{ profile.language }}</p><br>
                         <p style="font-size: 20px;">Major: {{ profile.major }}</p><br>
-                        <p style="font-size: 20px; margin-bottom:15px;">Visited Country : {% for j in k %} <img style="height:17px;width:24px;" src="{{ j.image.url }}"> {% endfor %}</p><br>
-                        <p style="font-size: 20px; margin-bottom:15px;">Next travel : {% for k in z %} <img style="width:24px; height:17px" src="{{ k.image.url|default:'Empty' }}"> {% endfor %}</p><br>
+                        <p style="font-size: 20px; margin-bottom:15px;">Visited Country : {% for j in k %} <img style="height:30px;width:30px;" src="{{ j.image.url }}"> {% endfor %}</p><br>
+                        <p style="font-size: 20px; margin-bottom:15px;">Next travel : {% for k in z %} <img style="width:30px; height:30px" src="{{ k.image.url|default:'Empty' }}"> {% endfor %}</p><br>
                         <p style="font-size: 20px; margin-bottom:15px;">Interest : {{ profile.interest }}</p><br>
                         {% endfor %}
                     </div>

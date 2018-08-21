@@ -28,8 +28,8 @@ STATICFILES_DIRS = [
 
 
 
-STATICFILES_STORAGE = 'askdjango.storages.StaticAzureStorage'
-DEFAULT_FILE_STORAGE = 'askdjango.storages.MediaAzureStorage'
+STATICFILES_STORAGE = 'mysite.storages.StaticAzureStorage'
+DEFAULT_FILE_STORAGE = 'mysite.storages.MediaAzureStorage'
 
 AZURE_ACCOUNT_NAME = os.environ.get('AZURE_ACCOUNT_NAME')
 AZURE_ACCOUNT_KEY = os.environ.get('AZURE_ACCOUNT_KEY')

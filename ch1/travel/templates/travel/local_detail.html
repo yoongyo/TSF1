@@ -11,6 +11,7 @@
             <div class="row" style="margin:40px 0px;">
                 {% for i in local_list %}
                 {% if i.City.video %}
+                {{ i.City.video }}
             <div class="col-md-4" style="height:3000px;">
                 <iframe style="width:350px; height: 200px;" src="{{ i.City.video }}?amp;autoplay=1&rel=0" frameborder="0" muted="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 <div class="well">

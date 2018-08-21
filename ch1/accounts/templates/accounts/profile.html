@@ -139,8 +139,8 @@
             <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;" >Name : {{ user.profile.name|default:'Empty' }}</div>
             <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;" >Language : {{ user.profile.language|default:'Empty' }}</div>
             <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Major : {{ user.profile.major|default:'Empty' }}</div>
-            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Visited Country : {% for j in k %} <img style="height:17px;width:24px;" src="{{ j.image.url }}"> {% endfor %}</div>
-            <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Next Travel : {% for k in z %} <img style="width:24px; height:17px" src="{{ k.image.url|default:'Empty' }}"> {% endfor %}</div>
+            <div style="border:1px solid black; margin:15px 0; padding:1px 10px; border-radius:5px;height:40px;">{% if VC %}<p style="padding: 0px; margin:0px">Visited Country : {% for j in VC %}<img style="height:36px;width:36px;" src="{{ j.image.url }}">{% endfor %}</p>{% else %}<p style="padding: 9px 0;">Visited Country : Empty</p>{% endif %}</div>
+            <div style="border:1px solid black; margin:15px 0; padding:1px 10px; border-radius:5px;height:40px;">{% if NC %}<p style="padding: 0px; margin:0px">Next Travel : {% for k in NC %}<img style="width:36px; height:36px" src="{{ k.image.url|default:'Empty' }}">{% endfor %}</p>{% else %}<p style="padding: 9px 0;">Next Travel : Empty</p>{% endif %}</div>
             <div style="border:1px solid black; margin:15px 0; padding:10px; border-radius:5px;">Interest : {{ user.profile.interest|default:'Empty' }}</div>
             <a href="{% url 'accounts:profileEdit' %}" style="margin: 10px 120px;"class="btn btn-primary">Change Profile</a>
         </div>

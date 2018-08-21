@@ -31,7 +31,7 @@ class PostMForm(forms.ModelForm):
             'Price_include',
             'NotDate',
             'GuestInfo',
-            'file',
+            'img',
             'SeasonFrom',
             'SeasonTo',
         ]
@@ -171,14 +171,11 @@ class PostMForm(forms.ModelForm):
                     'autocomplete': 'off'
                 }
             ),
-            'file': MultiUpload(
+            'img': forms.ClearableFileInput(
                 attrs={
-                    'type': "file",
-                    'id': "pro-image",
-                    'name': "pro-image",
-                    'style' : 'display:none;',
+                    'style': 'width:100%; height:130px; margin-top:4px; border:1px solid gray;',
                     'class': 'form-control',
-                    'multiple': True,
+                    'autocomplete': 'off'
                 }
             ),
             'SeasonFrom': DatePickerWidget(
@@ -196,17 +193,6 @@ class PostMForm(forms.ModelForm):
                 }
             ),
         }
-
-    def save(self, commit=True):
-        post = Post(**self.cleaned_data)
-        if commit:
-            post.save()
-        return post
-
-
-
-
-
 
 class BookMForm(forms.ModelForm):
     class Meta:

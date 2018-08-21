@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect,get_object_or_404
 
-from ch1 import travel
 from .forms import BookMForm,PostMForm
 from django.shortcuts import render,redirect
 from django.http import JsonResponse, HttpResponseRedirect
@@ -54,8 +53,6 @@ def local_detail(request, City):
 
 def local_detail_form(request, City, pk):
     queryset = Post.objects.all()
-
-
     qs = queryset.filter(pk=pk)
     qs1 = Post.objects.get(pk=pk)
     pf = models.Profile.objects.all()
@@ -66,7 +63,9 @@ def local_detail_form(request, City, pk):
     H1, M1 = str(qs1.Duration).split(':')
     H = int(SH)+int(H1)
     M = int(SM)+int(M1)
-    l = len(qs1.NotDate.split(','))
+    l=0
+    if qs1.NotDate != '':
+        l = len(qs1.NotDate.split(','))
     b=[]
     for i in range(l):
         a = qs1.NotDate.split(',')[i].split('-')
@@ -120,9 +119,8 @@ def post_edit(request, City, pk):
     if request.method == 'POST':
         form = PostMForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.user = request.user
-            post.save()
+            post = form.save()
+
             return redirect('accounts:profile')
     else:
         form = PostMForm(instance=post)

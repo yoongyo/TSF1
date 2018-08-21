@@ -96,7 +96,6 @@ class ProfileMForm(forms.ModelForm):
             'gender',
             'name',
             'img',
-            'video'
         }
         widgets = {
             'name': forms.TextInput(attrs={
@@ -178,9 +177,4 @@ class ProfileMForm(forms.ModelForm):
                 'class':'form-control',
                 'name': 'input-file-preview',
             }),
-            'video': forms.TextInput(attrs={
-                'style': 'height:27px; margin-top:4px;border: 1px solid gray;',
-                'class': 'form-control',
-            }),
-
         }

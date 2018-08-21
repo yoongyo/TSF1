@@ -10,7 +10,7 @@ WORKDIR /code
 COPY . /code/
 
 ENV LANG c.UTF-8
-ENV DJANGO_SETTINGS_MODULE askdjango.settings.prod
+ENV DJANGO_SETTINGS_MODULE mysite.config.settings.deploy
 ENV PYTHONUNBUFFERED 1
 
 RUN pip3 install -r requirements.txt
@@ -19,7 +19,7 @@ EXPOSE 80
 
 CMD ["uwsgi", "--plugins", "http,python", \
               "--http", "0.0.0.0:80", \
-              "--wsgi-file", "/code/askdjango/wsgi.py", \
+              "--wsgi-file", "/code/mysite/config/wsgi/deploy.py", \
               "--master", \
               "--die-on-term", \
               "--single-interpreter", \

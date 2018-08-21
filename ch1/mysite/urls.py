@@ -11,13 +11,13 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url(r'^', include('travel.urls', namespace='travel')),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^Personalized/', include('Personalized.urls', namespace='Personalized')),
     url(r'^Booking/', include('Booking.urls', namespace='Booking')),
     url(r'^select2/', include('django_select2.urls')),
-    url(r'review/', include('Review.urls', namespace='Review'))
+    url(r'review/', include('Review.urls', namespace='Review')),
+    url(r'^', include('travel.urls', namespace='travel')),
 ]
 
 
@@ -29,3 +29,10 @@ urlpatterns = [
 
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
